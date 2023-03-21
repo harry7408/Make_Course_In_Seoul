@@ -1,8 +1,0 @@
-<resources>
-    <string name="app_name">뭐놀?</string>
-    <string name="LoginActivityTop">로그인</string>
-    <string name="JoinActivityTop">회원가입</string>
-    <string name="login_page_edt1">eamil</string>
-    <string name="login_page_edt2">password</string>
-    <string name="login_button_text">로그인하기</string>
-</resources>
