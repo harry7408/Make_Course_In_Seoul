@@ -9,7 +9,7 @@
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:background="@color/light_purple"
         android:orientation="horizontal"
         android:gravity="center"
@@ -28,7 +28,7 @@
     <LinearLayout
         android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="280dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -38,38 +38,66 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
         <EditText
+            android:id="@+id/emailArea"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/background_rectangle"
             android:hint="@string/main_page_edt1"
             android:padding="16dp"
             android:textSize="15sp" />
+        <TextView
+            android:id="@+id/wrong_message1"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            tools:text="@string/wrong_email"
+            android:textColor="@color/red"/>
 
         <EditText
+            android:id="@+id/passArea"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/background_rectangle"
             android:hint="@string/main_page_edt2"
             android:padding="16dp"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:inputType="textPassword"/>
+        <TextView
+            android:id="@+id/wrong_message2"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            tools:text="@string/wrong_pass"
+            android:textColor="@color/red"/>
 
         <EditText
+            android:id="@+id/pass_checkArea"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginTop="16dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/background_rectangle"
             android:hint="@string/join_page_edt3"
             android:padding="16dp"
-            android:textSize="15sp" />
-
+            android:textSize="15sp"
+            android:inputType="textPassword"/>
+        <TextView
+            android:id="@+id/wrong_message3"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="4dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            tools:text="@string/wrong_pass_check"
+            android:textColor="@color/red"/>
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/nickNameArea"
         android:layout_width="260dp"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_rectangle"
@@ -80,9 +108,9 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/nameArea"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
@@ -92,12 +120,12 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/nickNameArea" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/doubleCheck"
         android:layout_width="70dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="56dp"
@@ -105,13 +133,13 @@
         android:text="@string/check_nick_name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toEndOf="@+id/editText"
+        app:layout_constraintStart_toEndOf="@+id/nickNameArea"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/birthArea"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
@@ -121,10 +149,10 @@
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintTop_toBottomOf="@+id/nameArea"
+        android:inputType="phone"/>
 
     <TextView
-        android:id="@+id/textView5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
@@ -134,7 +162,7 @@
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3" />
+        app:layout_constraintTop_toBottomOf="@+id/birthArea" />
 
     <RadioGroup
         android:layout_width="200dp"
@@ -143,15 +171,17 @@
         android:layout_marginEnd="28dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3">
+        app:layout_constraintTop_toBottomOf="@+id/birthArea">
 
         <RadioButton
+            android:id="@+id/male"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/male_area" />
 
         <RadioButton
+            android:id="@+id/female"
             android:layout_marginTop="4dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -160,7 +190,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/joinButton"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:text="@string/join_button_text"

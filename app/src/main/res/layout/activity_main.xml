@@ -8,7 +8,6 @@
 
 
     <TextView
-        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
@@ -20,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/login_page_image"
         android:layout_width="125dp"
         android:layout_height="125dp"
         android:layout_marginStart="32dp"
@@ -33,9 +32,9 @@
         app:srcCompat="@drawable/login1" />
 
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/id_pass_Layout"
         android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:layout_height="180dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="8dp"
@@ -43,9 +42,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+        app:layout_constraintTop_toBottomOf="@+id/login_page_image">
 
         <EditText
+            android:id="@+id/emailArea"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/background_radius_white"
@@ -54,18 +54,27 @@
             android:textSize="15sp" />
 
         <EditText
+            android:id="@+id/passArea"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/background_radius_white"
             android:hint="@string/main_page_edt2"
             android:padding="16dp"
-            android:textSize="15sp" />
-
+            android:textSize="15sp"
+            android:inputType="textPassword"/>
+        <TextView
+            android:id="@+id/wrong_message1"
+            android:textColor="@color/red"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            tools:text="@string/login_page_wrong_message"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/findIdText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -73,30 +82,30 @@
         android:text="@string/find_id"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/id_pass_Layout" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/findPassText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="@string/find_pass"
         android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintStart_toEndOf="@+id/findIdText"
+        app:layout_constraintTop_toBottomOf="@+id/id_pass_Layout" />
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/line1"
         android:layout_width="65dp"
         android:layout_height="1dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="4dp"
         android:background="@color/gray"
         android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/findIdText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/findIdText" />
 
     <LinearLayout
         android:layout_width="80dp"
@@ -104,9 +113,9 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="4dp"
         android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintEnd_toEndOf="@+id/findPassText"
+        app:layout_constraintStart_toEndOf="@+id/line1"
+        app:layout_constraintTop_toBottomOf="@+id/findPassText" />
 
     <TextView
         android:id="@+id/joinText"
@@ -117,24 +126,24 @@
         android:text="@string/Join"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/id_pass_Layout" />
 
     <LinearLayout
         android:layout_width="50dp"
         android:layout_height="1dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="32dp"
         android:background="@color/gray"
-        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/joinText"
         app:layout_constraintTop_toBottomOf="@+id/joinText" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -142,7 +151,7 @@
         android:text="@string/login_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/line1" />
 
     <Button
         android:id="@+id/button2"
@@ -152,7 +161,7 @@
         android:layout_marginTop="24dp"
         android:text="Button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <Button
         android:id="@+id/button3"
@@ -162,7 +171,7 @@
         android:layout_marginEnd="80dp"
         android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
