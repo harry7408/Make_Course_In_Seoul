@@ -70,7 +70,8 @@
             android:layout_marginStart="16dp"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            tools:text="@string/login_page_wrong_message"/>
+            android:text="@string/login_page_wrong_message"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <TextView

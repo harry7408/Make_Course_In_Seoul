@@ -10,6 +10,7 @@
     <string name="find_pass">비밀번호 찾기</string>
     <string name="user_name">이름</string>
     <string name="user_nick_name">닉네임</string>
+    <string name="email">이메일</string>
     <string name="gender">성별</string>
     <string name="male_area">남성</string>
     <string name="female_area">여성</string>
@@ -20,6 +21,7 @@
     <string name="wrong_pass">비밀번호 형식에 맞게 입력해주세요</string>
     <string name="wrong_pass_check">일치하지 않습니다</string>
     <string name="login_page_wrong_message">아이디 혹은 비밀번호가 일치하지 않습니다</string>
-    <string name="find_id_pass">이메일/비밀번호 찾기</string>
+    <string name="find_id_pass">이메일 / 비밀번호 찾기</string>
+
 
 </resources>

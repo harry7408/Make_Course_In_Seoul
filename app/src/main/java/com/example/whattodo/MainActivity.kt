@@ -32,5 +32,14 @@ class MainActivity : AppCompatActivity() {
             val intent=Intent(this,JoinActivity::class.java)
             startActivity(intent)
         }
+        findemailtxt.setOnClickListener {
+            val intent=Intent(this,FindingEpActivity::class.java)
+            startActivity(intent)
+        }
+
+        findpasstxt.setOnClickListener {
+            val intent=Intent(this,FindingEpActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
