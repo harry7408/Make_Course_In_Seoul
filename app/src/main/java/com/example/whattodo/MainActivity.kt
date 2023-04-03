@@ -1,11 +1,13 @@
 package com.example.whattodo
 
 import android.content.Intent
+import android.os.Build.VERSION_CODES.S
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import com.example.whattodo.FindIP.FindIdPassActivity
 
 class MainActivity : AppCompatActivity() {
     private lateinit var emailedt:EditText
@@ -26,20 +28,26 @@ class MainActivity : AppCompatActivity() {
         loginbtn=findViewById<Button>(R.id.loginButton)
 
 
-
-
         jointxt.setOnClickListener {
             val intent=Intent(this,JoinActivity::class.java)
             startActivity(intent)
         }
         findemailtxt.setOnClickListener {
-            val intent=Intent(this,FindingEpActivity::class.java)
+            val intent=Intent(this, FindIdPassActivity::class.java)
+            intent.putExtra("text",findemailtxt.text.toString())
+            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
 
         findpasstxt.setOnClickListener {
-            val intent=Intent(this,FindingEpActivity::class.java)
+            val intent=Intent(this,FindIdPassActivity::class.java)
+            intent.putExtra("text",findpasstxt.text.toString())
+            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }
+
+
+
+
 }
