@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
         jointxt=findViewById<TextView>(R.id.joinText)
         loginbtn=findViewById<Button>(R.id.loginButton)
 
-
-
 //        클릭 이벤트 처리부분
         jointxt.setOnClickListener {
             val intent=Intent(this,JoinActivity::class.java)
@@ -45,9 +43,9 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("text",findpasstxt.text.toString())
             startActivity(intent)
         }
+
+        loginbtn.setOnClickListener {
+
+        }
     }
-
-
-
-
 }

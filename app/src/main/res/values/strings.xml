@@ -19,7 +19,7 @@
     <string name="join_button_text">회원가입하기</string>
     <string name="wrong_email">이메일 형식이 올바르지 않습니다</string>
     <string name="wrong_pass">비밀번호 형식에 맞게 입력해주세요</string>
-    <string name="wrong_pass_check">일치하지 않습니다</string>
+    <string name="wrong_pass_check">비밀번호가 일치하지 않습니다</string>
     <string name="login_page_wrong_message">아이디 혹은 비밀번호가 일치하지 않습니다</string>
     <string name="find_id_pass">이메일 / 비밀번호 찾기</string>
     <!-- TODO: Remove or change this placeholder text -->

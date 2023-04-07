@@ -63,8 +63,11 @@ class JoinActivity : AppCompatActivity() {
     }
 
     private fun join() :Boolean {
+//        사용자 클래스 객체도 하나 만들어야 할 듯?
+
         var isOk=true
 
+//         아이디 유효성 검사 파트
         email.addTextChangedListener(object : TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
@@ -84,10 +87,9 @@ class JoinActivity : AppCompatActivity() {
                 }
             }
         })
-
+//       패스워드 유효성 체크 파트
         pass.addTextChangedListener(object: TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) { }
-
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) { }
 
             override fun afterTextChanged(s: Editable?) {
@@ -103,6 +105,28 @@ class JoinActivity : AppCompatActivity() {
                 }
             }
         })
+//      비밀번호 확인파트
+        cpass.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                if (s?.length==0) {isOk=false}
+                if (s.toString().equals(pass.text.toString())) {
+                    cpass.setBackgroundResource(R.drawable.background_rectangle)
+                    cpassError.text=""
+                    isOk=true
+                }else {
+                    cpass.setBackgroundResource(R.drawable.background_rectangle_red)
+                    cpassError.setText(R.string.wrong_pass_check)
+                    isOk=false
+                }
+            }
+        })
+
+
+
+
 
         return isOk
     }
