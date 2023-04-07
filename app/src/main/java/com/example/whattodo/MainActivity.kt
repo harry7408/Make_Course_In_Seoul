@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         loginbtn=findViewById<Button>(R.id.loginButton)
 
 
+
+//        클릭 이벤트 처리부분
         jointxt.setOnClickListener {
             val intent=Intent(this,JoinActivity::class.java)
             startActivity(intent)
@@ -35,14 +37,12 @@ class MainActivity : AppCompatActivity() {
         findemailtxt.setOnClickListener {
             val intent=Intent(this, FindIdPassActivity::class.java)
             intent.putExtra("text",findemailtxt.text.toString())
-            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
 
         findpasstxt.setOnClickListener {
             val intent=Intent(this,FindIdPassActivity::class.java)
             intent.putExtra("text",findpasstxt.text.toString())
-            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }

@@ -3,13 +3,13 @@
     <string name="MainActivityTop">로그인</string>
     <string name="Join">회원가입</string>
     <string name="main_page_edt1">이메일 입력</string>
-    <string name="main_page_edt2">패스워드 입력(영문,숫자,특수문자 포함 8~16자)</string>
+    <string name="main_page_edt2">패스워드 입력(영문,숫자, 특수문자 포함 8~15자)</string>
     <string name="join_page_edt3">비밀번호 확인</string>
     <string name="login_button_text">로그인하기</string>
     <string name="find_id">이메일 찾기</string>
     <string name="find_pass">비밀번호 찾기</string>
     <string name="user_name">이름</string>
-    <string name="user_nick_name">닉네임</string>
+    <string name="user_nick_name">닉네임(변경 불가)</string>ㅁ
     <string name="email">이메일</string>
     <string name="gender">성별</string>
     <string name="male_area">남성</string>
