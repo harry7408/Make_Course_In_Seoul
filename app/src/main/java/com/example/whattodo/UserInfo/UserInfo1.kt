@@ -13,7 +13,8 @@ data class UserInfo1 (
         @SerializedName("memberId")
         val nickname:String,
         @SerializedName("BDay")
-        val birth:Int,
+        val birth:String,
+        @SerializedName("gender")
         val gender:String
         )
 
