@@ -57,7 +57,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nameArea" />
 
             <EditText
-                android:id="@+id/bithArea"
+                android:id="@+id/birthArea"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
@@ -66,6 +66,7 @@
                 android:background="@drawable/background_rectangle"
                 android:hint="@string/Birth"
                 android:padding="12dp"
+                android:maxLength="6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nickNameArea" />
@@ -79,7 +80,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bithArea" />
+                app:layout_constraintTop_toBottomOf="@+id/birthArea" />
 
             <RadioGroup
                 android:id="@+id/radioGroup"
@@ -89,15 +90,17 @@
                 android:layout_marginEnd="80dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/bithArea">
+                app:layout_constraintTop_toBottomOf="@+id/birthArea">
 
                 <RadioButton
+                    android:id="@+id/male"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:text="@string/male_area"
                     android:textSize="18sp" />
 
                 <RadioButton
+                    android:id="@+id/female"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="24dp"
@@ -106,7 +109,7 @@
             </RadioGroup>
 
             <Button
-                android:id="@+id/emailButton"
+                android:id="@+id/passButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -116,6 +119,7 @@
                 android:text="@string/find_pass"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

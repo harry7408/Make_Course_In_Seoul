@@ -64,15 +64,13 @@ class JoinActivity : AppCompatActivity() {
         cpassError = findViewById(R.id.wrong_message3)
 
         checkInput()
-
         joinBtn.setOnClickListener {
-//            회원가입 가능 여부 확인 후 활성화 된다면 데이터가 서버에 저장 되도록
+//            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
             Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun checkInput() {
-
 
 //         아이디 유효성 검사 파트
         email.addTextChangedListener(object : TextWatcher {
@@ -141,7 +139,7 @@ class JoinActivity : AppCompatActivity() {
                             cpassError.setText(R.string.no_cpass)
                             cpassFlag = false
                         }
-                        !s.toString().equals(pass.text.toString()) -> {
+                        s.toString() != pass.text.toString() -> {
                             cpass.setBackgroundResource(R.drawable.background_rectangle_red)
                             cpassError.setText(R.string.wrong_pass_check)
                             cpassFlag = false
@@ -153,11 +151,62 @@ class JoinActivity : AppCompatActivity() {
 
                         }
                     }
-                    flagCheck()
+//                    flagCheck()
                 }
             }
         })
+//        닉네임 입력여부
+        nickname.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s!=null) {
+                    if (s.isEmpty()) { nicknameFlag=false }
+                    checkBtn.setOnClickListener {
+//                        서버와 통신
+                    }
+                }
+            }
+        })
+
+//        이름 입력 여부
+         name.addTextChangedListener(object:TextWatcher{
+             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+             override fun afterTextChanged(s: Editable?) {
+                 if (s!=null) {
+                     nameFlag = when {
+                         s.isEmpty()-> false
+                         else -> true
+                     }
+                 }
+             }
+         })
+//        생년월일 입력여부
+        birth.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s!=null) {
+                    birthFlag =when {
+                        s.isEmpty() ->false
+                        else-> true
+                    }
+                }
+            }
+        })
+//      성별 입력여부
+        genderGroup.setOnCheckedChangeListener { _,checkId ->
+            when(checkId) {
+                R.id.male -> genderFlag=true
+                R.id.female -> genderFlag=true
+                else -> genderFlag=false
+            }
+            flagCheck()
+        }
     }
+
+
     //    비밀번호 유효성 확인을 위한 함수 (비밀번호 길이 + 문자 조합)
     private fun checkPass(s: String): Matcher {
         val pwPattern: String = "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&]).{8,16}.\$"
@@ -165,11 +214,13 @@ class JoinActivity : AppCompatActivity() {
         return matcher
     }
 
+//    모든 입력이 있으면 회원가입 버튼 활성화
     private fun flagCheck() {
-        joinBtn.isEnabled=idFlag&&passFlag&&cpassFlag
+        joinBtn.isEnabled=idFlag&&passFlag&&cpassFlag && nameFlag && birthFlag && genderFlag
     }
-
 }
+
+
 
 
 

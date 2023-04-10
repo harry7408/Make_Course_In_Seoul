@@ -45,7 +45,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         loginbtn.setOnClickListener {
+            val email=emailedt.text.toString()
+            val pass=passedt.text.toString()
 
+//            서버와 통신 필요
         }
     }
 }
