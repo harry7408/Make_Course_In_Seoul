@@ -1,32 +1,34 @@
 <resources>
     <string name="app_name">뭐놀?</string>
-    <string name="MainActivityTop">로그인</string>
-    <string name="Join">회원가입</string>
-    <string name="main_page_edt1">이메일 입력</string>
-    <string name="main_page_edt2">패스워드 입력(영문,숫자, 특수문자 포함 8~16자)</string>
-    <string name="join_page_edt3">비밀번호 확인</string>
-    <string name="login_button_text">로그인하기</string>
-    <string name="find_id">이메일 찾기</string>
-    <string name="find_pass">비밀번호 찾기</string>
-    <string name="user_name">이름</string>
-    <string name="user_nick_name">닉네임</string>
-    <string name="email">이메일</string>
+    <string name="login">로그인</string>
+    <string name="join">회원가입</string>
+    <string name="input_id">아이디</string>
+    <string name="input_pass">패스워드 입력(영문,숫자, 특수문자 포함 8~16자)</string>
+    <string name="checkpass">비밀번호 확인</string>
+    <string name="find_Id">아이디 찾기</string>
+    <string name="find_Pass">비밀번호 찾기</string>
+    <string name="find_id_pass">아이디 / 비밀번호 찾기</string>
+    <string name="nickName">닉네임</string>
+    <string name="loginBtn">로그인하기</string>
+    <string name="findIdBtn">아이디 찾기</string>
+    <string name="findPassBtn">비밀번호 찾기</string>
+    <string name="male">남성</string>
+    <string name="female">여성</string>
     <string name="gender">성별</string>
-    <string name="male_area">남성</string>
-    <string name="female_area">여성</string>
-    <string name="Birth">생년월일 (6자리)</string>
-    <string name="check_nick_name">중복확인</string>
-    <string name="join_button_text">회원가입하기</string>
-    <string name="wrong_email">이메일 형식이 올바르지 않습니다</string>
-    <string name="no_id">아이디를 입력해주세요</string>
+    <string name="email">이메일</string>
+    <string name="idCheck">중복확인</string>
+    <string name="name">이름</string>
+    <string name="birth">생년월일(6자리)</string>
+    <string name="joinBtn">회원가입하기</string>
     <string name="no_pass">비밀번호를 입력해주세요</string>
-    <string name="no_cpass">비밀번호를 위와 같이 입력해주세요</string>
-    <string name="wrong_pass">비밀번호 형식에 맞게 입력해주세요</string>
-    <string name="wrong_pass_check">비밀번호가 일치하지 않습니다</string>
-    <string name="login_page_wrong_message">아이디 혹은 비밀번호가 일치하지 않습니다</string>
-    <string name="find_id_pass">이메일 / 비밀번호 찾기</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="wrong_pass">형식에 맞게 입력해주세요</string>
+    <string name="not_same_pass">비밀번호가 일치하지 않습니다</string>
+    <string name="no_email">이메일을 입력해주세요</string>
+    <string name="wrong_email">형식에 맞게 입력해주세요</string>
+
+
+
+
 
 
 </resources>

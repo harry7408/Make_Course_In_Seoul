@@ -14,53 +14,54 @@
 
             <EditText
                 android:id="@+id/nameArea"
+                android:hint="@string/name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/user_name"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
-                android:id="@+id/nickNameArea"
+                android:id="@+id/emailArea"
+                android:hint="@string/email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/user_nick_name"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameArea" />
 
+
             <EditText
                 android:id="@+id/birthArea"
+                android:hint="@string/birth"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/Birth"
                 android:maxLength="6"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nickNameArea" />
+                app:layout_constraintTop_toBottomOf="@+id/emailArea" />
 
             <TextView
+                android:text="@string/gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="@string/gender"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -78,22 +79,23 @@
 
                 <RadioButton
                     android:id="@+id/male"
+                    android:text="@string/male"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="@string/male_area"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/female"
+                    android:text="@string/female"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="24dp"
-                    android:text="@string/female_area"
                     android:textSize="18sp" />
             </RadioGroup>
 
             <Button
                 android:id="@+id/emailButton"
+                android:text="@string/findIdBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_radius"
@@ -102,7 +104,6 @@
                 android:layout_marginEnd="24dp"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="@string/find_id"
                 android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

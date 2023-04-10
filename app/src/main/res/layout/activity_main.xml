@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="96dp"
         android:layout_marginEnd="80dp"
-        android:text="@string/MainActivityTop"
+        android:text="@string/login"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,20 +46,20 @@
 
         <EditText
             android:id="@+id/emailArea"
+            android:hint="@string/input_id"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@drawable/background_radius_white"
-            android:hint="@string/main_page_edt1"
             android:padding="16dp"
             android:textSize="15sp" />
 
         <EditText
             android:id="@+id/passArea"
+            android:hint="@string/input_pass"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginTop="30dp"
             android:background="@drawable/background_radius_white"
-            android:hint="@string/main_page_edt2"
             android:padding="16dp"
             android:textSize="15sp"
             android:inputType="textPassword"/>
@@ -70,28 +70,27 @@
             android:layout_marginStart="16dp"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="@string/login_page_wrong_message"
             android:visibility="invisible"/>
     </LinearLayout>
 
     <TextView
         android:id="@+id/findIdText"
+        android:text="@string/find_Id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:text="@string/find_id"
         android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_pass_Layout" />
 
     <TextView
         android:id="@+id/findPassText"
+        android:text="@string/find_Pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/find_pass"
         android:textStyle="italic"
         app:layout_constraintStart_toEndOf="@+id/findIdText"
         app:layout_constraintTop_toBottomOf="@+id/id_pass_Layout" />
@@ -120,11 +119,11 @@
 
     <TextView
         android:id="@+id/joinText"
+        android:text="@string/join"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="32dp"
-        android:text="@string/Join"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/id_pass_Layout" />
@@ -141,6 +140,7 @@
 
     <Button
         android:id="@+id/loginButton"
+        android:text="@string/loginBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -149,7 +149,6 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:background="@drawable/background_radius"
-        android:text="@string/login_button_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/line1" />

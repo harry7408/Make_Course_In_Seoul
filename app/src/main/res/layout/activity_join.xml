@@ -8,12 +8,12 @@
     tools:context=".JoinActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
+        android:id="@+id/Title"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/light_purple"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,89 +21,107 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/Join"
+            android:text="@string/join"
             android:textSize="25sp"
             android:textStyle="bold" />
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="280dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
-
-        <EditText
-            android:id="@+id/emailArea"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/background_rectangle"
-            android:hint="@string/main_page_edt1"
-            android:padding="16dp"
-            android:textSize="15sp" />
-        <TextView
-            android:id="@+id/wrong_message1"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:textColor="@color/red_color"/>
-
-        <EditText
-            android:id="@+id/passArea"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/background_rectangle"
-            android:hint="@string/main_page_edt2"
-            android:padding="16dp"
-            android:textSize="15sp"
-            android:inputType="textPassword"/>
-        <TextView
-            android:id="@+id/wrong_message2"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:textColor="@color/red_color"/>
-
-        <EditText
-            android:id="@+id/passCheckArea"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/background_rectangle"
-            android:hint="@string/join_page_edt3"
-            android:padding="16dp"
-            android:textSize="15sp"
-            android:inputType="textPassword"/>
-        <TextView
-            android:id="@+id/wrong_message3"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="4dp"
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:textColor="@color/red_color"/>
-    </LinearLayout>
-
     <EditText
-        android:id="@+id/nickNameArea"
+        android:id="@+id/idArea"
         android:layout_width="260dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_rectangle"
-        android:hint="@string/user_nick_name"
+        android:hint="@string/input_id"
+        android:padding="16dp"
+        app:layout_constraintStart_toStartOf="@+id/Title"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <Button
+        android:id="@+id/idCheck"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:background="@color/yellow_color"
+        android:text="@string/idCheck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/idArea"
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
+
+    <EditText
+        android:id="@+id/passArea"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/background_rectangle"
+        android:hint="@string/input_pass"
+        android:inputType="textPassword"
         android:padding="16dp"
         android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@id/idArea" />
+
+    <TextView
+        android:id="@+id/passMessage"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/red_color"
+        app:layout_constraintTop_toBottomOf="@id/passArea" />
+
+    <EditText
+        android:id="@+id/passCheckArea"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/background_rectangle"
+        android:hint="@string/checkpass"
+        android:inputType="textPassword"
+        android:padding="16dp"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/passMessage" />
+
+    <TextView
+        android:id="@+id/cpassMessage"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/red_color"
+        app:layout_constraintTop_toBottomOf="@id/passCheckArea" />
+
+
+    <EditText
+        android:id="@+id/emailArea"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/background_rectangle"
+        android:hint="@string/email"
+        android:padding="16dp"
+        android:textSize="15sp"
+        app:layout_constraintTop_toBottomOf="@id/cpassMessage" />
+
+    <TextView
+        android:id="@+id/emailMessage"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="24dp"
+        android:textColor="@color/red_color"
+        app:layout_constraintTop_toBottomOf="@id/emailArea" />
+
 
     <EditText
         android:id="@+id/nameArea"
@@ -113,43 +131,29 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_rectangle"
-        android:hint="@string/user_name"
+        android:hint="@string/name"
         android:padding="16dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nickNameArea" />
-
-    <Button
-        android:id="@+id/doubleCheck"
-        android:layout_width="80dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="56dp"
-        android:background="@color/main_Color"
-        android:text="@string/check_nick_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toEndOf="@+id/nickNameArea"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+        app:layout_constraintTop_toBottomOf="@+id/emailMessage" />
 
     <EditText
         android:id="@+id/birthArea"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_rectangle"
-        android:hint="@string/Birth"
+        android:hint="@string/birth"
+        android:inputType="phone"
         android:maxLength="6"
         android:padding="16dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nameArea"
-        android:inputType="phone"/>
+        app:layout_constraintTop_toBottomOf="@+id/nameArea" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -178,7 +182,7 @@
             android:layout_width="wrap_content"
             android:layout_height="48dp"
             android:layout_marginTop="4dp"
-            android:text="@string/male_area" />
+            android:text="@string/male" />
 
         <RadioButton
             android:id="@+id/female"
@@ -186,22 +190,21 @@
             android:layout_height="48dp"
             android:layout_marginStart="50dp"
             android:layout_marginTop="4dp"
-            android:text="@string/female_area" />
+            android:text="@string/female" />
     </RadioGroup>
 
     <Button
-        android:id="@+id/joinButton"
+        android:id="@+id/joinBtn"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_margin="24dp"
         android:enabled="false"
-        android:text="@string/join_button_text"
+        android:text="@string/joinBtn"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.494" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

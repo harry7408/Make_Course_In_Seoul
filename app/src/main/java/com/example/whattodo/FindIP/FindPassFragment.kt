@@ -15,17 +15,17 @@ import com.example.whattodo.R
 import org.w3c.dom.Text
 
 class FindPassFragment : Fragment() {
-    private lateinit var email: EditText
+    private lateinit var id: EditText
     private lateinit var name: EditText
-    private lateinit var nickname: EditText
+    private lateinit var email: EditText
     private lateinit var birth: EditText
     private lateinit var genderGroup: RadioGroup
     private lateinit var male: RadioButton
     private lateinit var female: RadioButton
     private lateinit var button: Button
-    private var emailFlag=false
+    private var idFlag=false
     private var nameFlag=false
-    private var nickNameFlag=false
+    private var emailFlag=false
     private var birthFlag=false
     private var genderFalg=false
 
@@ -38,9 +38,9 @@ class FindPassFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_find_pass, container, false)
-        email = view.findViewById(R.id.emailArea)
+        id = view.findViewById(R.id.idArea)
         name = view.findViewById(R.id.nameArea)
-        nickname = view.findViewById(R.id.nickNameArea)
+        email=view.findViewById(R.id.emailArea)
         birth = view.findViewById(R.id.birthArea)
         genderGroup = view.findViewById(R.id.radioGroup)
         male = view.findViewById(R.id.male)
@@ -51,12 +51,12 @@ class FindPassFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        email.addTextChangedListener(object:TextWatcher{
+        id.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if(s!=null) {
-                    emailFlag = when {
+                    idFlag = when {
                         s.isEmpty() -> false
                         !android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches() -> false
                         else -> true
@@ -78,12 +78,12 @@ class FindPassFragment : Fragment() {
             }
         })
 
-        nickname.addTextChangedListener(object:TextWatcher{
+        email.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if(s!=null) {
-                    nickNameFlag=when {
+                    emailFlag=when {
                         s.isEmpty()->false
                         else -> true
                     }
@@ -120,7 +120,7 @@ class FindPassFragment : Fragment() {
         button.setOnClickListener {
             val userEmail = email.text.toString()
             val userName = name.text.toString()
-            val userNickName = nickname.text.toString()
+            val userNickName = email.text.toString()
             val userBirth = birth.text.toString()
             val userGender = when {
                 male.isChecked -> male.text.toString()
@@ -131,6 +131,6 @@ class FindPassFragment : Fragment() {
 
     }
     private fun checkFlag() {
-        button.isEnabled=emailFlag&&nameFlag&&nickNameFlag&&birthFlag&&genderFalg
+        button.isEnabled=emailFlag&&nameFlag&&emailFlag&&birthFlag&&genderFalg
     }
 }

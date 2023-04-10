@@ -15,14 +15,14 @@
 
 
             <EditText
-                android:id="@+id/emailArea"
+                android:id="@+id/idArea"
+                android:hint="@string/input_id"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/email"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -30,27 +30,27 @@
 
             <EditText
                 android:id="@+id/nameArea"
+                android:hint="@string/name"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/user_name"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/emailArea" />
+                app:layout_constraintTop_toBottomOf="@+id/idArea" />
 
             <EditText
-                android:id="@+id/nickNameArea"
+                android:id="@+id/emailArea"
+                android:hint="@string/email"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/user_nick_name"
                 android:padding="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -58,25 +58,25 @@
 
             <EditText
                 android:id="@+id/birthArea"
+                android:hint="@string/birth"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_rectangle"
-                android:hint="@string/Birth"
                 android:padding="12dp"
                 android:maxLength="6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nickNameArea" />
+                app:layout_constraintTop_toBottomOf="@+id/emailArea" />
 
             <TextView
+                android:text="@string/gender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="@string/gender"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -94,29 +94,29 @@
 
                 <RadioButton
                     android:id="@+id/male"
+                    android:text="@string/male"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
-                    android:text="@string/male_area"
                     android:textSize="18sp" />
 
                 <RadioButton
                     android:id="@+id/female"
+                    android:text="@string/female"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="24dp"
-                    android:text="@string/female_area"
                     android:textSize="18sp" />
             </RadioGroup>
 
             <Button
                 android:id="@+id/passButton"
+                android:text="@string/findPassBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/background_radius"
-                android:text="@string/find_pass"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:enabled="false"

@@ -1,31 +1,21 @@
 package com.example.whattodo
 
-import android.annotation.SuppressLint
-import android.graphics.Color.red
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore.Audio.Radio
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
-import android.view.View
 import android.widget.*
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
-import androidx.core.widget.addTextChangedListener
-import com.example.whattodo.UserInfo.UserInfo1
-import org.w3c.dom.Text
 import java.util.regex.Matcher
 import java.util.regex.Pattern
-import kotlin.io.path.fileVisitor
 
 
 class JoinActivity : AppCompatActivity() {
-    private lateinit var email: EditText
+    private lateinit var id: EditText
     private lateinit var pass: EditText
     private lateinit var cpass: EditText
-    private lateinit var nickname: EditText
+    private lateinit var email: EditText
     private lateinit var name: EditText
     private lateinit var birth: EditText
     private lateinit var genderGroup: RadioGroup
@@ -39,7 +29,7 @@ class JoinActivity : AppCompatActivity() {
     var idFlag = false
     var passFlag = false
     var cpassFlag = false
-    var nicknameFlag = false
+    var emailFlag = false
     var nameFlag = false
     var birthFlag = false
     var genderFlag = false
@@ -48,20 +38,20 @@ class JoinActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_join)
 
-        email = findViewById(R.id.emailArea)
+        id = findViewById(R.id.idArea)
         pass = findViewById(R.id.passArea)
         cpass = findViewById(R.id.passCheckArea)
-        nickname = findViewById(R.id.nickNameArea)
+        email = findViewById(R.id.emailArea)
         name = findViewById(R.id.nameArea)
         birth = findViewById(R.id.birthArea)
         genderGroup = findViewById(R.id.radioGroup)
         maleBox = findViewById(R.id.male)
         femaleBox = findViewById(R.id.female)
-        joinBtn = findViewById(R.id.joinButton)
-        checkBtn = findViewById(R.id.doubleCheck)
-        emailError = findViewById(R.id.wrong_message1)
-        passError = findViewById(R.id.wrong_message2)
-        cpassError = findViewById(R.id.wrong_message3)
+        joinBtn = findViewById(R.id.joinBtn)
+        checkBtn = findViewById(R.id.idCheck)
+        emailError = findViewById(R.id.emailMessage)
+        passError = findViewById(R.id.passMessage)
+        cpassError = findViewById(R.id.cpassMessage)
 
         checkInput()
         joinBtn.setOnClickListener {
@@ -71,30 +61,17 @@ class JoinActivity : AppCompatActivity() {
     }
 
     private fun checkInput() {
-
 //         아이디 유효성 검사 파트
-        email.addTextChangedListener(object : TextWatcher {
+        id.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    when {
-                        s.isEmpty() -> {
-                            email.setBackgroundResource(R.drawable.background_rectangle_red)
-                            emailError.setText(R.string.no_id)
-                            idFlag = false
-                        }
-                        !android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches() -> {
-                            email.setBackgroundResource(R.drawable.background_rectangle_red)
-                            emailError.setText(R.string.wrong_email)
-                            idFlag = false
-                        }
-                        else -> {
-                            email.setBackgroundResource(R.drawable.background_rectangle)
-                            emailError.text = ""
-                            idFlag = true
-                        }
+                if (s!=null) when {
+                    s.isEmpty() -> idFlag=false
+                    else -> apply {
+                        checkBtn.setOnClickListener() {
 
+                        }
                     }
                 }
             }
@@ -105,22 +82,22 @@ class JoinActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if(s!=null) {
+                if (s != null) {
                     when {
                         s.isEmpty() -> {
                             pass.setBackgroundResource(R.drawable.background_rectangle_red)
                             passError.setText(R.string.no_pass)
-                            passFlag=false
+                            passFlag = false
                         }
                         !checkPass(s.toString()).matches() -> {
                             pass.setBackgroundResource(R.drawable.background_rectangle_red)
                             passError.setText(R.string.wrong_pass)
-                            passFlag=false
+                            passFlag = false
                         }
                         else -> {
                             pass.setBackgroundResource(R.drawable.background_rectangle)
                             passError.text = ""
-                            passFlag=true
+                            passFlag = true
                         }
                     }
                 }
@@ -128,79 +105,92 @@ class JoinActivity : AppCompatActivity() {
         })
 
 //      비밀번호 확인파트
-        cpass.addTextChangedListener(object : TextWatcher {
+        cpass.addTextChangedListener(object:TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s!=null) {
+                    when {
+                        s.isEmpty() -> {
+                            cpass.setBackgroundResource(R.drawable.background_rectangle_red)
+                            cpassError.setText(R.string.no_pass)
+                            cpassFlag=false
+                        }
+                        !s.toString().equals(pass.text.toString()) -> {
+                            cpass.setBackgroundResource(R.drawable.background_rectangle_red)
+                            cpassError.setText(R.string.not_same_pass)
+                            cpassFlag=false
+                        }
+                        else -> {
+                            cpass.setBackgroundResource(R.drawable.background_rectangle)
+                            cpassError.setText("")
+                            cpassFlag=true
+                        }
+                    }
+                }
+            }
+        })
+        //         아이디 유효성 검사 파트
+        email.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if (s != null) {
                     when {
                         s.isEmpty() -> {
-                            cpass.setBackgroundResource(R.drawable.background_rectangle_red)
-                            cpassError.setText(R.string.no_cpass)
-                            cpassFlag = false
+                            email.setBackgroundResource(R.drawable.background_rectangle_red)
+                            emailError.setText(R.string.no_email)
+                            emailFlag = false
                         }
-                        s.toString() != pass.text.toString() -> {
-                            cpass.setBackgroundResource(R.drawable.background_rectangle_red)
-                            cpassError.setText(R.string.wrong_pass_check)
-                            cpassFlag = false
+                        !android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches() -> {
+                            email.setBackgroundResource(R.drawable.background_rectangle_red)
+                            emailError.setText(R.string.wrong_email)
+                            emailFlag = false
                         }
                         else -> {
-                            cpass.setBackgroundResource(R.drawable.background_rectangle)
-                            cpassError.text = ""
-                            cpassFlag = true
-
+                            email.setBackgroundResource(R.drawable.background_rectangle)
+                            emailError.text = ""
+                            emailFlag = true
                         }
-                    }
-//                    flagCheck()
-                }
-            }
-        })
-//        닉네임 입력여부
-        nickname.addTextChangedListener(object:TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s!=null) {
-                    if (s.isEmpty()) { nicknameFlag=false }
-                    checkBtn.setOnClickListener {
-//                        서버와 통신
+
                     }
                 }
             }
         })
+
 
 //        이름 입력 여부
-         name.addTextChangedListener(object:TextWatcher{
-             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-             override fun afterTextChanged(s: Editable?) {
-                 if (s!=null) {
-                     nameFlag = when {
-                         s.isEmpty()-> false
-                         else -> true
-                     }
-                 }
-             }
-         })
-//        생년월일 입력여부
-        birth.addTextChangedListener(object:TextWatcher{
+        name.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (s!=null) {
-                    birthFlag =when {
-                        s.isEmpty() ->false
-                        else-> true
+                if (s != null) {
+                    nameFlag = when {
+                        s.isEmpty() -> false
+                        else -> true
+                    }
+                }
+            }
+        })
+//        생년월일 입력여부
+        birth.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                if (s != null) {
+                    birthFlag = when {
+                        s.isEmpty() -> false
+                        else -> true
                     }
                 }
             }
         })
 //      성별 입력여부
-        genderGroup.setOnCheckedChangeListener { _,checkId ->
-            when(checkId) {
-                R.id.male -> genderFlag=true
-                R.id.female -> genderFlag=true
-                else -> genderFlag=false
+        genderGroup.setOnCheckedChangeListener { _, checkId ->
+            when (checkId) {
+                R.id.male -> genderFlag = true
+                R.id.female -> genderFlag = true
+                else -> genderFlag = false
             }
             flagCheck()
         }
@@ -214,9 +204,9 @@ class JoinActivity : AppCompatActivity() {
         return matcher
     }
 
-//    모든 입력이 있으면 회원가입 버튼 활성화
+    //    모든 입력이 있으면 회원가입 버튼 활성화 (id 부분 추후 추가)
     private fun flagCheck() {
-        joinBtn.isEnabled=idFlag&&passFlag&&cpassFlag && nameFlag && birthFlag && genderFlag
+        joinBtn.isEnabled = passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
     }
 }
 

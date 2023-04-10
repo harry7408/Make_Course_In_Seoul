@@ -43,7 +43,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_rectangle2"
             android:gravity="center"
-            android:text="@string/find_id"
+            android:text="@string/find_Id"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:background="@drawable/background_rectangle2"
             android:gravity="center"
-            android:text="@string/find_pass"
+            android:text="@string/find_Pass"
             android:textSize="15sp"
             android:textStyle="bold" />
     </LinearLayout>
