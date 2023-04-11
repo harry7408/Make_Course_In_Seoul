@@ -19,7 +19,7 @@ data class JoinData (
         )
 
 
-data class CheckIdData(
-        @SerializedName("memberId")
-        val memberId:String
+data class CheckIdMessage(
+        val data:List<JoinData>?
 )
+

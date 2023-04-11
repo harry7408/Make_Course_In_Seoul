@@ -7,10 +7,16 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import com.example.whattodo.dto.CheckIdMessage
+import com.example.whattodo.network.RetrofitAPI
+import com.example.whattodo.network.ServiceAPI
+import retrofit2.Call
+import retrofit2.Response
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-
+private const val TAG="JoinActivity"
 class JoinActivity : AppCompatActivity() {
     private lateinit var id: EditText
     private lateinit var pass: EditText
@@ -54,8 +60,31 @@ class JoinActivity : AppCompatActivity() {
         cpassError = findViewById(R.id.cpassMessage)
 
         checkInput()
+        checkBtn.setOnClickListener {
+           Toast.makeText(this,"i'm Clicked",Toast.LENGTH_SHORT).show()
+            RetrofitAPI.request.checkNickname()
+                .enqueue(object : retrofit2.Callback<CheckIdMessage>  {
+                    override fun onResponse(
+                        call: Call<CheckIdMessage>,
+                        response: Response<CheckIdMessage>
+                    ) {
+                        if (response.isSuccessful()) {
+                            Log.d(TAG,"SUCCESS")
+                        }else {
+                            Log.d(TAG,"FAIL")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<CheckIdMessage>, t: Throwable) {
+                        Log.e(TAG,"error")
+                    }
+                })
+        }
+
+
         joinBtn.setOnClickListener {
 //            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
+//            아이디의 중복확인 버튼이 비활성화 되어있을때
             Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show()
         }
     }
@@ -68,11 +97,7 @@ class JoinActivity : AppCompatActivity() {
             override fun afterTextChanged(s: Editable?) {
                 if (s!=null) when {
                     s.isEmpty() -> idFlag=false
-                    else -> apply {
-                        checkBtn.setOnClickListener() {
-
-                        }
-                    }
+                    else -> true
                 }
             }
         })
@@ -209,6 +234,7 @@ class JoinActivity : AppCompatActivity() {
         joinBtn.isEnabled = passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
     }
 }
+
 
 
 

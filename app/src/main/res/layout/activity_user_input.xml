@@ -20,6 +20,9 @@
 
     <Button
         android:id="@+id/okBtn"
+        android:text="@string/input_complete"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
