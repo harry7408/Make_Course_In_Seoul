@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.whattodo.R
+import com.example.whattodo.databinding.FragmentCourseBinding
 
 
 class CourseFragment : Fragment() {
-
+        private lateinit var binding : FragmentCourseBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,7 +22,15 @@ class CourseFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course, container, false)
+        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_course,container,false)
+        binding.placeTap.setOnClickListener {
+            it.findNavController().navigate(R.id.action_courseFragment_to_placeFragment)
+        }
+        binding.myPageTap.setOnClickListener {
+            it.findNavController().navigate(R.id.action_courseFragment_to_mypageFragment)
+        }
+
+
+        return binding.root
     }
 }

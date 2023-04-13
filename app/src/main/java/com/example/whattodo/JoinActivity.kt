@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import com.example.whattodo.dto.CheckIdMessage
 import com.example.whattodo.network.RetrofitAPI
+import com.example.whattodo.network.RetrofitAPI.request
 import com.example.whattodo.network.ServiceAPI
 import retrofit2.Call
 import retrofit2.Response
@@ -61,8 +62,9 @@ class JoinActivity : AppCompatActivity() {
 
         checkInput()
         checkBtn.setOnClickListener {
+            val check_id=id.text.toString()
            Toast.makeText(this,"i'm Clicked",Toast.LENGTH_SHORT).show()
-            RetrofitAPI.request.checkNickname()
+            request.checkNickname()
                 .enqueue(object : retrofit2.Callback<CheckIdMessage>  {
                     override fun onResponse(
                         call: Call<CheckIdMessage>,
