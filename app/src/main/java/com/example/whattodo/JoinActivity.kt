@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.dto.CheckIdMessage
 import com.example.whattodo.network.RetrofitAPI
 import com.example.whattodo.network.RetrofitAPI.request
@@ -19,20 +20,8 @@ import java.util.regex.Pattern
 
 private const val TAG="JoinActivity"
 class JoinActivity : AppCompatActivity() {
-    private lateinit var id: EditText
-    private lateinit var pass: EditText
-    private lateinit var cpass: EditText
-    private lateinit var email: EditText
-    private lateinit var name: EditText
-    private lateinit var birth: EditText
-    private lateinit var genderGroup: RadioGroup
-    private lateinit var maleBox: RadioButton
-    private lateinit var femaleBox: RadioButton
-    private lateinit var joinBtn: Button
-    private lateinit var checkBtn: Button
-    private lateinit var emailError: TextView
-    private lateinit var passError: TextView
-    private lateinit var cpassError: TextView
+
+    private lateinit var binding:ActivityJoinBinding
     var idFlag = false
     var passFlag = false
     var cpassFlag = false
@@ -43,26 +32,12 @@ class JoinActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_join)
-
-        id = findViewById(R.id.idArea)
-        pass = findViewById(R.id.passArea)
-        cpass = findViewById(R.id.passCheckArea)
-        email = findViewById(R.id.emailArea)
-        name = findViewById(R.id.nameArea)
-        birth = findViewById(R.id.birthArea)
-        genderGroup = findViewById(R.id.radioGroup)
-        maleBox = findViewById(R.id.male)
-        femaleBox = findViewById(R.id.female)
-        joinBtn = findViewById(R.id.joinBtn)
-        checkBtn = findViewById(R.id.idCheck)
-        emailError = findViewById(R.id.emailMessage)
-        passError = findViewById(R.id.passMessage)
-        cpassError = findViewById(R.id.cpassMessage)
+        binding=ActivityJoinBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         checkInput()
-        checkBtn.setOnClickListener {
-            val check_id=id.text.toString()
+        binding.idCheck.setOnClickListener {
+            val check_id=binding.idArea.text.toString()
            Toast.makeText(this,"i'm Clicked",Toast.LENGTH_SHORT).show()
             request.checkNickname()
                 .enqueue(object : retrofit2.Callback<CheckIdMessage>  {
@@ -84,7 +59,7 @@ class JoinActivity : AppCompatActivity() {
         }
 
 
-        joinBtn.setOnClickListener {
+        binding.joinBtn.setOnClickListener {
 //            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
 //            아이디의 중복확인 버튼이 비활성화 되어있을때
             Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show()
@@ -93,7 +68,7 @@ class JoinActivity : AppCompatActivity() {
 
     private fun checkInput() {
 //         아이디 유효성 검사 파트
-        id.addTextChangedListener(object : TextWatcher {
+        binding.idArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -105,25 +80,25 @@ class JoinActivity : AppCompatActivity() {
         })
 
 //       패스워드 유효성 체크 파트
-        pass.addTextChangedListener(object : TextWatcher {
+        binding.passArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if (s != null) {
                     when {
                         s.isEmpty() -> {
-                            pass.setBackgroundResource(R.drawable.background_rectangle_red)
-                            passError.setText(R.string.no_pass)
+                            binding.passArea.setBackgroundResource(R.drawable.background_rectangle_red)
+                            binding.passMessage.setText(R.string.no_pass)
                             passFlag = false
                         }
                         !checkPass(s.toString()).matches() -> {
-                            pass.setBackgroundResource(R.drawable.background_rectangle_red)
-                            passError.setText(R.string.wrong_pass)
+                            binding.passArea.setBackgroundResource(R.drawable.background_rectangle_red)
+                            binding.passMessage.setText(R.string.wrong_pass)
                             passFlag = false
                         }
                         else -> {
-                            pass.setBackgroundResource(R.drawable.background_rectangle)
-                            passError.text = ""
+                            binding.passArea.setBackgroundResource(R.drawable.background_rectangle)
+                            binding.passMessage.text = ""
                             passFlag = true
                         }
                     }
@@ -132,25 +107,25 @@ class JoinActivity : AppCompatActivity() {
         })
 
 //      비밀번호 확인파트
-        cpass.addTextChangedListener(object:TextWatcher{
+        binding.passCheckArea.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if (s!=null) {
                     when {
                         s.isEmpty() -> {
-                            cpass.setBackgroundResource(R.drawable.background_rectangle_red)
-                            cpassError.setText(R.string.no_pass)
+                            binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle_red)
+                            binding.cpassMessage.setText(R.string.no_pass)
                             cpassFlag=false
                         }
-                        !s.toString().equals(pass.text.toString()) -> {
-                            cpass.setBackgroundResource(R.drawable.background_rectangle_red)
-                            cpassError.setText(R.string.not_same_pass)
+                        !s.toString().equals(binding.passArea.text.toString()) -> {
+                            binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle_red)
+                            binding.cpassMessage.setText(R.string.not_same_pass)
                             cpassFlag=false
                         }
                         else -> {
-                            cpass.setBackgroundResource(R.drawable.background_rectangle)
-                            cpassError.setText("")
+                            binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle)
+                            binding.cpassMessage.setText("")
                             cpassFlag=true
                         }
                     }
@@ -158,25 +133,25 @@ class JoinActivity : AppCompatActivity() {
             }
         })
         //         아이디 유효성 검사 파트
-        email.addTextChangedListener(object : TextWatcher {
+        binding.emailArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if (s != null) {
                     when {
                         s.isEmpty() -> {
-                            email.setBackgroundResource(R.drawable.background_rectangle_red)
-                            emailError.setText(R.string.no_email)
+                            binding.emailArea.setBackgroundResource(R.drawable.background_rectangle_red)
+                            binding.emailMessage.setText(R.string.no_email)
                             emailFlag = false
                         }
                         !android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches() -> {
-                            email.setBackgroundResource(R.drawable.background_rectangle_red)
-                            emailError.setText(R.string.wrong_email)
+                            binding.emailArea.setBackgroundResource(R.drawable.background_rectangle_red)
+                            binding.emailMessage.setText(R.string.wrong_email)
                             emailFlag = false
                         }
                         else -> {
-                            email.setBackgroundResource(R.drawable.background_rectangle)
-                            emailError.text = ""
+                            binding.emailArea.setBackgroundResource(R.drawable.background_rectangle)
+                            binding.emailMessage.text = ""
                             emailFlag = true
                         }
 
@@ -187,7 +162,7 @@ class JoinActivity : AppCompatActivity() {
 
 
 //        이름 입력 여부
-        name.addTextChangedListener(object : TextWatcher {
+        binding.nameArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -200,7 +175,7 @@ class JoinActivity : AppCompatActivity() {
             }
         })
 //        생년월일 입력여부
-        birth.addTextChangedListener(object : TextWatcher {
+        binding.birthArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -213,7 +188,7 @@ class JoinActivity : AppCompatActivity() {
             }
         })
 //      성별 입력여부
-        genderGroup.setOnCheckedChangeListener { _, checkId ->
+        binding.genderGroup.setOnCheckedChangeListener { _, checkId ->
             when (checkId) {
                 R.id.male -> genderFlag = true
                 R.id.female -> genderFlag = true
@@ -233,7 +208,7 @@ class JoinActivity : AppCompatActivity() {
 
     //    모든 입력이 있으면 회원가입 버튼 활성화 (id 부분 추후 추가)
     private fun flagCheck() {
-        joinBtn.isEnabled = passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
+        binding.joinBtn.isEnabled = passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
     }
 }
 

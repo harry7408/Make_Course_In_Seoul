@@ -8,45 +8,43 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.whattodo.FindIP.FindIdPassActivity
+import com.example.whattodo.databinding.ActivityMainBinding
+import com.example.whattodo.main.UserInputActivity
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var emailedt:EditText
-    private lateinit var passedt:EditText
-    private lateinit var findemailtxt:TextView
-    private lateinit var findpasstxt:TextView
-    private lateinit var jointxt:TextView
-    private lateinit var loginbtn: Button
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        emailedt=findViewById<EditText>(R.id.emailArea)
-        passedt=findViewById<EditText>(R.id.passArea)
-        findemailtxt=findViewById<TextView>(R.id.findIdText)
-        findpasstxt=findViewById<TextView>(R.id.findPassText)
-        jointxt=findViewById<TextView>(R.id.joinText)
-        loginbtn=findViewById<Button>(R.id.loginButton)
+        binding=ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
 //        클릭 이벤트 처리부분
-        jointxt.setOnClickListener {
+        binding.joinText.setOnClickListener {
             val intent=Intent(this,JoinActivity::class.java)
             startActivity(intent)
         }
-        findemailtxt.setOnClickListener {
+        binding.findIdText.setOnClickListener {
             val intent=Intent(this, FindIdPassActivity::class.java)
-            intent.putExtra("text",findemailtxt.text.toString())
+            intent.putExtra("text",binding.findIdText.text.toString())
             startActivity(intent)
         }
 
-        findpasstxt.setOnClickListener {
+        binding.findPassText.setOnClickListener {
             val intent=Intent(this,FindIdPassActivity::class.java)
-            intent.putExtra("text",findpasstxt.text.toString())
+            intent.putExtra("text",binding.findPassText.text.toString())
             startActivity(intent)
         }
 
-        loginbtn.setOnClickListener {
-            val email=emailedt.text.toString()
-            val pass=passedt.text.toString()
+        binding.loginButton.setOnClickListener {
+            val email=binding.emailArea.text.toString()
+            val pass=binding.passArea.text.toString()
+
+
+            val intent=Intent(this,UserInputActivity::class.java)
+            startActivity(intent)
 
 //            서버와 통신 필요
         }

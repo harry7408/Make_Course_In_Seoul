@@ -12,17 +12,12 @@ import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.example.whattodo.R
+import com.example.whattodo.databinding.FragmentFindPassBinding
 import org.w3c.dom.Text
 
 class FindPassFragment : Fragment() {
-    private lateinit var id: EditText
-    private lateinit var name: EditText
-    private lateinit var email: EditText
-    private lateinit var birth: EditText
-    private lateinit var genderGroup: RadioGroup
-    private lateinit var male: RadioButton
-    private lateinit var female: RadioButton
-    private lateinit var button: Button
+
+    private lateinit var binding: FragmentFindPassBinding
     private var idFlag=false
     private var nameFlag=false
     private var emailFlag=false
@@ -37,21 +32,13 @@ class FindPassFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_find_pass, container, false)
-        id = view.findViewById(R.id.idArea)
-        name = view.findViewById(R.id.nameArea)
-        email=view.findViewById(R.id.emailArea)
-        birth = view.findViewById(R.id.birthArea)
-        genderGroup = view.findViewById(R.id.radioGroup)
-        male = view.findViewById(R.id.male)
-        female = view.findViewById(R.id.female)
-        button = view.findViewById(R.id.passButton)
-        return view
+        binding=FragmentFindPassBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        id.addTextChangedListener(object:TextWatcher{
+        binding.idArea.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -65,7 +52,7 @@ class FindPassFragment : Fragment() {
             }
         })
 
-        name.addTextChangedListener(object:TextWatcher{
+        binding.nameArea.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -78,7 +65,7 @@ class FindPassFragment : Fragment() {
             }
         })
 
-        email.addTextChangedListener(object:TextWatcher{
+        binding.emailArea.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -91,7 +78,7 @@ class FindPassFragment : Fragment() {
             }
         })
 
-        birth.addTextChangedListener(object:TextWatcher{
+        binding.birthArea.addTextChangedListener(object:TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -104,7 +91,7 @@ class FindPassFragment : Fragment() {
             }
         })
 
-        genderGroup.setOnCheckedChangeListener { _, checkedId ->
+        binding.genderGroup.setOnCheckedChangeListener { _, checkedId ->
             genderFalg = when(checkedId) {
                 R.id.male -> true
                 R.id.female -> true
@@ -117,20 +104,20 @@ class FindPassFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        button.setOnClickListener {
-            val userEmail = email.text.toString()
-            val userName = name.text.toString()
-            val userNickName = email.text.toString()
-            val userBirth = birth.text.toString()
+        binding.passButton.setOnClickListener {
+            val userId = binding.idArea.text.toString()
+            val userName = binding.nameArea.text.toString()
+            val userEmail=binding.emailArea.text.toString()
+            val userBirth = binding.birthArea.text.toString()
             val userGender = when {
-                male.isChecked -> male.text.toString()
-                else -> female.text.toString()
+                binding.male.isChecked -> binding.male.text.toString()
+                else -> binding.female.text.toString()
             }
         }
 
 
     }
     private fun checkFlag() {
-        button.isEnabled=emailFlag&&nameFlag&&emailFlag&&birthFlag&&genderFalg
+        binding.passButton.isEnabled=emailFlag&&nameFlag&&emailFlag&&birthFlag&&genderFalg
     }
 }

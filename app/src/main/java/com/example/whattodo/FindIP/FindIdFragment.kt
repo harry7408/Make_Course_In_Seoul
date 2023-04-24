@@ -21,52 +21,40 @@ import com.example.whattodo.databinding.FragmentFindIdBinding
 
 
 class FindIdFragment : Fragment() {
-    private lateinit var name: EditText
-    private lateinit var email: EditText
-    private lateinit var birth: EditText
-    private lateinit var genderGruop: RadioGroup
-    private lateinit var male: RadioButton
-    private lateinit var female: RadioButton
-    private lateinit var button: Button
-    private var nameFlag=false
-    private var emailFlag=false
-    private var birthFlag=false
-    private var genderFlag=false
+
+    private lateinit var binding: FragmentFindIdBinding
+
+    private var nameFlag = false
+    private var emailFlag = false
+    private var birthFlag = false
+    private var genderFlag = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_find_id, container, false)
-        name = view.findViewById(R.id.nameArea)
-        email = view.findViewById(R.id.emailArea)
-        birth = view.findViewById(R.id.birthArea)
-        genderGruop = view.findViewById(R.id.radioGroup2)
-        male = view.findViewById(R.id.male)
-        female = view.findViewById(R.id.female)
-        button = view.findViewById(R.id.emailButton)
-        return view
+        binding = FragmentFindIdBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        name.addTextChangedListener(object:TextWatcher{
+        binding.nameArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (s!=null) {
+                if (s != null) {
                     when {
-                        s.isEmpty() -> nameFlag=false
-                        else -> nameFlag=true
+                        s.isEmpty() -> nameFlag = false
+                        else -> nameFlag = true
                     }
                 }
             }
         })
-        email.addTextChangedListener(object : TextWatcher {
+        binding.emailArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
@@ -87,24 +75,24 @@ class FindIdFragment : Fragment() {
             }
         })
 
-        birth.addTextChangedListener(object:TextWatcher{
+        binding.birthArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
 
             override fun afterTextChanged(s: Editable?) {
-                if (s!=null) {
+                if (s != null) {
                     when {
-                        s.isEmpty()->birthFlag=false
-                        else -> birthFlag=true
+                        s.isEmpty() -> birthFlag = false
+                        else -> birthFlag = true
                     }
                 }
             }
         })
-        genderGruop.setOnCheckedChangeListener { _, checkedId ->
-            genderFlag= when(checkedId) {
-                R.id.male->true
-                R.id.female->true
+        binding.genderArea.setOnCheckedChangeListener { _, checkedId ->
+            genderFlag = when (checkedId) {
+                R.id.male -> true
+                R.id.female -> true
                 else -> false
             }
             checkFlag()
@@ -112,24 +100,22 @@ class FindIdFragment : Fragment() {
     }
 
 
-
-
     override fun onStart() {
         super.onStart()
-        button.setOnClickListener {
-            val userName: String = name.text.toString()
-            val userEmail: String = email.text.toString()
-            val userBirth: String = birth.text.toString()
-            val userGender=when {
-                male.isChecked->male.text.toString()
-                female.isChecked -> female.text.toString()
+        binding.findButton.setOnClickListener {
+            val userName: String = binding.nameArea.text.toString()
+            val userEmail: String = binding.emailArea.text.toString()
+            val userBirth: String = binding.birthArea.text.toString()
+            val userGender = when {
+                binding.male.isChecked -> binding.male.text.toString()
+                binding.female.isChecked -> binding.female.text.toString()
                 else -> null
             }
         }
-
     }
+
     private fun checkFlag() {
-        button.isEnabled=nameFlag&&emailFlag&&birthFlag&&genderFlag
+        binding.findButton.isEnabled = nameFlag && emailFlag && birthFlag && genderFlag
     }
 
 }

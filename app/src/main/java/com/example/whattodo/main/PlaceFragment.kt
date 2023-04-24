@@ -22,14 +22,17 @@ class PlaceFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=DataBindingUtil.inflate(inflater,R.layout.fragment_place,container,false)
+        binding=FragmentPlaceBinding.inflate(layoutInflater)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         binding.courseTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_placeFragment_to_courseFragment)
         }
         binding.myPageTap.setOnClickListener {
             it.findNavController().navigate(R.id.action_placeFragment_to_mypageFragment)
         }
-
-        return binding.root
     }
 }

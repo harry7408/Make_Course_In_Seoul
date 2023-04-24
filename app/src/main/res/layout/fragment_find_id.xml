@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+
     <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="Search.FindIdFragment">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -68,7 +68,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/birthArea" />
 
             <RadioGroup
-                android:id="@+id/radioGroup2"
+                android:id="@+id/genderArea"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -94,7 +94,7 @@
             </RadioGroup>
 
             <Button
-                android:id="@+id/emailButton"
+                android:id="@+id/findButton"
                 android:text="@string/findIdBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -107,9 +107,8 @@
                 android:enabled="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/radioGroup2" />
+                app:layout_constraintTop_toBottomOf="@+id/genderArea" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>
-</layout>

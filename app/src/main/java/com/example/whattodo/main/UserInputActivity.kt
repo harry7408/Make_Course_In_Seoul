@@ -11,7 +11,7 @@ class UserInputActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_input)
-
+        nextbutton=findViewById(R.id.okBtn)
         nextbutton.setOnClickListener {
             val intent= Intent(this,MainInfoActivity::class.java)
             startActivity(intent)
