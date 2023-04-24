@@ -19,6 +19,7 @@ data class JoinData (
         )
 
 
+
 data class CheckIdMessage(
         val data:List<JoinData>?
 )

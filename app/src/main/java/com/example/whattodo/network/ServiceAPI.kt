@@ -11,5 +11,5 @@ interface ServiceAPI {
      fun JoinUser(@Field("users") id :Int):Call<JoinData>
 
      @GET("/member/users")
-     fun checkNickname() : Call<CheckIdMessage>
+     fun checkNickname() : Call<List<JoinData>>
 }

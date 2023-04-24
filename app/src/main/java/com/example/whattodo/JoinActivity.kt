@@ -1,5 +1,8 @@
 package com.example.whattodo
 
+
+import android.app.ProgressDialog.show
+import android.graphics.Paint.Join
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,20 +11,23 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
+import androidx.core.provider.FontRequest
 import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.dto.CheckIdMessage
+import com.example.whattodo.dto.JoinData
 import com.example.whattodo.network.RetrofitAPI
-import com.example.whattodo.network.RetrofitAPI.request
 import com.example.whattodo.network.ServiceAPI
+
 import retrofit2.Call
 import retrofit2.Response
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
-private const val TAG="JoinActivity"
+private const val TAG = "JoinActivity"
+
 class JoinActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityJoinBinding
+    private lateinit var binding: ActivityJoinBinding
     var idFlag = false
     var passFlag = false
     var cpassFlag = false
@@ -32,30 +38,52 @@ class JoinActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding=ActivityJoinBinding.inflate(layoutInflater)
+        binding = ActivityJoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         checkInput()
         binding.idCheck.setOnClickListener {
-            val check_id=binding.idArea.text.toString()
-           Toast.makeText(this,"i'm Clicked",Toast.LENGTH_SHORT).show()
-            request.checkNickname()
-                .enqueue(object : retrofit2.Callback<CheckIdMessage>  {
-                    override fun onResponse(
-                        call: Call<CheckIdMessage>,
-                        response: Response<CheckIdMessage>
-                    ) {
-                        if (response.isSuccessful()) {
-                            Log.d(TAG,"SUCCESS")
-                        }else {
-                            Log.d(TAG,"FAIL")
+            val check_id = binding.idArea.text.toString()
+            val userListCall = RetrofitAPI.service.checkNickname()
+            userListCall.enqueue(object : retrofit2.Callback<List<JoinData>> {
+                override fun onResponse(
+                    call: Call<List<JoinData>>,
+                    response: Response<List<JoinData>>
+                ) {
+                    if (response.isSuccessful()) {
+                        Log.d(TAG,"SUCCESS")
+                        val userList:List<JoinData>? = response.body()
+                        for (users in userList!!) {
+                            if (users.memberId==check_id) {
+                               AlertDialog.Builder(this@JoinActivity).run {
+                                   setTitle("중복체크여부")
+                                   setMessage("중복된 아이디 입니다")
+                                   setPositiveButton("Ok",null)
+                                   show()
+                               }
+                                continue
+                            } else {
+                                AlertDialog.Builder(this@JoinActivity).run {
+                                    setTitle("중복체크여부")
+                                    setMessage("중복되지 않은 아이디 입니다")
+                                    setPositiveButton("Ok",null)
+                                    show()
+                                }
+                                idFlag=true
+                                binding.idCheck.isEnabled=false
+                            }
+                            Log.d(TAG,"${users.memberId}")
                         }
+                    } else {
+                        Log.d(TAG, "실패?")
                     }
+                }
 
-                    override fun onFailure(call: Call<CheckIdMessage>, t: Throwable) {
-                        Log.e(TAG,"error")
-                    }
-                })
+                override fun onFailure(call: Call<List<JoinData>>, t: Throwable) {
+                    Log.d(TAG, t.message.toString())
+                    call.cancel()
+                }
+            })
         }
 
 
@@ -72,8 +100,8 @@ class JoinActivity : AppCompatActivity() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (s!=null) when {
-                    s.isEmpty() -> idFlag=false
+                if (s != null) when {
+                    s.isEmpty() -> idFlag = false
                     else -> true
                 }
             }
@@ -107,26 +135,26 @@ class JoinActivity : AppCompatActivity() {
         })
 
 //      비밀번호 확인파트
-        binding.passCheckArea.addTextChangedListener(object:TextWatcher{
+        binding.passCheckArea.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
-                if (s!=null) {
+                if (s != null) {
                     when {
                         s.isEmpty() -> {
                             binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle_red)
                             binding.cpassMessage.setText(R.string.no_pass)
-                            cpassFlag=false
+                            cpassFlag = false
                         }
                         !s.toString().equals(binding.passArea.text.toString()) -> {
                             binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle_red)
                             binding.cpassMessage.setText(R.string.not_same_pass)
-                            cpassFlag=false
+                            cpassFlag = false
                         }
                         else -> {
                             binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle)
                             binding.cpassMessage.setText("")
-                            cpassFlag=true
+                            cpassFlag = true
                         }
                     }
                 }
@@ -208,9 +236,11 @@ class JoinActivity : AppCompatActivity() {
 
     //    모든 입력이 있으면 회원가입 버튼 활성화 (id 부분 추후 추가)
     private fun flagCheck() {
-        binding.joinBtn.isEnabled = passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
+        binding.joinBtn.isEnabled =
+            idFlag && passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
     }
 }
+
 
 
 
