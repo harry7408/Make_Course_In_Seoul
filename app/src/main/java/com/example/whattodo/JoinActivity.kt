@@ -1,22 +1,17 @@
 package com.example.whattodo
 
 
-import android.app.ProgressDialog.show
-import android.graphics.Paint.Join
+import android.graphics.Paint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
-import android.text.InputFilter
+import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
-import android.widget.*
 import androidx.appcompat.app.AlertDialog
-import androidx.core.provider.FontRequest
 import com.example.whattodo.databinding.ActivityJoinBinding
-import com.example.whattodo.dto.CheckIdMessage
 import com.example.whattodo.dto.JoinData
 import com.example.whattodo.network.RetrofitAPI
-import com.example.whattodo.network.ServiceAPI
 
 import retrofit2.Call
 import retrofit2.Response
@@ -42,40 +37,52 @@ class JoinActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         checkInput()
+        /* ID 중복확인 검사 부분 */
         binding.idCheck.setOnClickListener {
             val check_id = binding.idArea.text.toString()
-            val userListCall = RetrofitAPI.service.checkNickname()
+            var dupChecked: Boolean = false
+            val userListCall = RetrofitAPI.idCheckService.checkNickname()
             userListCall.enqueue(object : retrofit2.Callback<List<JoinData>> {
                 override fun onResponse(
                     call: Call<List<JoinData>>,
                     response: Response<List<JoinData>>
                 ) {
-                    if (response.isSuccessful()) {
-                        Log.d(TAG,"SUCCESS")
-                        val userList:List<JoinData>? = response.body()
+                    if (response.isSuccessful() && check_id.isNotEmpty()) {
+//                        Log.d(TAG, "SUCCESS")
+                        val userList: List<JoinData>? = response.body()
                         for (users in userList!!) {
-                            if (users.memberId==check_id) {
-                               AlertDialog.Builder(this@JoinActivity).run {
-                                   setTitle("중복체크여부")
-                                   setMessage("중복된 아이디 입니다")
-                                   setPositiveButton("Ok",null)
-                                   show()
-                               }
-                                continue
+                            if (users.memberId == check_id) {
+                                dupChecked = false
+                                break
                             } else {
-                                AlertDialog.Builder(this@JoinActivity).run {
-                                    setTitle("중복체크여부")
-                                    setMessage("중복되지 않은 아이디 입니다")
-                                    setPositiveButton("Ok",null)
-                                    show()
-                                }
-                                idFlag=true
-                                binding.idCheck.isEnabled=false
+                                dupChecked = true
                             }
-                            Log.d(TAG,"${users.memberId}")
+                        }
+                        if (dupChecked) {
+                            idFlag = true
+                            binding.idArea.inputType = InputType.TYPE_NULL
+                            binding.idCheck.isEnabled = false
+                            AlertDialog.Builder(this@JoinActivity).run {
+                                setTitle(R.string.check_id)
+                                setMessage(R.string.isNot_duplicate)
+                                setPositiveButton(R.string.ok, null)
+                                show()
+                            }
+                        } else {
+                            AlertDialog.Builder(this@JoinActivity).run {
+                                setTitle(R.string.check_id)
+                                setMessage(R.string.is_duplicate)
+                                setPositiveButton(R.string.ok, null)
+                                show()
+                            }
                         }
                     } else {
-                        Log.d(TAG, "실패?")
+                        AlertDialog.Builder(this@JoinActivity).run {
+                            setTitle(R.string.check_id)
+                            setMessage(R.string.no_id)
+                            setPositiveButton(R.string.ok, null)
+                            show()
+                        }
                     }
                 }
 
@@ -87,10 +94,36 @@ class JoinActivity : AppCompatActivity() {
         }
 
 
+
         binding.joinBtn.setOnClickListener {
 //            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
 //            아이디의 중복확인 버튼이 비활성화 되어있을때
-            Toast.makeText(this, "aaa", Toast.LENGTH_SHORT).show()
+            val genderText= when {
+                binding.male.isChecked->binding.male.text.toString()
+                else -> binding.female.text.toString()
+            }
+            val userData=JoinData(
+                binding.idArea.text.toString(),
+                binding.passArea.text.toString(),
+                binding.emailArea.text.toString(),
+                binding.nameArea.text.toString(),
+                binding.birthArea.text.toString(),
+                genderText
+            )
+            /* 여기서 현재 통신 안됨 */
+            val joinCall=RetrofitAPI.joinService.Join(userData)
+            joinCall.enqueue(object:retrofit2.Callback<JoinData>{
+                override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
+                    if (response.isSuccessful) {
+                        Log.d(TAG,"hahahaha")
+                    }
+                }
+
+                override fun onFailure(call: Call<JoinData>, t: Throwable) {
+                    Log.d(TAG,"so sad")
+                }
+
+            })
         }
     }
 
@@ -101,7 +134,9 @@ class JoinActivity : AppCompatActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) {
                 if (s != null) when {
-                    s.isEmpty() -> idFlag = false
+                    s.isEmpty() -> {
+                        idFlag = false
+                    }
                     else -> true
                 }
             }
@@ -240,6 +275,7 @@ class JoinActivity : AppCompatActivity() {
             idFlag && passFlag && cpassFlag && emailFlag && nameFlag && birthFlag && genderFlag
     }
 }
+
 
 
 

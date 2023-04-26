@@ -6,12 +6,12 @@ import com.google.gson.annotations.SerializedName
 data class JoinData (
         @SerializedName("memberId")
         val memberId:String,
-        @SerializedName("memberName")
-        val memberName:String,
         @SerializedName("password")
         val password:String,
         @SerializedName("eMail")
         val eMail:String,
+        @SerializedName("memberName")
+        val memberName:String,
         @SerializedName("BDay")
         val BDay:String,
         @SerializedName("gender")

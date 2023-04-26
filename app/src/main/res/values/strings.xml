@@ -23,11 +23,13 @@
     <string name="no_pass">비밀번호를 입력해주세요</string>
     <string name="wrong_pass">형식에 맞게 입력해주세요</string>
     <string name="not_same_pass">비밀번호가 일치하지 않습니다</string>
+    <string name="no_id">아이디를 입력해주세요</string>
     <string name="no_email">이메일을 입력해주세요</string>
     <string name="wrong_email">형식에 맞게 입력해주세요</string>
     <string name="input_complete">입력 완료</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
+    <string name="is_duplicate">중복된 아이디입니다</string>
+    <string name="isNot_duplicate">사용가능한 아이디입니다</string>
+    <string name="ok">Ok</string>
+    <string name="check_id">아이디 확인</string>
 
 </resources>
