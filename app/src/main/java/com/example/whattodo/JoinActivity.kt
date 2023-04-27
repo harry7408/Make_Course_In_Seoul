@@ -2,6 +2,7 @@ package com.example.whattodo
 
 
 import android.graphics.Paint
+import android.graphics.Paint.Join
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.dto.JoinData
 import com.example.whattodo.network.RetrofitAPI
+import com.google.gson.Gson
 
 import retrofit2.Call
 import retrofit2.Response
@@ -48,7 +50,6 @@ class JoinActivity : AppCompatActivity() {
                     response: Response<List<JoinData>>
                 ) {
                     if (response.isSuccessful() && check_id.isNotEmpty()) {
-//                        Log.d(TAG, "SUCCESS")
                         val userList: List<JoinData>? = response.body()
                         for (users in userList!!) {
                             if (users.memberId == check_id) {
@@ -93,16 +94,14 @@ class JoinActivity : AppCompatActivity() {
             })
         }
 
-
-
         binding.joinBtn.setOnClickListener {
 //            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
 //            아이디의 중복확인 버튼이 비활성화 되어있을때
-            val genderText= when {
-                binding.male.isChecked->binding.male.text.toString()
+            val genderText = when {
+                binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
-            val userData=JoinData(
+            val userData = JoinData(
                 binding.idArea.text.toString(),
                 binding.passArea.text.toString(),
                 binding.emailArea.text.toString(),
@@ -111,18 +110,19 @@ class JoinActivity : AppCompatActivity() {
                 genderText
             )
             /* 여기서 현재 통신 안됨 */
-            val joinCall=RetrofitAPI.joinService.Join(userData)
-            joinCall.enqueue(object:retrofit2.Callback<JoinData>{
+            val joinCall = RetrofitAPI.joinService.Join(userData)
+            joinCall.enqueue(object : retrofit2.Callback<JoinData> {
                 override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
                     if (response.isSuccessful) {
-                        Log.d(TAG,"hahahaha")
+                        Log.d(TAG, "Complete")
+                        Log.d(TAG, "response : " +Gson().toJson(response.body()))
+                    } else {
+                        Log.d(TAG,"response : "+Gson().toJson(response.body()))
                     }
                 }
-
                 override fun onFailure(call: Call<JoinData>, t: Throwable) {
-                    Log.d(TAG,"so sad")
+                    Log.d(TAG, "so sad")
                 }
-
             })
         }
     }
