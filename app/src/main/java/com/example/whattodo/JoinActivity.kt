@@ -9,6 +9,7 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.dto.JoinData
@@ -125,6 +126,22 @@ class JoinActivity : AppCompatActivity() {
                 }
             })
         }
+
+        /* toolBar 설정 */
+        setSupportActionBar(binding.toolBar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setTitle(R.string.join)
+
+    }
+    /* 툴바에서 <- 눌렀을때 이벤트 처리 */
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home-> {
+                finish()
+                return true
+            } else -> {}
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun checkInput() {

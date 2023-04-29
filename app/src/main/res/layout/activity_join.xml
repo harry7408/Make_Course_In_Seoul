@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".JoinActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/Title"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBar"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/light_purple"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:background="@color/yellow_color"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/join"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+        app:layout_constraintEnd_toEndOf="parent"/>
 
     <EditText
         android:id="@+id/idArea"
@@ -35,8 +28,8 @@
         android:background="@drawable/background_rectangle"
         android:hint="@string/input_id"
         android:padding="16dp"
-        app:layout_constraintStart_toStartOf="@+id/Title"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        app:layout_constraintStart_toStartOf="@+id/toolBar"
+        app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
     <Button
         android:id="@+id/idCheck"
@@ -48,7 +41,7 @@
         android:text="@string/idCheck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/idArea"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
+        app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
     <EditText
         android:id="@+id/passArea"
@@ -202,9 +195,11 @@
         android:text="@string/joinBtn"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:background="@drawable/background_radius_yellow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/genderGroup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>

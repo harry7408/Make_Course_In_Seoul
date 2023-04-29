@@ -5,22 +5,20 @@ import com.google.gson.annotations.SerializedName
 // 회원가입에 관련된 사용자 정보
 data class JoinData (
         @SerializedName("memberId")
-        val memberId:String,
+        val memberId:String?,
         @SerializedName("password")
-        val password:String,
+        val password:String?,
         @SerializedName("email")
-        val email:String,
+        val email:String?,
         @SerializedName("memberName")
-        val memberName:String,
+        val memberName:String?,
         @SerializedName("birthday")
-        val birthday:String,
+        val birthday:String?,
         @SerializedName("gender")
-        val gender:String
+        val gender:String?
         )
 
 
 
-data class CheckIdMessage(
-        val data:List<JoinData>?
-)
+
 

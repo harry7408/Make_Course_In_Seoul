@@ -1,9 +1,11 @@
 package com.example.whattodo.FindIP
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.provider.MediaStore.Audio.Radio
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +20,12 @@ import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindIdBinding
+import com.example.whattodo.dto.JoinData
+import com.example.whattodo.network.RetrofitAPI
+import retrofit2.Call
+import retrofit2.Response
 
+private const val TAG = "FindIdFragment"
 
 class FindIdFragment : Fragment() {
 
@@ -111,6 +118,31 @@ class FindIdFragment : Fragment() {
                 binding.female.isChecked -> binding.female.text.toString()
                 else -> null
             }
+            val userData = JoinData(
+                null, null, userEmail,
+                userName, userBirth, userGender
+            )
+            val findIdCall = RetrofitAPI.findService.findId()
+            findIdCall.enqueue(object : retrofit2.Callback<JoinData> {
+                override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
+                    if (response.isSuccessful) {
+                        val receiveData = response.body()
+                        AlertDialog.Builder(context).run {
+                            setTitle("아이디")
+                            setMessage("${receiveData!!.memberId}")
+                            setPositiveButton(R.string.ok, null)
+                            show()
+                        }
+                    } else {
+                        Log.d(TAG, "why not")
+                    }
+                }
+
+                override fun onFailure(call: Call<JoinData>, t: Throwable) {
+                    Log.d(TAG, "sad")
+                    call.cancel()
+                }
+            })
         }
     }
 
