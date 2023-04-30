@@ -6,7 +6,7 @@ import retrofit2.create
 
 object RetrofitAPI {
 //    10.0.2.2 앱에서
-    private const val BASE_URL="http://:8080"
+    private const val BASE_URL="http://3.39.24.10:8080"
 
     private val retrofit : Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)

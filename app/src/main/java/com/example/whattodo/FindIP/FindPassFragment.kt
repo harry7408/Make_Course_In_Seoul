@@ -126,7 +126,7 @@ class FindPassFragment : Fragment() {
                 userId, null, userEmail,
                 userName, userBirth, userGender
             )
-            val findPassCall = RetrofitAPI.findService.findPass()
+            val findPassCall = RetrofitAPI.findService.findPass(userData)
             findPassCall.enqueue(object : retrofit2.Callback<JoinData> {
                 override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
                     if (response.isSuccessful) {
@@ -140,6 +140,8 @@ class FindPassFragment : Fragment() {
                         }
                     } else {
                         Log.d(TAG, "WHY not")
+                        Log.d(TAG, response.body().toString())
+                        Log.d(TAG,"${userData.memberId},${userData.memberName},${userData.email},${userData.gender},${userData.birthday}")
                     }
                 }
 

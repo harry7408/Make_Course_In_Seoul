@@ -31,5 +31,11 @@
     <string name="isNot_duplicate">사용가능한 아이디입니다</string>
     <string name="ok">Ok</string>
     <string name="check_id">아이디 확인</string>
+    <string name="home">홈</string>
+    <string name="place">장소찾기</string>
+    <string name="mypage">마이페이지</string>
+    <string name="make_course">코스만들기</string>
+    <string name="find_place">장소검색</string>
+
 
 </resources>

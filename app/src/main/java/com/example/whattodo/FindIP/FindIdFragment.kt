@@ -119,10 +119,10 @@ class FindIdFragment : Fragment() {
                 else -> null
             }
             val userData = JoinData(
-                null, null, userEmail,
+                 null,null,userEmail,
                 userName, userBirth, userGender
             )
-            val findIdCall = RetrofitAPI.findService.findId()
+            val findIdCall = RetrofitAPI.findService.findId(userData)
             findIdCall.enqueue(object : retrofit2.Callback<JoinData> {
                 override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
                     if (response.isSuccessful) {
@@ -135,6 +135,8 @@ class FindIdFragment : Fragment() {
                         }
                     } else {
                         Log.d(TAG, "why not")
+                        Log.d(TAG,"${response.body()}")
+                        Log.d(TAG,"${userData.memberName}, ${userData.email},${userData.gender}")
                     }
                 }
 

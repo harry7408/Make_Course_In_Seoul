@@ -20,11 +20,11 @@ interface joinAPI {
 
 interface findAPI {
     /* GET 방식 OR POST 방식? */
-    @GET("/member/checkId")
-    fun findId(): Call<JoinData>
+    @POST("/membercheckId")
+    fun findId(@Body data:JoinData): Call<JoinData>
 
-    @GET("/member/findPW")
-    fun findPass() : Call<JoinData>
+    @POST("/memberfindPW")
+    fun findPass(@Body data:JoinData) : Call<JoinData>
 }
 
 //@Body data:JoinData

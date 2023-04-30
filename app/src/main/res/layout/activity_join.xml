@@ -27,7 +27,7 @@
         android:layout_marginTop="16dp"
         android:background="@drawable/background_rectangle"
         android:hint="@string/input_id"
-        android:padding="16dp"
+        android:padding="8dp"
         app:layout_constraintStart_toStartOf="@+id/toolBar"
         app:layout_constraintTop_toBottomOf="@+id/toolBar" />
 
@@ -53,7 +53,7 @@
         android:background="@drawable/background_rectangle"
         android:hint="@string/input_pass"
         android:inputType="textPassword"
-        android:padding="16dp"
+        android:padding="8dp"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/idArea" />
 
@@ -77,7 +77,7 @@
         android:background="@drawable/background_rectangle"
         android:hint="@string/checkpass"
         android:inputType="textPassword"
-        android:padding="16dp"
+        android:padding="8dp"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/passMessage" />
 
@@ -101,7 +101,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_rectangle"
         android:hint="@string/email"
-        android:padding="16dp"
+        android:padding="8dp"
         android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/cpassMessage" />
 
@@ -125,7 +125,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_rectangle"
         android:hint="@string/name"
-        android:padding="16dp"
+        android:padding="8dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,7 +142,7 @@
         android:hint="@string/birth"
         android:inputType="phone"
         android:maxLength="6"
-        android:padding="16dp"
+        android:padding="8dp"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
