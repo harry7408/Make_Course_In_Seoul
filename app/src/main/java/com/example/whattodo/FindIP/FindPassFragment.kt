@@ -1,6 +1,7 @@
 package com.example.whattodo.FindIP
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.graphics.Paint.Join
 import android.os.Bundle
 import android.text.Editable
@@ -31,7 +32,7 @@ class FindPassFragment : Fragment() {
     private var nameFlag = false
     private var emailFlag = false
     private var birthFlag = false
-    private var genderFalg = false
+    private var genderFlag = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,7 +102,7 @@ class FindPassFragment : Fragment() {
         })
 
         binding.genderGroup.setOnCheckedChangeListener { _, checkedId ->
-            genderFalg = when (checkedId) {
+            genderFlag = when (checkedId) {
                 R.id.male -> true
                 R.id.female -> true
                 else -> false
@@ -132,28 +133,32 @@ class FindPassFragment : Fragment() {
                     if (response.isSuccessful) {
                         Log.d(TAG, "success")
                         val receiveData = response.body()
-                        AlertDialog.Builder(context).run {
-                            setTitle("비밀번호찾기")
-                            setMessage("${receiveData!!.password} 입니다")
-                            setPositiveButton(R.string.ok, null)
-                            show()
-                        }
+                        val builder=AlertDialog.Builder(context)
+                        builder.setTitle("비밀번호")
+                        builder.setMessage("${receiveData?.password.toString()}입니다")
+                        builder.setPositiveButton(R.string.ok,
+                            DialogInterface.OnClickListener { dialog, which ->
+                            activity!!.finish()
+                        })
+                        builder.create()
+                        builder.show()
                     } else {
                         Log.d(TAG, "WHY not")
-                        Log.d(TAG, response.body().toString())
-                        Log.d(TAG,"${userData.memberId},${userData.memberName},${userData.email},${userData.gender},${userData.birthday}")
                     }
                 }
 
                 override fun onFailure(call: Call<JoinData>, t: Throwable) {
-                    Log.d(TAG, "so sad")
-                    call.cancel()
+                    val builder=AlertDialog.Builder(context)
+                    builder.setMessage("일치하는 정보가 없습니다.")
+                    builder.setPositiveButton(R.string.ok,null)
+                    builder.create()
+                    builder.show()
                 }
             })
         }
     }
 
     private fun checkFlag() {
-        binding.passButton.isEnabled = emailFlag && nameFlag && emailFlag && birthFlag && genderFalg
+        binding.passButton.isEnabled = emailFlag && nameFlag && emailFlag && birthFlag && genderFlag
     }
 }

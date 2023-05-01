@@ -1,6 +1,7 @@
 package com.example.whattodo.FindIP
 
 import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.provider.MediaStore.Audio.Radio
 import android.text.Editable
@@ -16,6 +17,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import com.example.whattodo.R
@@ -24,6 +26,7 @@ import com.example.whattodo.dto.JoinData
 import com.example.whattodo.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Response
+import kotlin.concurrent.fixedRateTimer
 
 private const val TAG = "FindIdFragment"
 
@@ -127,22 +130,25 @@ class FindIdFragment : Fragment() {
                 override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
                     if (response.isSuccessful) {
                         val receiveData = response.body()
-                        AlertDialog.Builder(context).run {
-                            setTitle("아이디")
-                            setMessage("${receiveData!!.memberId}")
-                            setPositiveButton(R.string.ok, null)
-                            show()
-                        }
+                        val builder=AlertDialog.Builder(context)
+                        builder.setTitle("아이디")
+                        builder.setMessage("${receiveData?.memberId.toString()}입니다")
+                        builder.setPositiveButton(R.string.ok,DialogInterface.OnClickListener { dialog, which ->
+                            activity!!.finish()
+                        })
+                        builder.create()
+                        builder.show()
                     } else {
-                        Log.d(TAG, "why not")
-                        Log.d(TAG,"${response.body()}")
-                        Log.d(TAG,"${userData.memberName}, ${userData.email},${userData.gender}")
+                        Log.d(TAG,"WHY")
                     }
                 }
 
                 override fun onFailure(call: Call<JoinData>, t: Throwable) {
-                    Log.d(TAG, "sad")
-                    call.cancel()
+                    val builder=AlertDialog.Builder(context)
+                    builder.setMessage("일치하는 정보가 없습니다.")
+                    builder.setPositiveButton(R.string.ok,null)
+                    builder.create()
+                    builder.show()
                 }
             })
         }

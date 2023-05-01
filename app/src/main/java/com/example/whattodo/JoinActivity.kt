@@ -1,6 +1,7 @@
 package com.example.whattodo
 
 
+import android.content.DialogInterface
 import android.graphics.Paint
 import android.graphics.Paint.Join
 import androidx.appcompat.app.AppCompatActivity
@@ -10,11 +11,13 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
-import androidx.appcompat.app.AlertDialog
+import android.app.AlertDialog
+import android.content.Intent
 import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.dto.JoinData
 import com.example.whattodo.network.RetrofitAPI
 import com.google.gson.Gson
+
 
 import retrofit2.Call
 import retrofit2.Response
@@ -110,19 +113,25 @@ class JoinActivity : AppCompatActivity() {
                 binding.birthArea.text.toString(),
                 genderText
             )
-            /* 여기서 현재 통신 안됨 */
+
             val joinCall = RetrofitAPI.joinService.Join(userData)
             joinCall.enqueue(object : retrofit2.Callback<JoinData> {
                 override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
                     if (response.isSuccessful) {
-                        Log.d(TAG, "Complete")
-                        Log.d(TAG, "response : " +Gson().toJson(response.body()))
-                    } else {
-                        Log.d(TAG,"response : "+Gson().toJson(response.body()))
-                    }
+                       val builder=AlertDialog.Builder(this@JoinActivity)
+                        builder.setTitle("회원가입")
+                        builder.setMessage("회원가입 성공")
+                        builder.setPositiveButton(R.string.ok,DialogInterface.OnClickListener { dialog, which ->
+                            this@JoinActivity.finish()
+                        })
+                        builder.create()
+                        builder.show()
+                    } else { Log.d(TAG,"not Successful") }
                 }
+
                 override fun onFailure(call: Call<JoinData>, t: Throwable) {
-                    Log.d(TAG, "so sad")
+                    t.printStackTrace()
+                    call.cancel()
                 }
             })
         }
@@ -133,13 +142,15 @@ class JoinActivity : AppCompatActivity() {
         supportActionBar?.setTitle(R.string.join)
 
     }
+
     /* 툴바에서 <- 눌렀을때 이벤트 처리 */
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            android.R.id.home-> {
+        when (item.itemId) {
+            android.R.id.home -> {
                 finish()
                 return true
-            } else -> {}
+            }
+            else -> {}
         }
         return super.onOptionsItemSelected(item)
     }
