@@ -27,3 +27,8 @@ interface findAPI {
     fun findPass(@Body data:JoinData) : Call<JoinData>
 }
 
+interface loginAPI {
+    @POST("/login/login")
+    fun login(@Body data:JoinData) : Call<JoinData>
+}
+

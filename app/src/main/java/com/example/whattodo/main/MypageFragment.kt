@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentMypageBinding
+import net.daum.mf.map.api.MapView
 
 
 class MypageFragment : Fragment() {

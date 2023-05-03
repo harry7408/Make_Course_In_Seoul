@@ -16,6 +16,6 @@ object RetrofitAPI {
     val idCheckService : idCheckAPI = retrofit.create(idCheckAPI::class.java)
     val joinService : joinAPI=retrofit.create(joinAPI::class.java)
     val findService : findAPI= retrofit.create(findAPI::class.java)
-
+    val loginService: loginAPI= retrofit.create(loginAPI::class.java)
 }
 

@@ -30,9 +30,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        viewBinding true
-    }
     dataBinding {
         enabled=true
     }
@@ -40,6 +37,7 @@ android {
         enabled=true
     }
 }
+
 
 dependencies {
 
@@ -63,4 +61,12 @@ dependencies {
 
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
     implementation 'com.google.android.material:material:1.8.0'
+
+    implementation 'com.github.Spikeysanju:MotionToast:1.4'
+    implementation 'io.github.shashank02051997:FancyToast:2.0.1'
+
+    implementation files("libs/libDaumMapAndroid.jar")
+
+
 }
+
