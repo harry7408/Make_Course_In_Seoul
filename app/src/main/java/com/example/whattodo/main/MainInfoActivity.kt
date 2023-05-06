@@ -18,9 +18,9 @@ class MainInfoActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolBar)
 
-        val barList= listOf<String>(getString(R.string.make_course),getString(R.string.find_place),getString(R.string.mypage))
-        val textList= listOf<String>(getString(R.string.home),getString(R.string.place),getString(R.string.mypage))
-        val iconList=listOf(R.drawable.home,R.drawable.place,R.drawable.mypage)
+        val barList= listOf<String>(getString(R.string.app_name),getString(R.string.make_course),getString(R.string.mypage))
+        val textList= listOf<String>(getString(R.string.home),getString(R.string.make_course),getString(R.string.mypage))
+        val iconList=listOf(R.drawable.home,R.drawable.course,R.drawable.mypage)
         val myAdapter=MyMainAdapter(this)
 
         myAdapter.addFragment(CourseFragment())

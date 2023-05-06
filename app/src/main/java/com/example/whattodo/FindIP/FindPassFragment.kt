@@ -17,7 +17,7 @@ import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindPassBinding
-import com.example.whattodo.dto.JoinData
+import com.example.whattodo.dto.UserDto
 import com.example.whattodo.network.RetrofitAPI
 import org.w3c.dom.Text
 import retrofit2.Call
@@ -123,13 +123,14 @@ class FindPassFragment : Fragment() {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
-            val userData = JoinData(
+            val userData = UserDto(
                 userId, null, userEmail,
-                userName, userBirth, userGender
+                userName, userBirth, userGender,
+                null,null,null
             )
             val findPassCall = RetrofitAPI.findService.findPass(userData)
-            findPassCall.enqueue(object : retrofit2.Callback<JoinData> {
-                override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
+            findPassCall.enqueue(object : retrofit2.Callback<UserDto> {
+                override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                     if (response.isSuccessful) {
                         Log.d(TAG, "success")
                         val receiveData = response.body()
@@ -147,7 +148,7 @@ class FindPassFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<JoinData>, t: Throwable) {
+                override fun onFailure(call: Call<UserDto>, t: Throwable) {
                     val builder=AlertDialog.Builder(context)
                     builder.setMessage("일치하는 정보가 없습니다.")
                     builder.setPositiveButton(R.string.ok,null)

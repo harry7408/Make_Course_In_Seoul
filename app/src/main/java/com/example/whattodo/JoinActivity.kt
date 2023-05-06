@@ -14,7 +14,7 @@ import android.view.MenuItem
 import android.app.AlertDialog
 import android.content.Intent
 import com.example.whattodo.databinding.ActivityJoinBinding
-import com.example.whattodo.dto.JoinData
+import com.example.whattodo.dto.UserDto
 import com.example.whattodo.network.RetrofitAPI
 import com.google.gson.Gson
 
@@ -48,13 +48,13 @@ class JoinActivity : AppCompatActivity() {
             val check_id = binding.idArea.text.toString()
             var dupChecked: Boolean = false
             val userListCall = RetrofitAPI.idCheckService.checkNickname()
-            userListCall.enqueue(object : retrofit2.Callback<List<JoinData>> {
+            userListCall.enqueue(object : retrofit2.Callback<List<UserDto>> {
                 override fun onResponse(
-                    call: Call<List<JoinData>>,
-                    response: Response<List<JoinData>>
+                    call: Call<List<UserDto>>,
+                    response: Response<List<UserDto>>
                 ) {
                     if (response.isSuccessful() && check_id.isNotEmpty()) {
-                        val userList: List<JoinData>? = response.body()
+                        val userList: List<UserDto>? = response.body()
                         for (users in userList!!) {
                             if (users.memberId == check_id) {
                                 dupChecked = false
@@ -91,7 +91,7 @@ class JoinActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<List<JoinData>>, t: Throwable) {
+                override fun onFailure(call: Call<List<UserDto>>, t: Throwable) {
                     Log.d(TAG, t.message.toString())
                     call.cancel()
                 }
@@ -105,18 +105,18 @@ class JoinActivity : AppCompatActivity() {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
-            val userData = JoinData(
+            val userData = UserDto(
                 binding.idArea.text.toString(),
                 binding.passArea.text.toString(),
                 binding.emailArea.text.toString(),
                 binding.nameArea.text.toString(),
                 binding.birthArea.text.toString(),
-                genderText
+                genderText, null, null,null
             )
 
             val joinCall = RetrofitAPI.joinService.Join(userData)
-            joinCall.enqueue(object : retrofit2.Callback<JoinData> {
-                override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
+            joinCall.enqueue(object : retrofit2.Callback<UserDto> {
+                override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                     if (response.isSuccessful) {
                        val builder=AlertDialog.Builder(this@JoinActivity)
                         builder.setTitle("회원가입")
@@ -129,7 +129,7 @@ class JoinActivity : AppCompatActivity() {
                     } else { Log.d(TAG,"not Successful") }
                 }
 
-                override fun onFailure(call: Call<JoinData>, t: Throwable) {
+                override fun onFailure(call: Call<UserDto>, t: Throwable) {
                     t.printStackTrace()
                     call.cancel()
                 }

@@ -3,12 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -16,17 +15,25 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Design.NoActionBar"
+        android:theme="@style/Theme.WhatToDO"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".main.MainInfoActivity"
+            android:name=".SecondSurveyActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.UserInputActivity"
+            android:name=".survey.FirstSurveyActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".main.MainInfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -66,7 +73,10 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="8743f5dc56ea78eac576be29df72380d"/>
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="8743f5dc56ea78eac576be29df72380d" />
     </application>
 
 </manifest>

@@ -22,7 +22,7 @@ import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindIdBinding
-import com.example.whattodo.dto.JoinData
+import com.example.whattodo.dto.UserDto
 import com.example.whattodo.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Response
@@ -121,13 +121,13 @@ class FindIdFragment : Fragment() {
                 binding.female.isChecked -> binding.female.text.toString()
                 else -> null
             }
-            val userData = JoinData(
+            val userData = UserDto(
                  null,null,userEmail,
                 userName, userBirth, userGender
-            )
+            ,null,null,null)
             val findIdCall = RetrofitAPI.findService.findId(userData)
-            findIdCall.enqueue(object : retrofit2.Callback<JoinData> {
-                override fun onResponse(call: Call<JoinData>, response: Response<JoinData>) {
+            findIdCall.enqueue(object : retrofit2.Callback<UserDto> {
+                override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                     if (response.isSuccessful) {
                         val receiveData = response.body()
                         val builder=AlertDialog.Builder(context)
@@ -143,7 +143,7 @@ class FindIdFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<JoinData>, t: Throwable) {
+                override fun onFailure(call: Call<UserDto>, t: Throwable) {
                     val builder=AlertDialog.Builder(context)
                     builder.setMessage("일치하는 정보가 없습니다.")
                     builder.setPositiveButton(R.string.ok,null)

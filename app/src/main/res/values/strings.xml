@@ -36,6 +36,11 @@
     <string name="mypage">마이페이지</string>
     <string name="make_course">코스만들기</string>
     <string name="find_place">장소검색</string>
-
+    <string name="survey">설문조사</string>
+    <string name="very_good">매우 그렇다</string>
+    <string name="not_good">전혀 그렇지않다</string>
+    <string name="first_question">나는 체력이 좋은 사람이다</string>
+    <string name="second_question">나는 이색적인것을 좋아한다</string>
+    <string name="third_question">나는 활동적인 것을 좋아한다</string>
 
 </resources>
