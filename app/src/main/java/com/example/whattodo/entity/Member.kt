@@ -21,9 +21,9 @@ data class Member (
         @ColumnInfo(name="gender")
         val gender:String,
         @ColumnInfo(name="fatigability")
-        val fatigability:Int?,
+        var fatigability:Int?,
         @ColumnInfo(name="specification")
-        val specification:Int?,
+        var specification:Int?,
         @ColumnInfo(name="active")
-        val active:Int?,
+        var active:Int?,
         )

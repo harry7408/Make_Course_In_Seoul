@@ -1,17 +1,23 @@
 package com.example.whattodo.main
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
-import com.example.whattodo.R
+import com.example.whattodo.*
 import com.example.whattodo.databinding.ActivityMainInfoBinding
+import com.example.whattodo.db.UserDatabase
 import com.google.android.material.tabs.TabLayoutMediator
+import java.lang.reflect.Array.getInt
 
-//      사용자 취향 입력받았을때 넘어가는 처음 페이지 -> 네비게이션 + 프래그먼트로 이동 화면 이동 구현 해야할 듯
+private const val TAG="MainInfoActivity"
 class MainInfoActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityMainInfoBinding
-
+    var fatigue=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding=ActivityMainInfoBinding.inflate(layoutInflater)
@@ -39,5 +45,10 @@ class MainInfoActivity : AppCompatActivity() {
             tab.text=textList[position]
             tab.setIcon(iconList[position])
         }.attach()
+        val editor=getSharedPreferences(USER_INFO,Context.MODE_PRIVATE)
+        fatigue=editor.getInt(FATIGUE,0)
+        Log.d(TAG,"$fatigue")
     }
 }
+
+

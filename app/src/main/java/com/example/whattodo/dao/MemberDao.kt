@@ -11,8 +11,11 @@ interface MemberDao {
     @Query("SELECT * FROM members WHERE memberId=(:id)")
     fun getMember(id:String): Member?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(member: Member)
+
+    @Update
+    fun updateMember(member:Member)
 
     @Query("DELETE FROM members")
      fun delete()

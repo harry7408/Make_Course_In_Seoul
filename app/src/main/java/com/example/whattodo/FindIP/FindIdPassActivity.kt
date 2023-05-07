@@ -71,23 +71,3 @@ class FindIdPassActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-//        이전에서 터치한 텍스트 전달 받기위함
-//
-
-//        이메일찾기 비밀번호 찾기 안에서 서로 이동 가능하도록
-//        binding.findId.setOnClickListener {
-//            binding.findId.setBackgroundResource(R.drawable.background_rectangle_yellow)
-//            binding.findPass.setBackgroundResource(R.drawable.background_rectangle2)
-//            val fragment = FindIdFragment()
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.viewpager, fragment)
-//                .commit()
-//        }
-//        binding.findPass.setOnClickListener {
-//            binding.findId.setBackgroundResource(R.drawable.background_rectangle2)
-//            binding.findPass.setBackgroundResource(R.drawable.background_rectangle_yellow)
-//            val fragment = FindPassFragment()
-//            supportFragmentManager.beginTransaction()
-//                .replace(R.id.viewpager, fragment)
-//                .commit()
-//        }

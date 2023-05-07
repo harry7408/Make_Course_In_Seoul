@@ -1,5 +1,6 @@
 package com.example.whattodo
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.loginButton.setOnClickListener {
-//            val intent = Intent(this, UserInputActivity::class.java)
+//            val intent = Intent(this, FirstSurveyActivity::class.java)
 //            startActivity(intent)
             val id = binding.idArea.text.toString()
             val pass = binding.passArea.text.toString()
@@ -62,17 +63,14 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                     if (response.isSuccessful) {
                         val data = response.body()
-                        val member = Member(
-                            data!!.memberId.toString(), data!!.password.toString(),
-                            data!!.email.toString(), data!!.memberName.toString(),
-                            data!!.birthday.toString(), data!!.gender.toString(), null,
-                            null, null
-                        )
-                        val database: UserDatabase = Room.databaseBuilder(
-                            this@MainActivity,
-                            UserDatabase::class.java, "members"
-                        ).allowMainThreadQueries().build()
-                        database.memberDao().insert(member)
+                        with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()){
+                            putString(ID,data?.memberId)
+                            putString(PASS,data?.password)
+                            putString(EMAIL,data?.email)
+                            putString(NAME,data?.memberName)
+                            putString(BDAY,data?.birthday)
+                            putString(GENDER,data?.gender)
+                        }.apply()
                         val intent = Intent(applicationContext, FirstSurveyActivity::class.java)
                         startActivity(intent)
                     } else {
@@ -103,3 +101,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
+//                       val member = Member(
+//                            data!!.memberId.toString(), data!!.password.toString(),
+//                            data!!.email.toString(), data!!.memberName.toString(),
+//                            data!!.birthday.toString(), data!!.gender.toString(), 0,
+//                            0, 0
+//                        )
+
+//                      val database: UserDatabase = Room.databaseBuilder(
+//                            this@MainActivity,
+//                            UserDatabase::class.java, "members"
+//                        ).allowMainThreadQueries().build()
+//                        database.memberDao().insert(member)
