@@ -2,8 +2,6 @@ package com.example.whattodo
 
 
 import android.content.DialogInterface
-import android.graphics.Paint
-import android.graphics.Paint.Join
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -12,11 +10,9 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.app.AlertDialog
-import android.content.Intent
 import com.example.whattodo.databinding.ActivityJoinBinding
-import com.example.whattodo.dto.UserDto
+import com.example.whattodo.Networkdto.UserDto
 import com.example.whattodo.network.RetrofitAPI
-import com.google.gson.Gson
 
 
 import retrofit2.Call

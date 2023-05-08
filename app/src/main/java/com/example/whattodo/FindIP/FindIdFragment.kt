@@ -3,7 +3,6 @@ package com.example.whattodo.FindIP
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
-import android.provider.MediaStore.Audio.Radio
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -11,22 +10,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.TextView
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.findFragment
-import androidx.navigation.fragment.findNavController
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindIdBinding
-import com.example.whattodo.dto.UserDto
+import com.example.whattodo.Networkdto.UserDto
 import com.example.whattodo.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Response
-import kotlin.concurrent.fixedRateTimer
 
 private const val TAG = "FindIdFragment"
 

@@ -29,8 +29,8 @@ class MainInfoActivity : AppCompatActivity() {
         val iconList=listOf(R.drawable.home,R.drawable.course,R.drawable.mypage)
         val myAdapter=MyMainAdapter(this)
 
-        myAdapter.addFragment(CourseFragment())
         myAdapter.addFragment(PlaceFragment())
+        myAdapter.addFragment(CourseFragment())
         myAdapter.addFragment(MypageFragment())
         binding.viewpager.adapter=myAdapter
 

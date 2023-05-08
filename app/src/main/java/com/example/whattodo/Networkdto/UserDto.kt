@@ -1,4 +1,4 @@
-package com.example.whattodo.dto
+package com.example.whattodo.Networkdto
 
 import com.google.gson.annotations.SerializedName
 

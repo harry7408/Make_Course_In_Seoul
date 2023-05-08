@@ -2,7 +2,6 @@ package com.example.whattodo.FindIP
 
 import android.app.AlertDialog
 import android.content.DialogInterface
-import android.graphics.Paint.Join
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,15 +10,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.RadioGroup
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindPassBinding
-import com.example.whattodo.dto.UserDto
+import com.example.whattodo.Networkdto.UserDto
 import com.example.whattodo.network.RetrofitAPI
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Response
 

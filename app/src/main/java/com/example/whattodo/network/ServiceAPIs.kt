@@ -1,7 +1,8 @@
 package com.example.whattodo.network
 
-import android.graphics.Paint.Join
-import com.example.whattodo.dto.UserDto
+import com.example.whattodo.Networkdto.CourseDto
+import com.example.whattodo.Networkdto.StoreDto
+import com.example.whattodo.Networkdto.UserDto
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -30,5 +31,15 @@ interface findAPI {
 interface loginAPI {
     @POST("/login/login")
     fun login(@Body data:UserDto) : Call<UserDto>
+}
+/* 코스 만들때 쓰는 API */
+interface courseAPI {
+    @POST("/makeCourse")
+    fun requestCourse(@Body courseDto: CourseDto) : Call<CourseDto>
+}
+
+interface storeAPI {
+    @GET("a")
+    fun requestStore():Call<StoreDto>
 }
 

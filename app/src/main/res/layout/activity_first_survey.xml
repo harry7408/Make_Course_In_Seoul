@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginTop="36dp"
+        android:background="@drawable/background_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar"
@@ -96,6 +97,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginTop="36dp"
+        android:background="@drawable/background_rectangle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/first_linear_area"
@@ -172,6 +174,7 @@
         android:layout_height="120dp"
         android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/background_rectangle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/second_linear_area"
         android:orientation="vertical">

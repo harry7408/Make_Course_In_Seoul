@@ -17,5 +17,7 @@ object RetrofitAPI {
     val joinService : joinAPI=retrofit.create(joinAPI::class.java)
     val findService : findAPI= retrofit.create(findAPI::class.java)
     val loginService: loginAPI= retrofit.create(loginAPI::class.java)
+    val courseService : courseAPI=retrofit.create(courseAPI::class.java)
+    val storeService:storeAPI=retrofit.create(storeAPI::class.java)
 }
 
