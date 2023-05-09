@@ -120,7 +120,7 @@
         app:layout_constraintTop_toBottomOf="@id/keyWordText" />
 
     <RadioGroup
-        android:id="@+id/radioGruop1"
+        android:id="@+id/radioGroup1"
         android:layout_width="200dp"
         android:layout_height="25dp"
         android:gravity="center"
@@ -145,31 +145,6 @@
     </RadioGroup>
 
     <RadioGroup
-        android:id="@+id/radioGruop2"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/radioGruop1">
-
-        <RadioButton
-            android:id="@+id/ActiveHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="동적" />
-
-        <RadioButton
-            android:id="@+id/AcriveLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="정적" />
-    </RadioGroup>
-
-    <RadioGroup
         android:id="@+id/radioGroup3"
         android:layout_width="200dp"
         android:layout_height="25dp"
@@ -178,16 +153,41 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/radioGruop2">
+        app:layout_constraintTop_toBottomOf="@id/radioGroup2">
 
         <RadioButton
-            android:id="@+id/fatigueHigh"
+            android:id="@+id/activeHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="동적" />
+
+        <RadioButton
+            android:id="@+id/activeLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="정적" />
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/radioGroup2"
+        android:layout_width="200dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintTop_toBottomOf="@id/radioGroup1">
+
+        <RadioButton
+            android:id="@+id/hpHigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="고체력" />
 
         <RadioButton
-            android:id="@+id/fatigueLow"
+            android:id="@+id/hpLow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
@@ -214,28 +214,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/goalWordText" />
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup3"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:weightSum="100">
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipGroup1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp"
-            android:layout_weight="25"
-            app:layout_constraintStart_toStartOf="@id/guideline"
-            app:layout_constraintTop_toBottomOf="@id/radioGroup3"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            android:layout_marginTop="16dp">
 
-        </com.google.android.material.chip.ChipGroup>
-        </LinearLayout>
+    <TextView
+        android:id="@+id/requiredPlaceTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/goalWordText"
+        style="@style/Title"
+        android:visibility="invisible"
+        android:layout_marginTop="136dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="필수장소"/>
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chipGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:singleSelection="true"
+        app:selectionRequired="true"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/goalWordText"
+        android:layout_marginTop="120dp">
+    </com.google.android.material.chip.ChipGroup>
+
+    <Spinner
+        android:id="@+id/categoryListSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintTop_toBottomOf="@id/requiredPlaceTextView"
+        android:layout_marginTop="24dp"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

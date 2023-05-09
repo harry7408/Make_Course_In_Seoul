@@ -7,7 +7,7 @@ data class CourseDto(
     @SerializedName("numPeople")
     val numPeople: Int,
     @SerializedName("memberIdList")
-    val memberIdList: List<Long>,
+    val memberIdList: List<Long>?,
     @SerializedName("startTime")
     val startTime: Int,
     @SerializedName("finishTime")
@@ -15,9 +15,9 @@ data class CourseDto(
     @SerializedName("mealCheck")
     val mealFlag: Boolean,
     @SerializedName("wantedCategory")
-    val essentialPlace: String,
+    val essentialPlace: String?,
     @SerializedName("courseKeywords")
-    val fatigability: List<Boolean>,
+    val keywords: List<Int>,
     @SerializedName("goals")
-    val specification: List<Boolean>,
+    val specification: List<Int>,
 )

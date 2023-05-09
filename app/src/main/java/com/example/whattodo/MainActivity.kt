@@ -27,26 +27,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val sharedPreferences=getSharedPreferences(USER_INFO, MODE_PRIVATE)
-        val userId=sharedPreferences.getString(ID,null)
-        val userPass=sharedPreferences.getString(PASS,null)
+        val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
+        val userId = sharedPreferences.getString(ID, null)
+        val userPass = sharedPreferences.getString(PASS, null)
 
-        val userFatigue=sharedPreferences.getInt(FATIGUE,-1)
-        val userExotic=sharedPreferences.getInt(EXOTIC,-1)
-        val userActive=sharedPreferences.getInt(ACTIVITY,-1)
+        val userFatigue = sharedPreferences.getInt(FATIGUE, -1)
+        val userExotic = sharedPreferences.getInt(EXOTIC, -1)
+        val userActive = sharedPreferences.getInt(ACTIVITY, -1)
 
 
         /* 자동 로그인 (사용자 아이디, 피로도 특이도, 활동성 무도 있다면 바로 메인 페이지로)*/
-        if (userId!=null && userPass!=null && userFatigue!=-1 && userActive!=-1 && userExotic!=-1) {
-            val intent =Intent(this,MainInfoActivity::class.java)
+        if (userId != null && userPass != null && userFatigue != -1 && userActive != -1 && userExotic != -1) {
+            val intent = Intent(this, MainInfoActivity::class.java)
+            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
             /*피로도 활동성 특이도가 없다면 -1로 설정해놓고(값이 0인 경우가 있을 수 있기때문에) 설문 받는 페이지로 */
-        } else if (userId!=null && userPass!=null && userFatigue==-1 && userActive==-1 && userExotic==-1) {
-            val intent=Intent(this,FirstSurveyActivity::class.java)
+        } else if (userId != null && userPass != null && userFatigue == -1 && userActive == -1 && userExotic == -1) {
+            val intent = Intent(this, FirstSurveyActivity::class.java)
             startActivity(intent)
         }
 
-        
 
 //        클릭 이벤트 처리부분
         binding.joinText.setOnClickListener {
@@ -81,13 +81,13 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
                     if (response.isSuccessful) {
                         val data = response.body()
-                        with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()){
-                            putString(ID,data?.memberId)
-                            putString(PASS,data?.password)
-                            putString(EMAIL,data?.email)
-                            putString(NAME,data?.memberName)
-                            putString(BDAY,data?.birthday)
-                            putString(GENDER,data?.gender)
+                        with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()) {
+                            putString(ID, data?.memberId)
+                            putString(PASS, data?.password)
+                            putString(EMAIL, data?.email)
+                            putString(NAME, data?.memberName)
+                            putString(BDAY, data?.birthday)
+                            putString(GENDER, data?.gender)
                         }.apply()
                         val intent = Intent(applicationContext, FirstSurveyActivity::class.java)
                         startActivity(intent)
