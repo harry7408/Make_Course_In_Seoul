@@ -12,7 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindIdBinding
-import com.example.whattodo.Networkdto.UserDto
+import com.example.whattodo.datas.User
 import com.example.whattodo.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Response
@@ -110,13 +110,13 @@ class FindIdFragment : Fragment() {
                 binding.female.isChecked -> binding.female.text.toString()
                 else -> null
             }
-            val userData = UserDto(
+            val userData = User(
                  null,null,userEmail,
                 userName, userBirth, userGender
             ,null,null,null)
             val findIdCall = RetrofitAPI.findService.findId(userData)
-            findIdCall.enqueue(object : retrofit2.Callback<UserDto> {
-                override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
+            findIdCall.enqueue(object : retrofit2.Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val receiveData = response.body()
                         val builder=AlertDialog.Builder(context)
@@ -132,7 +132,7 @@ class FindIdFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<UserDto>, t: Throwable) {
+                override fun onFailure(call: Call<User>, t: Throwable) {
                     val builder=AlertDialog.Builder(context)
                     builder.setMessage("일치하는 정보가 없습니다.")
                     builder.setPositiveButton(R.string.ok,null)

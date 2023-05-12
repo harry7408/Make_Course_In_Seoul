@@ -1,9 +1,9 @@
-package com.example.whattodo.Networkdto
+package com.example.whattodo.datas
 
 import com.google.gson.annotations.SerializedName
 
 // 회원가입에 관련된 사용자 정보
-data class UserDto (
+data class User (
         @SerializedName("memberId")
         val memberId:String?,
         @SerializedName("password")

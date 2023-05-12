@@ -1,23 +1,14 @@
 package com.example.whattodo.makeCourse
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
 import android.widget.*
-import androidx.collection.arrayMapOf
 import androidx.core.view.*
-import androidx.room.util.foreignKeyCheck
-import com.example.whattodo.Networkdto.CourseDto
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityMakeCourseBinding
 import com.google.android.material.chip.Chip
-import com.google.android.material.chip.ChipDrawable
-import com.google.android.material.chip.ChipGroup
-import com.nex3z.flowlayout.FlowLayout
-import java.util.concurrent.Flow
 
 const val TAG = "MakeCourseActivity"
 
@@ -66,7 +57,7 @@ class MakeCourseActivity : AppCompatActivity() {
             }
         }
 
-        val courseInput = CourseDto(
+       /* val courseInput = CourseDto(
             binding.numPeople.text.toString().toInt(), null,
             binding.startTime.text.toString().toInt(),
             binding.endTime.text.toString().toInt(),
@@ -74,7 +65,13 @@ class MakeCourseActivity : AppCompatActivity() {
             if (placeFlag) binding.categoryListSpinner.selectedItem.toString() else null,
             userKeywordList,
             userGoalList,
-        )
+        )*/
+
+        binding.courseMakeBtn.setOnClickListener {
+            val intent=Intent(this, CourseListShowActivity::class.java)
+//            intent.putExtra("courseInput",courseInput)
+            startActivity(intent)
+        }
     }
 
     /* 필수장소 선택 chip 내용 초기화 하는 부분 */

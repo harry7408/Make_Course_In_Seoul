@@ -1,8 +1,10 @@
-package com.example.whattodo.Networkdto
+package com.example.whattodo.datas
 
 import com.google.gson.annotations.SerializedName
 
-data class StoreDto (
+
+/* 하나의 가게 정보를 받을 데이터 */
+data class Store (
     @SerializedName("placeName")
     val placeName: String,
     @SerializedName("categoryGroupCode")

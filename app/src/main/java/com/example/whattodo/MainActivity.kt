@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.whattodo.FindIP.FindIdPassActivity
 import com.example.whattodo.databinding.ActivityMainBinding
-import com.example.whattodo.Networkdto.UserDto
+import com.example.whattodo.datas.User
 import com.example.whattodo.main.MainInfoActivity
 import com.example.whattodo.network.RetrofitAPI
 import com.example.whattodo.survey.FirstSurveyActivity
@@ -70,15 +70,15 @@ class MainActivity : AppCompatActivity() {
 //            startActivity(intent)
             val id = binding.idArea.text.toString()
             val pass = binding.passArea.text.toString()
-            val userdata = UserDto(
+            val userdata = User(
                 id, pass, null,
                 null, null, null,
                 -1, -1, -1
             )
 
             val loginCall = RetrofitAPI.loginService.login(userdata)
-            loginCall.enqueue(object : retrofit2.Callback<UserDto> {
-                override fun onResponse(call: Call<UserDto>, response: Response<UserDto>) {
+            loginCall.enqueue(object : retrofit2.Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val data = response.body()
                         with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()) {
@@ -89,14 +89,17 @@ class MainActivity : AppCompatActivity() {
                             putString(BDAY, data?.birthday)
                             putString(GENDER, data?.gender)
                         }.apply()
-                        val intent = Intent(applicationContext, FirstSurveyActivity::class.java)
+                        var intent = Intent(applicationContext, FirstSurveyActivity::class.java)
+                        if(userFatigue!=-1&& userExotic!=-1 && userActive!=-1) {
+                            intent=Intent(applicationContext,MainInfoActivity::class.java)
+                        }
                         startActivity(intent)
                     } else {
                         Log.d(TAG, "WHY NOT")
                     }
                 }
 
-                override fun onFailure(call: Call<UserDto>, t: Throwable) {
+                override fun onFailure(call: Call<User>, t: Throwable) {
                     if (id.isEmpty() && pass.isEmpty()) {
                         FancyToast.makeText(
                             applicationContext,
@@ -118,6 +121,8 @@ class MainActivity : AppCompatActivity() {
             })
         }
     }
+
+
 }
 
 

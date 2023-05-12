@@ -1,9 +1,17 @@
-package com.example.whattodo.Networkdto
+package com.example.whattodo.datas
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-/* 서버에서 코스만들때 요청하는 데이터 */
-data class CourseDto(
+data class Courses(
+    val courses: List<Course>
+)
+
+
+/* 서버에서 코스만들때 쓰는 데이터 */
+@Parcelize
+data class Course(
     @SerializedName("numPeople")
     val numPeople: Int,
     @SerializedName("memberIdList")
@@ -20,4 +28,4 @@ data class CourseDto(
     val keywords: List<Int>,
     @SerializedName("goals")
     val specification: List<Int>,
-)
+) : Parcelable
