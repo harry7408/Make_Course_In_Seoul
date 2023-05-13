@@ -1,10 +1,11 @@
-package com.example.whattodo.FindIP
+package com.example.whattodo.FindingIdPass
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
+
+/* 프래그먼트 담을 어뎁터 (ViewPager를 위해) */
 class MyFindAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
     private var fragments : ArrayList<Fragment> = ArrayList()
     override fun getItemCount(): Int {

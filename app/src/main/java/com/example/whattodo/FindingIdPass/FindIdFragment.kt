@@ -1,4 +1,4 @@
-package com.example.whattodo.FindIP
+package com.example.whattodo.FindingIdPass
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindIdBinding
 import com.example.whattodo.datas.User
@@ -17,6 +18,8 @@ import com.example.whattodo.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Response
 
+
+/* 아이디찾기 프래그먼트 */
 private const val TAG = "FindIdFragment"
 
 class FindIdFragment : Fragment() {
@@ -41,53 +44,42 @@ class FindIdFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nameArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    when {
-                        s.isEmpty() -> nameFlag = false
-                        else -> nameFlag = true
+
+        /* 이름 영역 입력여부 확인 */
+        binding.nameArea.addTextChangedListener { text ->
+            if (text != null) {
+                nameFlag = when {
+                    text.isEmpty() -> false
+                    else -> true
+                }
+            }
+        }
+        /* 이메일 영역 입력여부 확인*/
+        binding.emailArea.addTextChangedListener { text ->
+            if (text != null) {
+                emailFlag = when {
+                    text.isEmpty() -> {
+                        false
+                    }
+                    !android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches() -> {
+                        false
+                    }
+                    else -> {
+                        true
                     }
                 }
             }
-        })
-        binding.emailArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    when {
-                        s.isEmpty() -> {
-                            emailFlag = false
-                        }
-                        !android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches() -> {
-                            emailFlag = false
-                        }
-                        else -> {
-                            emailFlag = true
-                        }
-
-                    }
+        }
+        /* 생일 입력 여부 확인 */
+        binding.birthArea.addTextChangedListener { text ->
+            if (text != null) {
+                birthFlag = when {
+                    text.isEmpty() -> false
+                    else -> true
                 }
             }
-        })
-
-        binding.birthArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    when {
-                        s.isEmpty() -> birthFlag = false
-                        else -> birthFlag = true
-                    }
-                }
-            }
-        })
+        }
+        /* 성별부분 체크 여부 확인 */
         binding.genderArea.setOnCheckedChangeListener { _, checkedId ->
             genderFlag = when (checkedId) {
                 R.id.male -> true
@@ -97,7 +89,6 @@ class FindIdFragment : Fragment() {
             checkFlag()
         }
     }
-
 
     override fun onStart() {
         super.onStart()
@@ -111,31 +102,33 @@ class FindIdFragment : Fragment() {
                 else -> null
             }
             val userData = User(
-                 null,null,userEmail,
-                userName, userBirth, userGender
-            ,null,null,null)
+                null, null, userEmail,
+                userName, userBirth, userGender, null, null, null
+            )
             val findIdCall = RetrofitAPI.findService.findId(userData)
             findIdCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val receiveData = response.body()
-                        val builder=AlertDialog.Builder(context)
+                        val builder = AlertDialog.Builder(context)
                         builder.setTitle("아이디")
                         builder.setMessage("${receiveData?.memberId.toString()}입니다")
-                        builder.setPositiveButton(R.string.ok,DialogInterface.OnClickListener { dialog, which ->
-                            activity!!.finish()
-                        })
+                        builder.setPositiveButton(
+                            R.string.ok,
+                            DialogInterface.OnClickListener { _, _ ->
+                                activity!!.finish()
+                            })
                         builder.create()
                         builder.show()
                     } else {
-                        Log.d(TAG,"WHY")
+                        Log.d(TAG, "Failure")
                     }
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    val builder=AlertDialog.Builder(context)
+                    val builder = AlertDialog.Builder(context)
                     builder.setMessage("일치하는 정보가 없습니다.")
-                    builder.setPositiveButton(R.string.ok,null)
+                    builder.setPositiveButton(R.string.ok, null)
                     builder.create()
                     builder.show()
                 }

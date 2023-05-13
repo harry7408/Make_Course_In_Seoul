@@ -1,4 +1,4 @@
-package com.example.whattodo.makeCourse
+package com.example.whattodo.SecondFeature
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

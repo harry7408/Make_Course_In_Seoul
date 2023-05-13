@@ -1,4 +1,4 @@
-package com.example.whattodo.main
+package com.example.whattodo.FirstFeature
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -36,6 +36,7 @@ class PlaceFragmentAdapter(
                 binding.categoryImageView.setImageResource(category.image)
                 binding.categoryTextView.text = category.title
             }
+
         }
     }
 

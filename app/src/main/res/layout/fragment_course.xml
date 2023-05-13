@@ -7,21 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".main.PlaceFragment">
+    tools:context=".FirstFeature.PlaceFragment">
 
-    <TextView
-        android:id="@+id/TitleTextView"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:gravity="center"
-        android:text="다음 중 하나를 고르세요"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/cardView1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/cardFlow"
@@ -37,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TitleTextView" />
+        app:layout_constraintTop_toBottomOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView1"

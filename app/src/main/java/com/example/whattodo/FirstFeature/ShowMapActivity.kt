@@ -1,17 +1,20 @@
-package com.example.whattodo.main
+package com.example.whattodo.FirstFeature
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityShowMapBinding
 import com.google.android.material.chip.Chip
-
+const private val TAG="ShowMapActivity"
 class ShowMapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShowMapBinding
 
     private val dList = mutableListOf<String>()
 
+    var previousSelectedChip:Chip?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,7 +26,34 @@ class ShowMapActivity : AppCompatActivity() {
 
         categoryChips()
 
+        
+        /* 여기 안에 서버랑 통신하는 부분 넣어야 할 듯*/
+        binding.categoryChipGroup.setOnCheckedStateChangeListener { _, _ ->
+            val chip=findViewById<Chip>(binding.categoryChipGroup.checkedChipId)
+            val categoryD=chip.text
 
+            Log.e(TAG,"$categoryC    -- $categoryD")
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.mapView.onSurfaceDestroyed()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        binding.mapView.onStartTemporaryDetach()
     }
 
     override fun onStop() {
@@ -41,11 +71,13 @@ class ShowMapActivity : AppCompatActivity() {
     }
 
     /* 칩 제작 부분 */
+    @SuppressLint("ResourceAsColor")
     private fun createChip(text: String): Chip {
         val chip = Chip(this).apply {
             setText(text)
             isCheckable = true
             isClickable = true
+            setBackgroundColor(R.color.white)
         }
         return chip
     }
@@ -92,25 +124,25 @@ class ShowMapActivity : AppCompatActivity() {
                 dList.add(1, "테라리움")
             }
             "메이크업" -> {
-                dList.add(0, "산")
-                dList.add(1, "계곡")
+//                dList.add(0, "산")
+//                dList.add(1, "계곡")
             }
 
             "다도" -> {
-                dList.add(0, "산")
-                dList.add(1, "계곡")
+//                dList.add(0, "산")
+//                dList.add(1, "계곡")
             }
             "미술" -> {
-                dList.add(0, "산")
-                dList.add(1, "계곡")
+//                dList.add(0, "산")
+//                dList.add(1, "계곡")
             }
             "핸드메이드" -> {
-                dList.add(0, "산")
-                dList.add(1, "계곡")
+//                dList.add(0, "산")
+//                dList.add(1, "계곡")
             }
             "관람" -> {
-                dList.add(0, "산")
-                dList.add(1, "계곡")
+                dList.add(0, "야외 동물원")
+                dList.add(1, "실내 동물원")
             }
             "관광명소" -> {
                 dList.add(0, "궁")

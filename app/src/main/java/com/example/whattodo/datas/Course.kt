@@ -9,7 +9,7 @@ data class Courses(
 )
 
 
-/* 서버에서 코스만들때 쓰는 데이터 */
+/* 서버한테 전달할 데이터 */
 @Parcelize
 data class Course(
     @SerializedName("numPeople")

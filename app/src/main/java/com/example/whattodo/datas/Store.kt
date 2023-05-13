@@ -32,3 +32,12 @@ data class Store (
     @SerializedName("finishTime")
     val finishTime: Double,
         )
+
+
+
+/* 여러개 가게 정보들 받을 데이터 */
+data class StoreList (
+    @SerializedName("courseList")
+    val courseList:List<Store>,
+)
+

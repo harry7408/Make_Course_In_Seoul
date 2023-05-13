@@ -1,4 +1,4 @@
-package com.example.whattodo.FindIP
+package com.example.whattodo.FindingIdPass
 
 import android.app.AlertDialog
 import android.content.DialogInterface
@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindPassBinding
 import com.example.whattodo.datas.User
@@ -17,6 +18,7 @@ import com.example.whattodo.network.RetrofitAPI
 import retrofit2.Call
 import retrofit2.Response
 
+/* 비밀번호 찾기 프래그먼트 */
 private const val TAG = "FindIdPassFragment"
 
 class FindPassFragment : Fragment() {
@@ -42,59 +44,46 @@ class FindPassFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.idArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    idFlag = when {
-                        s.isEmpty() -> false
-                        !android.util.Patterns.EMAIL_ADDRESS.matcher(s).matches() -> false
-                        else -> true
-                    }
+
+        /*아이디 입력여부 확인*/
+        binding.idArea.addTextChangedListener { text->
+            if (text != null) {
+                emailFlag = when {
+                    text.isEmpty() -> false
+                    else -> true
                 }
             }
-        })
-
-        binding.nameArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    nameFlag = when {
-                        s.isEmpty() -> false
-                        else -> true
-                    }
+        }
+        /* 이름 입력 여부 확인 */
+        binding.nameArea.addTextChangedListener { text->
+            if (text != null) {
+                nameFlag = when {
+                    text.isEmpty() -> false
+                    else -> true
                 }
             }
-        })
+        }
 
-        binding.emailArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    emailFlag = when {
-                        s.isEmpty() -> false
-                        else -> true
-                    }
+        /*이메일 입력 여부 확인 */
+        binding.emailArea.addTextChangedListener { text->
+            if (text != null) {
+                idFlag = when {
+                    text.isEmpty() -> false
+                    !android.util.Patterns.EMAIL_ADDRESS.matcher(text).matches() -> false
+                    else -> true
                 }
             }
-        })
-
-        binding.birthArea.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                if (s != null) {
-                    birthFlag = when {
-                        s.isEmpty() -> false
-                        else -> true
-                    }
+        }
+       /* 생일 입력 여부 확인*/
+        binding.birthArea.addTextChangedListener { text->
+            if (text != null) {
+                birthFlag = when {
+                    text.isEmpty() -> false
+                    else -> true
                 }
             }
-        })
-
+        }
+        /* 성별 체크 여부 확인 */
         binding.genderGroup.setOnCheckedChangeListener { _, checkedId ->
             genderFlag = when (checkedId) {
                 R.id.male -> true
@@ -103,7 +92,6 @@ class FindPassFragment : Fragment() {
             }
             checkFlag()
         }
-
     }
 
     override fun onStart() {
@@ -141,7 +129,6 @@ class FindPassFragment : Fragment() {
                         Log.d(TAG, "WHY not")
                     }
                 }
-
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     val builder=AlertDialog.Builder(context)
                     builder.setMessage("일치하는 정보가 없습니다.")

@@ -1,4 +1,4 @@
-package com.example.whattodo.main
+package com.example.whattodo.FirstFeature
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,15 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentPlaceBinding
 import com.example.whattodo.datas.Category
-import net.daum.android.map.MapActivity
-import net.daum.mf.map.api.MapView
 
 
 class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
@@ -41,7 +36,6 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
         super.onViewCreated(view, savedInstanceState)
         initCategoryList()
         initRecyclerView()
-
     }
 
 

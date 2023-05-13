@@ -1,4 +1,4 @@
-package com.example.whattodo.makeCourse
+package com.example.whattodo.SecondFeature
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -30,7 +30,7 @@ class MakeCourseActivity : AppCompatActivity() {
 
         /* 칩을 적용하려면 material 테마 적용해야함 */
         setTheme(com.google.android.material.R.style.Theme_MaterialComponents_Light)
-        initSuggestChips()
+
 
         /* 액션바 설정 */
         setSupportActionBar(binding.toolBar)
@@ -96,7 +96,7 @@ class MakeCourseActivity : AppCompatActivity() {
     /* 필수 장소 있는 경우 다음 페이지의 장소선택 보이도록*/
     private fun checkMenu(flag: Boolean) {
         if (flag) {
-            binding.chipGroup1.isVisible = true
+            initSuggestChips()
             binding.categoryListSpinner.isVisible = true
             binding.requiredPlaceTextView.isVisible = true
         }

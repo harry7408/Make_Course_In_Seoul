@@ -5,16 +5,17 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.whattodo.FindIP.FindIdPassActivity
+import com.example.whattodo.FindingIdPass.FindIdPassActivity
 import com.example.whattodo.databinding.ActivityMainBinding
 import com.example.whattodo.datas.User
-import com.example.whattodo.main.MainInfoActivity
+import com.example.whattodo.FirstFeature.MainInfoActivity
 import com.example.whattodo.network.RetrofitAPI
 import com.example.whattodo.survey.FirstSurveyActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import retrofit2.Call
 import retrofit2.Response
 
+/* 로그인 페이지 */
 private const val TAG = "MainActivity"
 
 class MainActivity : AppCompatActivity() {
@@ -35,8 +36,8 @@ class MainActivity : AppCompatActivity() {
         val userExotic = sharedPreferences.getInt(EXOTIC, -1)
         val userActive = sharedPreferences.getInt(ACTIVITY, -1)
 
-
-        /* 자동 로그인 (사용자 아이디, 피로도 특이도, 활동성 무도 있다면 바로 메인 페이지로)*/
+        /* 이 부분 다시 정리하기 */
+        /* 자동 로그인 (사용자 아이디, 피로도 특이도, 활동성 무도 있다면 바로 메인 페이지로) */
         if (userId != null && userPass != null && userFatigue != -1 && userActive != -1 && userExotic != -1) {
             val intent = Intent(this, MainInfoActivity::class.java)
             intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val data = response.body()
+                        /* 여기부분 고민해보기 db 써야할 수도 */
                         with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()) {
                             putString(ID, data?.memberId)
                             putString(PASS, data?.password)
@@ -95,10 +97,9 @@ class MainActivity : AppCompatActivity() {
                         }
                         startActivity(intent)
                     } else {
-                        Log.d(TAG, "WHY NOT")
+                        Log.e(TAG,"Failure")
                     }
                 }
-
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     if (id.isEmpty() && pass.isEmpty()) {
                         FancyToast.makeText(
@@ -121,8 +122,6 @@ class MainActivity : AppCompatActivity() {
             })
         }
     }
-
-
 }
 
 

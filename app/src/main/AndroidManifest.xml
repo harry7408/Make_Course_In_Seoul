@@ -19,21 +19,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".main.ShowMapActivity"
+            android:name=".FirstFeature.ShowMapActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".makeCourse.CourseListShowActivity"
+            android:name=".SecondFeature.CourseListShowActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".makeCourse.MakeCourseActivity"
+            android:name=".SecondFeature.MakeCourseActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -54,14 +54,14 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".main.MainInfoActivity"
+            android:name=".FirstFeature.MainInfoActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".FindIP.FindIdPassActivity"
+            android:name=".FindingIdPass.FindIdPassActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -97,7 +97,7 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="8743f5dc56ea78eac576be29df72380d" />
+            android:value=" api value 값 입력(재발급 받음) " />
     </application>
 
 </manifest>

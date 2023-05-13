@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="32dp"
     android:weightSum="2"
-    tools:context=".main.PlaceFragment">
+    tools:context=".FirstFeature.PlaceFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/addressConstLayout"

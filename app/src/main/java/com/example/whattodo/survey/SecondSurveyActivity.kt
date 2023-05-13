@@ -3,14 +3,9 @@ package com.example.whattodo.survey
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.core.graphics.green
-import androidx.room.Room
 import com.example.whattodo.*
 import com.example.whattodo.databinding.ActivitySecondSurveyBinding
-import com.example.whattodo.db.UserDatabase
-import com.example.whattodo.main.MainInfoActivity
-import java.lang.reflect.Member
+import com.example.whattodo.FirstFeature.MainInfoActivity
 
 private const val TAG = "SecondSurveyActivity"
 

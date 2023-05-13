@@ -1,17 +1,15 @@
-package com.example.whattodo.main
+package com.example.whattodo.FirstFeature
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.room.Room
 import androidx.viewpager2.widget.ViewPager2
 import com.example.whattodo.*
+import com.example.whattodo.SecondFeature.CourseFragment
+import com.example.whattodo.ThirdFeature.MypageFragment
 import com.example.whattodo.databinding.ActivityMainInfoBinding
-import com.example.whattodo.db.UserDatabase
 import com.google.android.material.tabs.TabLayoutMediator
-import java.lang.reflect.Array.getInt
 
 private const val TAG="MainInfoActivity"
 class MainInfoActivity : AppCompatActivity() {
@@ -37,7 +35,7 @@ class MainInfoActivity : AppCompatActivity() {
         binding.viewpager.registerOnPageChangeCallback(object:ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                supportActionBar?.setTitle(barList[position])
+                supportActionBar?.title = barList[position]
             }
         })
 

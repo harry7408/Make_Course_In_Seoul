@@ -1,20 +1,14 @@
-package com.example.whattodo.main
+package com.example.whattodo.ThirdFeature
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
 import com.example.whattodo.*
 import com.example.whattodo.databinding.FragmentMypageBinding
-import net.daum.mf.map.api.MapView
 
 
 class MypageFragment : Fragment() {
@@ -45,7 +39,6 @@ class MypageFragment : Fragment() {
             editor.remove(PASS)
             startActivity(intent)
         }
-
     }
 }
 

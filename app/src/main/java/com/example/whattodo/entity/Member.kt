@@ -6,7 +6,7 @@ import androidx.room.Fts4
 import androidx.room.PrimaryKey
 
 
-/* 사용자 정보 데이터 */
+/* 사용자 정보 데이터 베이스를 위한 클래스 */
 @Entity(tableName="members")
 data class Member (
         @ColumnInfo(name="memberId")

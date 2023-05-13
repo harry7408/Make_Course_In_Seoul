@@ -1,4 +1,4 @@
-package com.example.whattodo.makeCourse
+package com.example.whattodo.SecondFeature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
