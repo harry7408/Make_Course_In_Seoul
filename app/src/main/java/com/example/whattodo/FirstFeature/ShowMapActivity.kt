@@ -4,17 +4,36 @@ import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityShowMapBinding
+import com.example.whattodo.datas.PlaceCategory
+import com.example.whattodo.datas.StoreList
+import com.example.whattodo.network.RetrofitAPI
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.chip.Chip
+import net.daum.android.map.coord.MapCoordLatLng
+import net.daum.mf.map.api.MapPoint
+import net.daum.mf.map.api.MapPoint.PlainCoordinate
+import net.daum.mf.map.api.MapView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+
 const private val TAG="ShowMapActivity"
 class ShowMapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShowMapBinding
 
+    private lateinit var myMap:MapView
+
     private val dList = mutableListOf<String>()
 
-    var previousSelectedChip:Chip?=null
+    private val mapGetAdapter=MapGetAdapter {
+        collapseBottomSheet()
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,43 +42,58 @@ class ShowMapActivity : AppCompatActivity() {
         setTheme(com.google.android.material.R.style.Theme_MaterialComponents_Light)
         val categoryC = intent.getStringExtra("selected").toString()
         initCategoryD(categoryC)
-
         categoryChips()
 
-        
+
+
+
         /* 여기 안에 서버랑 통신하는 부분 넣어야 할 듯*/
         binding.categoryChipGroup.setOnCheckedStateChangeListener { _, _ ->
             val chip=findViewById<Chip>(binding.categoryChipGroup.checkedChipId)
-            val categoryD=chip.text
+            val categoryD=chip.text.toString()
+            Log.e(TAG,"$categoryC - $categoryD")
 
-            Log.e(TAG,"$categoryC    -- $categoryD")
+            val serverRequestData=PlaceCategory(categoryC,categoryD)
+
+
+            RetrofitAPI.storeService.requestStore(serverRequestData).enqueue(object: Callback<StoreList>{
+                override fun onResponse(call: Call<StoreList>, response: Response<StoreList>) {
+                    val responseData=response.body()?.storeList.orEmpty()
+
+                    if (responseData.isEmpty()) {
+                        Toast.makeText(this@ShowMapActivity,"검색 결과가 없습니다",Toast.LENGTH_SHORT).show()
+                        return
+                    } else {
+//                        markers=responseData.map {
+//                            PlainCoordinate(it.x.toDouble(),it.y.toDouble())
+//                        }
+                    }
+//                    mapGetAdapter.setData(responseData)
+//                    moveCamera(markers.first())
+
+                }
+
+                override fun onFailure(call: Call<StoreList>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        binding.mapView.onResume()
+    private fun collapseBottomSheet() {
+        val bottomSheet=BottomSheetBehavior.from(binding.bottomSheetLayout.root)
+        bottomSheet.state=STATE_COLLAPSED
     }
 
-    override fun onPause() {
-        super.onPause()
-        binding.mapView.onPause()
-    }
+    /*private fun moveCamera(position: MapCoordLatLng, zoomLevel:Double) {
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding.mapView.onSurfaceDestroyed()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        binding.mapView.onStartTemporaryDetach()
-    }
+    }*/
 
     override fun onStop() {
         super.onStop()
         dList.clear()
     }
+
 
     /* 필수장소 선택 chip 내용 초기화 하는 부분 */
     private fun categoryChips() {
@@ -71,16 +105,15 @@ class ShowMapActivity : AppCompatActivity() {
     }
 
     /* 칩 제작 부분 */
-    @SuppressLint("ResourceAsColor")
     private fun createChip(text: String): Chip {
         val chip = Chip(this).apply {
             setText(text)
             isCheckable = true
             isClickable = true
-            setBackgroundColor(R.color.white)
         }
         return chip
     }
+
 
 
     private fun initCategoryD(txt: String) {
@@ -194,6 +227,4 @@ class ShowMapActivity : AppCompatActivity() {
             }
         }
     }
-
-
 }

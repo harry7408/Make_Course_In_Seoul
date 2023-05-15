@@ -1,6 +1,10 @@
 package com.example.whattodo.datas
 
+import androidx.annotation.NonNull
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+
 
 /* 사용자 정보 (회원가입 시 서버와 통신에 사용) */
 data class User (

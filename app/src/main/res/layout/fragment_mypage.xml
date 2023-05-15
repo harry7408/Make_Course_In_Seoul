@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/userImage"
+                android:id="@+id/userImageView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginStart="20dp"
@@ -40,7 +40,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/userImage"
+                app:layout_constraintStart_toEndOf="@+id/userImageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -52,7 +52,7 @@
                 android:text="회원정보수정"
                 android:textColor="@color/gray"
                 android:textSize="15sp"
-                app:layout_constraintStart_toEndOf="@+id/userImage"
+                app:layout_constraintStart_toEndOf="@+id/userImageView"
                 app:layout_constraintTop_toBottomOf="@+id/userId" />
 
             <TextView
@@ -66,10 +66,17 @@
                 app:layout_constraintStart_toEndOf="@+id/changeInfo"
                 app:layout_constraintTop_toBottomOf="@+id/userId" />
 
+            <androidx.constraintlayout.helper.widget.Layer
+                android:id="@+id/userInfoChangeLayer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:constraint_referenced_ids="userImageView,changeInfo"
+                tools:ignore="MissingConstraints" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/friendZone"
+            android:id="@+id/friendListCardView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="40dp"
@@ -113,13 +120,13 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/anotherZone"
+            android:id="@+id/historyCardView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/friendZone">
+            app:layout_constraintTop_toBottomOf="@+id/friendListCardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -153,13 +160,13 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cZone"
+            android:id="@+id/deleteCardView"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/anotherZone">
+            app:layout_constraintTop_toBottomOf="@+id/historyCardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

@@ -1,27 +1,45 @@
 package com.example.whattodo.FirstFeature
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whattodo.databinding.ItemCourseBinding
+import com.example.whattodo.databinding.ItemGetBinding
+import com.example.whattodo.datas.Store
+import net.daum.android.map.coord.MapCoordLatLng
 
-class MapGetAdapter():RecyclerView.Adapter<MapGetAdapter.MapGetViewHolder>() {
+class MapGetAdapter(private val onClick: (MapCoordLatLng)->Unit):RecyclerView.Adapter<MapGetAdapter.MapGetViewHolder>() {
+    private var dataSet= emptyList<Store>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapGetViewHolder {
-        TODO("Not yet implemented")
+        return MapGetViewHolder(
+            ItemGetBinding.inflate(LayoutInflater.from(parent.context),
+            parent,
+            false)
+        )
     }
 
     override fun onBindViewHolder(holder: MapGetViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(dataSet[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return dataSet.size
     }
 
+    inner class MapGetViewHolder(private val binding: ItemGetBinding) :RecyclerView.ViewHolder(binding.root) {
+            fun bind(store: Store) {
+                binding.storeNameTextView.text=store.placeName
+                binding.storeAddressTextView.text=store.roadAddressName
+                binding.storePhoneTextView.text=store.phone
 
-
-
-
-    inner class MapGetViewHolder(private val binding: ItemCourseBinding) :RecyclerView.ViewHolder(binding.root) {
-
+                binding.root.setOnClickListener {
+                    onClick(MapCoordLatLng(store.x.toDouble(),store.y.toDouble()))
+                }
+            }
+    }
+    fun setData(dataSet:List<Store>) {
+        this.dataSet=dataSet
+        notifyDataSetChanged()
     }
 }

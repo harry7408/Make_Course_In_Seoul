@@ -8,10 +8,10 @@ import com.example.whattodo.entity.Member
 @Dao
 interface MemberDao {
     @Query("SELECT * FROM members")
-    fun getMembers():Member
+    fun getMembers():List<Member>
 
-    @Query("SELECT * FROM members WHERE memberId=(:id)")
-    fun getMember(id:String): Member?
+    @Query("SELECT * FROM members WHERE memberId=(:id) LIMIT 1")
+    fun getMember(id:String): Member
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(member: Member)

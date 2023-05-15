@@ -32,6 +32,25 @@ class MypageFragment : Fragment() {
         val sharedPreferences=requireActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
         binding.userId.text=sharedPreferences.getString(ID,null).toString()
 
+        binding.userInfoChangeLayer.setOnClickListener {
+            val intent=Intent(context,ChangeUserInfoActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.friendListCardView.setOnClickListener {
+            val intent=Intent(context,FriendListActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.historyCardView.setOnClickListener {
+//            val intent=Intent(context,)
+        }
+
+        binding.deleteCardView.setOnClickListener {
+            /* 서버와 회원탈퇴 기능 맞춰서 해야함 */
+        }
+
+
         binding.logoutText.setOnClickListener {
             val intent= Intent(activity,MainActivity::class.java)
             val editor=sharedPreferences.edit()

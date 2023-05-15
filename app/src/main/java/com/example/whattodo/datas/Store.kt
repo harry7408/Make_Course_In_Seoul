@@ -38,6 +38,6 @@ data class Store (
 /* 여러개 가게 정보들 받을 데이터 */
 data class StoreList (
     @SerializedName("courseList")
-    val courseList:List<Store>,
+    val storeList:List<Store>,
 )
 

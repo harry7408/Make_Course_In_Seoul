@@ -1,6 +1,8 @@
 package com.example.whattodo.network
 
+import com.example.whattodo.datas.PlaceCategory
 import com.example.whattodo.datas.Store
+import com.example.whattodo.datas.StoreList
 import com.example.whattodo.datas.User
 import retrofit2.Call
 import retrofit2.http.Body
@@ -29,17 +31,30 @@ interface findAPI {
 
 interface loginAPI {
     @POST("/login/login")
-    fun login(@Body data:User) : Call<User>
+    fun login(@Body user:User) : Call<User>
 }
+
+interface ChangePassAPI {
+    @POST("/changePW")
+    fun change(@Body user:User) : Call<User>
+}
+
+interface withDrawAPI {
+    @POST("/deleteMember")
+    fun delete(@Body user:User):Call<User>
+}
+
 
 /* 코스 만들때 쓰는 API *//*
 interface courseAPI {
     @POST("/makeCourse")
-    fun requestCourse(@Body courseDto: CourseDto) : Call<CourseDto>
+    fun requestCourse(@Body course: Course) : Call<List<Course>>
 }*/
 
 interface storeAPI {
-    @GET("a")
-    fun requestStore():Call<Store>
+    @POST("")
+    fun requestStore(@Body categories:PlaceCategory):Call<StoreList>
 }
+
+
 

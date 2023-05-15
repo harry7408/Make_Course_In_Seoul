@@ -10,10 +10,12 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
 import android.app.AlertDialog
+import android.content.Intent
 import androidx.core.widget.addTextChangedListener
 import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.datas.User
 import com.example.whattodo.network.RetrofitAPI
+import com.example.whattodo.survey.FirstSurveyActivity
 
 
 import retrofit2.Call
@@ -160,9 +162,8 @@ class JoinActivity : AppCompatActivity() {
             flagCheck()
         }
     }
-
+    /* ID 중복확인 검사 부분 */
     private fun multipleIdCheck() {
-        /* ID 중복확인 검사 부분 */
         binding.idCheck.setOnClickListener {
             val check_id = binding.idArea.text.toString()
             var dupChecked: Boolean = false
@@ -217,12 +218,10 @@ class JoinActivity : AppCompatActivity() {
             })
         }
     }
-
+    /*회원가입 버튼 눌렸을때 반응*/
     private fun joinUser() {
-        /*회원가입 버튼 눌렸을때 반응*/
         binding.joinBtn.setOnClickListener {
 //            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
-//            아이디의 중복확인 버튼이 비활성화 되어있을때
             val genderText = when {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
@@ -235,18 +234,19 @@ class JoinActivity : AppCompatActivity() {
                 binding.birthArea.text.toString(),
                 genderText, null, null, null
             )
-
+            /* 서버와 통신 부분 */
             val joinCall = RetrofitAPI.joinService.Join(userData)
             joinCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val builder = AlertDialog.Builder(this@JoinActivity)
-                        builder.setTitle("회원가입")
-                        builder.setMessage("회원가입 성공")
+                        builder.setMessage("설문을 진행해 주세요")
                         builder.setPositiveButton(
                             R.string.ok,
                             DialogInterface.OnClickListener { dialog, which ->
-                                this@JoinActivity.finish()
+                                val intent= Intent(this@JoinActivity,FirstSurveyActivity::class.java)
+                                intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
                             })
                         builder.create()
                         builder.show()
@@ -254,7 +254,6 @@ class JoinActivity : AppCompatActivity() {
                         Log.d(TAG, "not Successful")
                     }
                 }
-
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     t.printStackTrace()
                     call.cancel()

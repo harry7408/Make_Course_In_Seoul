@@ -9,11 +9,14 @@ import com.example.whattodo.FindingIdPass.FindIdPassActivity
 import com.example.whattodo.databinding.ActivityMainBinding
 import com.example.whattodo.datas.User
 import com.example.whattodo.FirstFeature.MainInfoActivity
+import com.example.whattodo.db.UserDatabase
+import com.example.whattodo.entity.Member
 import com.example.whattodo.network.RetrofitAPI
 import com.example.whattodo.survey.FirstSurveyActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import retrofit2.Call
 import retrofit2.Response
+
 
 /* 로그인 페이지 */
 private const val TAG = "MainActivity"
@@ -21,6 +24,8 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var member: Member
+    private lateinit var latestMember:Member
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +40,9 @@ class MainActivity : AppCompatActivity() {
         val userFatigue = sharedPreferences.getInt(FATIGUE, -1)
         val userExotic = sharedPreferences.getInt(EXOTIC, -1)
         val userActive = sharedPreferences.getInt(ACTIVITY, -1)
+
+
+
 
         /* 이 부분 다시 정리하기 */
         /* 자동 로그인 (사용자 아이디, 피로도 특이도, 활동성 무도 있다면 바로 메인 페이지로) */
@@ -91,11 +99,13 @@ class MainActivity : AppCompatActivity() {
                             putString(BDAY, data?.birthday)
                             putString(GENDER, data?.gender)
                         }.apply()
-                        var intent = Intent(applicationContext, FirstSurveyActivity::class.java)
-                        if(userFatigue!=-1&& userExotic!=-1 && userActive!=-1) {
+                        member= Member(data?.memberId.toString(),data?.password,data?.email,
+                            data?.memberName,data?.birthday,data?.gender,userFatigue,userExotic,userActive)
+                        Thread {
+                           UserDatabase.getInstance(this@MainActivity)?.memberDao()?.insert(member)
+                       }.start()
                             intent=Intent(applicationContext,MainInfoActivity::class.java)
-                        }
-                        startActivity(intent)
+                            startActivity(intent)
                     } else {
                         Log.e(TAG,"Failure")
                     }
@@ -121,6 +131,10 @@ class MainActivity : AppCompatActivity() {
                 }
             })
         }
+    }
+
+    private fun checkCurrentUser(id:String) : Member {
+       return UserDatabase.getInstance(this@MainActivity)?.memberDao()?.getMember(id)!!
     }
 }
 
