@@ -4,6 +4,7 @@ import com.example.whattodo.datas.PlaceCategory
 import com.example.whattodo.datas.Store
 import com.example.whattodo.datas.StoreList
 import com.example.whattodo.datas.User
+import com.example.whattodo.entity.Member
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -35,13 +36,13 @@ interface loginAPI {
 }
 
 interface ChangePassAPI {
-    @POST("/changePW")
+    @POST("/member/changePW")
     fun change(@Body user:User) : Call<User>
 }
 
 interface withDrawAPI {
-    @POST("/deleteMember")
-    fun delete(@Body user:User):Call<User>
+    @POST("/member/deleteMember")
+    fun delete(@Body user:User):Call<String>
 }
 
 

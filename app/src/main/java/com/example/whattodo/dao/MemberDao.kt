@@ -19,6 +19,6 @@ interface MemberDao {
     @Update
     fun updateMember(member:Member)
 
-    @Query("DELETE FROM members")
-     fun delete()
+    @Query("DELETE FROM members WHERE memberId=(:id)")
+     fun delete(id:String)
 }

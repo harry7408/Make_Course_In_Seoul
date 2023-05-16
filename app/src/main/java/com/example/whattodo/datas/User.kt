@@ -21,11 +21,11 @@ data class User (
         @SerializedName("gender")
         val gender:String?,
         @SerializedName("fatigability")
-        val fatigability:Int?,
+        var fatigability:Int?,
         @SerializedName("specification")
-        val specification:Int?,
+        var specification:Int?,
         @SerializedName("activity")
-        val active:Int?
+        var active:Int?
         )
 
 

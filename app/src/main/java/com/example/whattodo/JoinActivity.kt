@@ -14,6 +14,7 @@ import android.content.Intent
 import androidx.core.widget.addTextChangedListener
 import com.example.whattodo.databinding.ActivityJoinBinding
 import com.example.whattodo.datas.User
+import com.example.whattodo.entity.Member
 import com.example.whattodo.network.RetrofitAPI
 import com.example.whattodo.survey.FirstSurveyActivity
 
@@ -162,10 +163,12 @@ class JoinActivity : AppCompatActivity() {
             flagCheck()
         }
     }
+
     /* ID 중복확인 검사 부분 */
     private fun multipleIdCheck() {
         binding.idCheck.setOnClickListener {
             val check_id = binding.idArea.text.toString()
+            Log.d(TAG,"I AM ${check_id}")
             var dupChecked: Boolean = false
             val userListCall = RetrofitAPI.idCheckService.checkNickname()
             userListCall.enqueue(object : retrofit2.Callback<List<User>> {
@@ -173,6 +176,7 @@ class JoinActivity : AppCompatActivity() {
                     call: Call<List<User>>,
                     response: Response<List<User>>
                 ) {
+                    Log.d(TAG,"RESPONSE : ${response.body()}")
                     if (response.isSuccessful() && check_id.isNotEmpty()) {
                         val userList: List<User>? = response.body()
                         for (users in userList!!) {
@@ -202,6 +206,7 @@ class JoinActivity : AppCompatActivity() {
                             }
                         }
                     } else {
+                        Log.d(TAG,"HELLO")
                         AlertDialog.Builder(this@JoinActivity).run {
                             setTitle(R.string.check_id)
                             setMessage(R.string.no_id)
@@ -210,7 +215,6 @@ class JoinActivity : AppCompatActivity() {
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<List<User>>, t: Throwable) {
                     Log.d(TAG, t.message.toString())
                     call.cancel()
@@ -218,6 +222,7 @@ class JoinActivity : AppCompatActivity() {
             })
         }
     }
+
     /*회원가입 버튼 눌렸을때 반응*/
     private fun joinUser() {
         binding.joinBtn.setOnClickListener {
@@ -226,7 +231,7 @@ class JoinActivity : AppCompatActivity() {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
-            val userData = User(
+            val member = Member(
                 binding.idArea.text.toString(),
                 binding.passArea.text.toString(),
                 binding.emailArea.text.toString(),
@@ -234,34 +239,20 @@ class JoinActivity : AppCompatActivity() {
                 binding.birthArea.text.toString(),
                 genderText, null, null, null
             )
-            /* 서버와 통신 부분 */
-            val joinCall = RetrofitAPI.joinService.Join(userData)
-            joinCall.enqueue(object : retrofit2.Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        val builder = AlertDialog.Builder(this@JoinActivity)
-                        builder.setMessage("설문을 진행해 주세요")
-                        builder.setPositiveButton(
-                            R.string.ok,
-                            DialogInterface.OnClickListener { dialog, which ->
-                                val intent= Intent(this@JoinActivity,FirstSurveyActivity::class.java)
-                                intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                startActivity(intent)
-                            })
-                        builder.create()
-                        builder.show()
-                    } else {
-                        Log.d(TAG, "not Successful")
-                    }
-                }
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    t.printStackTrace()
-                    call.cancel()
-                }
-            })
+            val builder = AlertDialog.Builder(this@JoinActivity)
+            builder.setMessage("설문을 진행해 주세요")
+            builder.setPositiveButton(
+                R.string.ok,
+                DialogInterface.OnClickListener { dialog, which ->
+                    val intent = Intent(this@JoinActivity, FirstSurveyActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                    intent.putExtra("memberInfo",member)
+                    startActivity(intent)
+                })
+            builder.create()
+            builder.show()
         }
     }
-
 
     //    비밀번호 유효성 확인을 위한 함수 (비밀번호 길이 + 문자 조합)
     private fun checkPass(s: String): Matcher {

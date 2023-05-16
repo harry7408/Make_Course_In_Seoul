@@ -1,5 +1,6 @@
 package com.example.whattodo.FirstFeature
 
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +8,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.OnBackPressedDispatcher
+import androidx.activity.addCallback
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentPlaceBinding
 import com.example.whattodo.datas.Category
@@ -19,6 +24,10 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
 //    private var selectedCategory:Category?=null
     private val categoryList= mutableListOf<Category>()
 
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,6 +38,25 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding=FragmentPlaceBinding.inflate(layoutInflater)
+
+        /* 뒤로가기 눌렀을 때 앱 종료할 것인지 물어보는 다이얼로그 띄우는 부분 */
+        val onBackPressedCallback=object: OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val builder=AlertDialog.Builder(requireActivity())
+                builder.setMessage("정말로 종료하시겠습니까?")
+                builder.setPositiveButton("Ok") {_,_->
+                    requireActivity().finish()
+                }
+                builder.setNegativeButton("Cancel") {dialog,_ ->
+                    dialog.dismiss()
+                }
+                builder.show()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,onBackPressedCallback
+        )
+
         return binding.root
     }
 
@@ -37,6 +65,7 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
         initCategoryList()
         initRecyclerView()
     }
+
 
 
     private fun initRecyclerView() {
@@ -78,4 +107,12 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
         categoryList.add(19,Category(R.drawable.gallery,"전시시설"))
         categoryList.add(20,Category(R.drawable.concert,"공연시설"))
     }
+
+    /* onResume일때 backbutton 처리 */
+    override fun onResume() {
+        super.onResume()
+        requireActivity().onBackPressedDispatcher
+    }
+
+
 }

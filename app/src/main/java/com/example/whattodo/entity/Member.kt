@@ -1,10 +1,12 @@
 package com.example.whattodo.entity
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
-
+@Parcelize
 @Entity(tableName = "members")
 data class Member(
     @PrimaryKey
@@ -25,4 +27,4 @@ data class Member(
     var specification:Int?,
 
     var active:Int?
-)
+) : Parcelable

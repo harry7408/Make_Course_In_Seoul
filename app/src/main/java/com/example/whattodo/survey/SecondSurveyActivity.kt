@@ -1,15 +1,23 @@
 package com.example.whattodo.survey
 
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.example.whattodo.*
 import com.example.whattodo.databinding.ActivitySecondSurveyBinding
 import com.example.whattodo.FirstFeature.MainInfoActivity
+import com.example.whattodo.datas.User
 import com.example.whattodo.db.UserDatabase
 import com.example.whattodo.entity.Member
+import com.example.whattodo.network.RetrofitAPI
+import retrofit2.Call
+import retrofit2.Response
 
 private const val TAG = "SecondSurveyActivity"
 
@@ -17,6 +25,9 @@ class SecondSurveyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySecondSurveyBinding
     private lateinit var currentMember: Member
+    var extraFatigue = 0
+    var extraExotic = 0
+    var extraActive = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +37,13 @@ class SecondSurveyActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = getString(R.string.survey)
 
-        val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
-        val currentUserId = sharedPreferences.getString(ID, null)
-        val currentUserPassword = sharedPreferences.getString(PASS, null)
-        val currentUserName = sharedPreferences.getString(NAME, null)
-        val currentUserEmail = sharedPreferences.getString(EMAIL, null)
-        val currentUserBirthDay = sharedPreferences.getString(BDAY, null)
-        val currentUserGender = sharedPreferences.getString(GENDER, null)
+         val fatigue = intent.getIntExtra("fatigue", 0)
+         val exotic = intent.getIntExtra("exotic", 0)
+         val active = intent.getIntExtra("active", 0)
 
-        var fatigue: Int = intent.getIntExtra("fatigue", 0)
-        var exotic: Int = intent.getIntExtra("exotic", 0)
-        var active: Int = intent.getIntExtra("active", 0)
-        var extraFatigue = 0
-        var extraExotic = 0
-        var extraActive = 0
+        Log.d(TAG,"$fatigue, $exotic, $active")
+        val memberData=intent.getParcelableExtra<Member>("memberInfo1")
+
         binding.firstQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraFatigue = when (checkedId) {
                 R.id.first1 -> 0
@@ -49,7 +53,7 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.first5 -> 80
                 else -> 50
             }
-            fatigue += extraFatigue
+            Log.e(TAG,"$extraFatigue")
         }
         binding.secondQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraExotic = when (checkedId) {
@@ -60,7 +64,7 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.second5 -> 80
                 else -> 50
             }
-            exotic += extraExotic
+            Log.e(TAG,"$extraExotic")
         }
         binding.thirdQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraActive = when (checkedId) {
@@ -71,41 +75,51 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.third5 -> 80
                 else -> 50
             }
-            active += extraActive
+            Log.e(TAG,"$extraActive")
         }
+
         binding.layer.setOnClickListener {
-            val builder = android.app.AlertDialog.Builder(this@SecondSurveyActivity)
-            builder.setTitle("회원가입")
-            builder.setMessage("회원가입 성공")
-            builder.setPositiveButton(
-                R.string.ok,
-                DialogInterface.OnClickListener { dialog, which ->
-                    val intent = Intent(this@SecondSurveyActivity, MainActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    with(getSharedPreferences(USER_INFO, MODE_PRIVATE).edit()) {
-                        putInt(FATIGUE, fatigue)
-                        putInt(EXOTIC, exotic)
-                        putInt(ACTIVITY, active)
-                    }.apply()
-                    currentMember = Member(
-                        currentUserId.toString(), currentUserPassword, currentUserEmail,
-                        currentUserName, currentUserBirthDay, currentUserGender, fatigue, exotic, active
-                    )
+            currentMember=Member(memberData?.memberId.toString(),memberData?.password,
+                memberData?.email, memberData?.memberName, memberData?.birthday,
+                memberData?.gender, (fatigue+extraFatigue), (exotic+extraExotic), (active+extraActive))
 
-                    Thread {
-                        UserDatabase.getInstance(this@SecondSurveyActivity)?.memberDao()
-                            ?.updateMember(currentMember)
-                    }.start()
 
-                    startActivity(intent)
-                })
-            builder.create()
-            builder.show()
+            val currentUser=User(memberData?.memberId.toString(),memberData?.password,
+                memberData?.email, memberData?.memberName, memberData?.birthday,
+                memberData?.gender, (fatigue+extraFatigue), (exotic+extraExotic), (active+extraActive))
+
+            /* 서버와 통신 필요*/
+            val joinCall = RetrofitAPI.joinService.Join(currentUser)
+            joinCall.enqueue(object : retrofit2.Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        Thread {
+                            UserDatabase.getInstance(this@SecondSurveyActivity)?.memberDao()
+                                ?.updateMember(currentMember)
+                        }.start()
+                        val builder = android.app.AlertDialog.Builder(this@SecondSurveyActivity)
+                        builder.setMessage("회원가입 성공")
+                        builder.setPositiveButton(
+                            R.string.ok,
+                            DialogInterface.OnClickListener { dialog, which ->
+                                val intent= Intent(this@SecondSurveyActivity,MainActivity::class.java)
+                                intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                startActivity(intent)
+                            })
+                        builder.create()
+                        builder.show()
+
+                    } else {
+                        Log.d(TAG, "not Successful")
+                    }
+                }
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.d(TAG,"FAILURE")
+                    t.printStackTrace()
+                    call.cancel()
+                }
+            })
         }
-
-
-
-
     }
 }
 
@@ -117,3 +131,6 @@ val database: UserDatabase = Room.databaseBuilder(
 ).allowMainThreadQueries().build()
 member = database.memberDao().getMembers()
 */
+
+
+

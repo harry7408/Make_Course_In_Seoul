@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var member: Member
-    private lateinit var latestMember:Member
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,25 +33,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
-        val userId = sharedPreferences.getString(ID, null)
         val userPass = sharedPreferences.getString(PASS, null)
 
-        val userFatigue = sharedPreferences.getInt(FATIGUE, -1)
-        val userExotic = sharedPreferences.getInt(EXOTIC, -1)
-        val userActive = sharedPreferences.getInt(ACTIVITY, -1)
 
-
-
-
-        /* 이 부분 다시 정리하기 */
-        /* 자동 로그인 (사용자 아이디, 피로도 특이도, 활동성 무도 있다면 바로 메인 페이지로) */
-        if (userId != null && userPass != null && userFatigue != -1 && userActive != -1 && userExotic != -1) {
+        if (!userPass.equals(null)) {
             val intent = Intent(this, MainInfoActivity::class.java)
             intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
-            /*피로도 활동성 특이도가 없다면 -1로 설정해놓고(값이 0인 경우가 있을 수 있기때문에) 설문 받는 페이지로 */
-        } else if (userId != null && userPass != null && userFatigue == -1 && userActive == -1 && userExotic == -1) {
-            val intent = Intent(this, FirstSurveyActivity::class.java)
             startActivity(intent)
         }
 
@@ -98,18 +84,31 @@ class MainActivity : AppCompatActivity() {
                             putString(NAME, data?.memberName)
                             putString(BDAY, data?.birthday)
                             putString(GENDER, data?.gender)
+                            putInt(FATIGUE, data?.fatigability!!)
+                            putInt(EXOTIC,data?.specification!!)
+                            putInt(ACTIVITY,data?.active!!)
                         }.apply()
-                        member= Member(data?.memberId.toString(),data?.password,data?.email,
-                            data?.memberName,data?.birthday,data?.gender,userFatigue,userExotic,userActive)
+                        member = Member(
+                            data?.memberId.toString(),
+                            data?.password,
+                            data?.email,
+                            data?.memberName,
+                            data?.birthday,
+                            data?.gender,
+                            data?.fatigability,
+                            data?.specification,
+                            data?.active
+                        )
                         Thread {
-                           UserDatabase.getInstance(this@MainActivity)?.memberDao()?.insert(member)
-                       }.start()
-                            intent=Intent(applicationContext,MainInfoActivity::class.java)
-                            startActivity(intent)
+                            UserDatabase.getInstance(this@MainActivity)?.memberDao()?.insert(member)
+                        }.start()
+                        intent = Intent(applicationContext, MainInfoActivity::class.java)
+                        startActivity(intent)
                     } else {
-                        Log.e(TAG,"Failure")
+                        Log.e(TAG, "Failure")
                     }
                 }
+
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     if (id.isEmpty() && pass.isEmpty()) {
                         FancyToast.makeText(
@@ -133,8 +132,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkCurrentUser(id:String) : Member {
-       return UserDatabase.getInstance(this@MainActivity)?.memberDao()?.getMember(id)!!
+    private fun checkCurrentUser(id: String): Member {
+        return UserDatabase.getInstance(this@MainActivity)?.memberDao()?.getMember(id)!!
     }
 }
 

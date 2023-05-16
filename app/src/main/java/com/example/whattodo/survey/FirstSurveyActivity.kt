@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityFirstSurveyBinding
+import com.example.whattodo.entity.Member
 
 private const val TAG="FirstSurveyActivity"
 class FirstSurveyActivity : AppCompatActivity() {
@@ -22,6 +23,10 @@ class FirstSurveyActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = getString(R.string.survey)
+
+        var memberData=intent.getParcelableExtra<Member>("memberInfo")
+        /* 넘어오는 데이터 확인용 로그*/
+
         binding.firstQuestion.setOnCheckedChangeListener { _, checkedId ->
            fatigue= when (checkedId) {
                 R.id.first1->0
@@ -31,6 +36,7 @@ class FirstSurveyActivity : AppCompatActivity() {
                 R.id.first5 ->80
                 else-> 50
             }
+            Log.e(TAG,"$fatigue")
         }
         binding.secondQuestion.setOnCheckedChangeListener { _, checkedId ->
             exotic= when (checkedId) {
@@ -41,6 +47,7 @@ class FirstSurveyActivity : AppCompatActivity() {
                 R.id.second5 ->80
                 else-> 50
             }
+            Log.e(TAG,"$exotic")
         }
         binding.thirdQuestion.setOnCheckedChangeListener { _, checkedId ->
             active= when (checkedId) {
@@ -51,6 +58,7 @@ class FirstSurveyActivity : AppCompatActivity() {
                 R.id.third5 ->80
                 else-> 50
             }
+            Log.e(TAG,"$active")
         }
 
         binding.layer.setOnClickListener {
@@ -60,7 +68,7 @@ class FirstSurveyActivity : AppCompatActivity() {
                 putExtra("exotic",exotic)
                 putExtra("active",active)
             }
-            intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            intent.putExtra("memberInfo1", memberData)
             startActivity(intent)
         }
     }
