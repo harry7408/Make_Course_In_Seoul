@@ -24,18 +24,6 @@ class CourseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentCourseBinding.inflate(layoutInflater)
-        /* fragment에서 뒤로가기 눌렀을 때 home으로 이동 */
-        val onBackPressedCallback=object: OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val viewPager=requireActivity().findViewById<ViewPager2>(R.id.viewpager)
-                viewPager.setCurrentItem(0,true)
-
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,onBackPressedCallback
-        )
-
         return binding.root
     }
 

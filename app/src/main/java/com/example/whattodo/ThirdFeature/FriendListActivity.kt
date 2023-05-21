@@ -2,7 +2,10 @@ package com.example.whattodo.ThirdFeature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityFriendListBinding
 
@@ -29,8 +32,26 @@ class FriendListActivity : AppCompatActivity() {
                 finish()
                 return true
             }
-            else -> {}
+            else -> {
+                val builder=AlertDialog.Builder(this)
+                builder.run {
+                    setTitle("친구추가")
+                    setView(R.layout.add_friend_edittext)
+                    setPositiveButton("OK") {_,_ ->
+                        /* 서버와 통신이 들어가는 부분 (친구추가) */
+
+                    }
+                    setNegativeButton("Cancel") {dialog,_ ->
+                        dialog.dismiss()
+                    }
+                }.show()
+            }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.friend_menu,menu)
+        return true
     }
 }

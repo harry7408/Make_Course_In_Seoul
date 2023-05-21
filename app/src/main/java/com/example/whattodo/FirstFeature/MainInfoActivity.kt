@@ -5,6 +5,9 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.viewpager2.widget.ViewPager2
 import com.example.whattodo.*
 import com.example.whattodo.SecondFeature.CourseFragment
@@ -19,6 +22,7 @@ class MainInfoActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainInfoBinding
     var fatigue = 0
     private var dialog: AlertDialog? = null
+    private var initTime:Long=0L
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,9 +59,24 @@ class MainInfoActivity : AppCompatActivity() {
             tab.text = textList[position]
             tab.setIcon(iconList[position])
         }.attach()
-
     }
 
+    /* 프래그먼트 화면 전환 처리 */
+    override fun onBackPressed() {
+        if (binding.viewpager.currentItem==0) {
+            val builder = AlertDialog.Builder(this)
+            builder.setMessage("정말로 종료하시겠습니까?")
+            builder.setPositiveButton("Ok") { _, _ ->
+                this.finish()
+            }
+            builder.setNegativeButton("Cancel") { dialog, _ ->
+                dialog.dismiss()
+            }
+            builder.show()
+        } else {
+            binding.viewpager.setCurrentItem(0,true)
+        }
+    }
 
 }
 

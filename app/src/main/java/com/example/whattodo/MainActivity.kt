@@ -61,8 +61,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.loginButton.setOnClickListener {
-//            val intent = Intent(this, FirstSurveyActivity::class.java)
-//            startActivity(intent)
             val id = binding.idArea.text.toString()
             val pass = binding.passArea.text.toString()
             val userdata = User(

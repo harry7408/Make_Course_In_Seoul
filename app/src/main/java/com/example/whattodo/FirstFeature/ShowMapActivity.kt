@@ -26,7 +26,6 @@ class ShowMapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShowMapBinding
 
-    private lateinit var myMap:MapView
 
     private val dList = mutableListOf<String>()
 
@@ -41,6 +40,9 @@ class ShowMapActivity : AppCompatActivity() {
         setContentView(binding.root)
         setTheme(com.google.android.material.R.style.Theme_MaterialComponents_Light)
         val categoryC = intent.getStringExtra("selected").toString()
+
+        binding.mapView.onCreate(savedInstanceState)
+
         initCategoryD(categoryC)
         categoryChips()
 
@@ -56,27 +58,27 @@ class ShowMapActivity : AppCompatActivity() {
             val serverRequestData=PlaceCategory(categoryC,categoryD)
 
 
-            RetrofitAPI.storeService.requestStore(serverRequestData).enqueue(object: Callback<StoreList>{
-                override fun onResponse(call: Call<StoreList>, response: Response<StoreList>) {
-                    val responseData=response.body()?.storeList.orEmpty()
-
-                    if (responseData.isEmpty()) {
-                        Toast.makeText(this@ShowMapActivity,"검색 결과가 없습니다",Toast.LENGTH_SHORT).show()
-                        return
-                    } else {
-//                        markers=responseData.map {
-//                            PlainCoordinate(it.x.toDouble(),it.y.toDouble())
-//                        }
-                    }
-//                    mapGetAdapter.setData(responseData)
-//                    moveCamera(markers.first())
-
-                }
-
-                override fun onFailure(call: Call<StoreList>, t: Throwable) {
-                    t.printStackTrace()
-                }
-            })
+//            RetrofitAPI.storeService.requestStore(serverRequestData).enqueue(object: Callback<StoreList>{
+//                override fun onResponse(call: Call<StoreList>, response: Response<StoreList>) {
+//                    val responseData=response.body()?.storeList.orEmpty()
+//
+//                    if (responseData.isEmpty()) {
+//                        Toast.makeText(this@ShowMapActivity,"검색 결과가 없습니다",Toast.LENGTH_SHORT).show()
+//                        return
+//                    } else {
+////                        markers=responseData.map {
+////                            PlainCoordinate(it.x.toDouble(),it.y.toDouble())
+////                        }
+//                    }
+////                    mapGetAdapter.setData(responseData)
+////                    moveCamera(markers.first())
+//
+//                }
+//
+//                override fun onFailure(call: Call<StoreList>, t: Throwable) {
+//                    t.printStackTrace()
+//                }
+//            })
         }
     }
 
@@ -89,9 +91,40 @@ class ShowMapActivity : AppCompatActivity() {
 
     }*/
 
+    override fun onStart() {
+        super.onStart()
+        binding.mapView.onStart()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView.onPause()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.mapView.onDestroy()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
+    }
+
     override fun onStop() {
         super.onStop()
         dList.clear()
+        binding.mapView.onStop()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.mapView.onSaveInstanceState(outState)
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.mapView.onLowMemory()
     }
 
 

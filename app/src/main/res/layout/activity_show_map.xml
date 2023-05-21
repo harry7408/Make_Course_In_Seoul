@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FirstFeature.ShowMapActivity">
-
-    <net.daum.mf.map.api.MapView
+<!--일단 네이버 쓰는데 좌표 잘 바뀔지 알아봐야함 -->
+    <com.naver.maps.map.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
@@ -30,10 +30,8 @@
             app:singleSelection="true" />
     </HorizontalScrollView>
 
-
-
     <include
         android:id="@+id/bottomSheetLayout"
-        layout="@layout/bottom_sheet"/>
+        layout="@layout/map_bottom_sheet"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

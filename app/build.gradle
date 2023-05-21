@@ -82,6 +82,8 @@ dependencies {
 
     implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
 
+    /*네이버지도 위한 dependency*/
+    implementation 'com.naver.maps:map-sdk:3.16.2'
 
 }
 

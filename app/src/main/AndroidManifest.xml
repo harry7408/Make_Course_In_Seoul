@@ -125,7 +125,10 @@
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value=" api value 값 입력(재발급 받음) " />
+            android:value="카카오지도 안쓸 예정" />
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="@string/client_id" />
     </application>
 
 </manifest>

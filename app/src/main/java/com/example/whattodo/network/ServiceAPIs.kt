@@ -1,9 +1,6 @@
 package com.example.whattodo.network
 
-import com.example.whattodo.datas.PlaceCategory
-import com.example.whattodo.datas.Store
-import com.example.whattodo.datas.StoreList
-import com.example.whattodo.datas.User
+import com.example.whattodo.datas.*
 import com.example.whattodo.entity.Member
 import retrofit2.Call
 import retrofit2.http.Body
@@ -45,16 +42,17 @@ interface withDrawAPI {
     fun delete(@Body user:User):Call<String>
 }
 
-
-/* 코스 만들때 쓰는 API *//*
-interface courseAPI {
-    @POST("/makeCourse")
-    fun requestCourse(@Body course: Course) : Call<List<Course>>
+// 코스 제작할 때 보낼 데이터 api
+/*interface courseAPI {
+    @POST("/makeCourse/test")
+    fun requestCourse() : Call<List<Course>>
 }*/
 
+
+/* 가게 테스트로 가게 데이터 받아오는 용도로 만든 api*/
 interface storeAPI {
-    @POST("")
-    fun requestStore(@Body categories:PlaceCategory):Call<StoreList>
+    @POST("/makeCourse/test")
+    fun requestStore():Call<StoreList>
 }
 
 

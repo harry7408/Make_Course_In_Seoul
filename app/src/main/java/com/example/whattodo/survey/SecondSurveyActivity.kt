@@ -37,12 +37,12 @@ class SecondSurveyActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = getString(R.string.survey)
 
-         val fatigue = intent.getIntExtra("fatigue", 0)
-         val exotic = intent.getIntExtra("exotic", 0)
-         val active = intent.getIntExtra("active", 0)
+        val fatigue = intent.getIntExtra("fatigue", 0)
+        val exotic = intent.getIntExtra("exotic", 0)
+        val active = intent.getIntExtra("active", 0)
 
-        Log.d(TAG,"$fatigue, $exotic, $active")
-        val memberData=intent.getParcelableExtra<Member>("memberInfo1")
+        Log.d(TAG, "$fatigue, $exotic, $active")
+        val memberData = intent.getParcelableExtra<Member>("memberInfo1")
 
         binding.firstQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraFatigue = when (checkedId) {
@@ -53,7 +53,7 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.first5 -> 80
                 else -> 50
             }
-            Log.e(TAG,"$extraFatigue")
+            Log.e(TAG, "$extraFatigue")
         }
         binding.secondQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraExotic = when (checkedId) {
@@ -64,7 +64,7 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.second5 -> 80
                 else -> 50
             }
-            Log.e(TAG,"$extraExotic")
+            Log.e(TAG, "$extraExotic")
         }
         binding.thirdQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraActive = when (checkedId) {
@@ -75,18 +75,34 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.third5 -> 80
                 else -> 50
             }
-            Log.e(TAG,"$extraActive")
+            Log.e(TAG, "$extraActive")
         }
 
         binding.layer.setOnClickListener {
-            currentMember=Member(memberData?.memberId.toString(),memberData?.password,
-                memberData?.email, memberData?.memberName, memberData?.birthday,
-                memberData?.gender, (fatigue+extraFatigue), (exotic+extraExotic), (active+extraActive))
+            currentMember = Member(
+                memberData?.memberId.toString(),
+                memberData?.password,
+                memberData?.email,
+                memberData?.memberName,
+                memberData?.birthday,
+                memberData?.gender,
+                (fatigue + extraFatigue),
+                (exotic + extraExotic),
+                (active + extraActive)
+            )
 
 
-            val currentUser=User(memberData?.memberId.toString(),memberData?.password,
-                memberData?.email, memberData?.memberName, memberData?.birthday,
-                memberData?.gender, (fatigue+extraFatigue), (exotic+extraExotic), (active+extraActive))
+            val currentUser = User(
+                memberData?.memberId.toString(),
+                memberData?.password,
+                memberData?.email,
+                memberData?.memberName,
+                memberData?.birthday,
+                memberData?.gender,
+                (fatigue + extraFatigue),
+                (exotic + extraExotic),
+                (active + extraActive)
+            )
 
             /* 서버와 통신 필요*/
             val joinCall = RetrofitAPI.joinService.Join(currentUser)
@@ -102,8 +118,10 @@ class SecondSurveyActivity : AppCompatActivity() {
                         builder.setPositiveButton(
                             R.string.ok,
                             DialogInterface.OnClickListener { dialog, which ->
-                                val intent= Intent(this@SecondSurveyActivity,MainActivity::class.java)
-                                intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                val intent =
+                                    Intent(this@SecondSurveyActivity, MainActivity::class.java)
+                                intent.flags =
+                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
                                 startActivity(intent)
                             })
                         builder.create()
@@ -113,8 +131,9 @@ class SecondSurveyActivity : AppCompatActivity() {
                         Log.d(TAG, "not Successful")
                     }
                 }
+
                 override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.d(TAG,"FAILURE")
+                    Log.d(TAG, "FAILURE")
                     t.printStackTrace()
                     call.cancel()
                 }
@@ -122,15 +141,5 @@ class SecondSurveyActivity : AppCompatActivity() {
         }
     }
 }
-
-
-/*
-val database: UserDatabase = Room.databaseBuilder(
-    this@SecondSurveyActivity,
-    UserDatabase::class.java, "members"
-).allowMainThreadQueries().build()
-member = database.memberDao().getMembers()
-*/
-
 
 

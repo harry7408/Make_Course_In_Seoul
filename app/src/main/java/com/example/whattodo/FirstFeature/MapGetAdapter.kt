@@ -30,7 +30,7 @@ class MapGetAdapter(private val onClick: (MapCoordLatLng)->Unit):RecyclerView.Ad
     inner class MapGetViewHolder(private val binding: ItemGetBinding) :RecyclerView.ViewHolder(binding.root) {
             fun bind(store: Store) {
                 binding.storeNameTextView.text=store.placeName
-                binding.storeAddressTextView.text=store.roadAddressName
+                binding.storeAddressTextView.text=store.addressName
                 binding.storePhoneTextView.text=store.phone
 
                 binding.root.setOnClickListener {

@@ -23,6 +23,20 @@ class ChangeUserInfoActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "회원정보수정"
 
+        val currentUserName=intent.getStringExtra("username")
+        val currentUserEmail=intent.getStringExtra("userEmail")
+        val currentUserGender=intent.getStringExtra("userGender")
+
+        if (currentUserGender.equals("남성")) {
+            binding.userImageView.setImageResource(R.drawable.male)
+        } else {
+            binding.userImageView.setImageResource(R.drawable.female)
+        }
+
+        binding.userNameTextView.text=currentUserName
+        binding.userEmailTextView.text=currentUserEmail
+
+
         binding.passWordChangeCardView.setOnClickListener {
             val intent= Intent(this,PasswordChangeActivity::class.java)
             startActivity(intent)

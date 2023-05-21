@@ -8,9 +8,15 @@ import android.widget.*
 import androidx.core.view.*
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityMakeCourseBinding
+import com.example.whattodo.datas.Store
+import com.example.whattodo.datas.StoreList
+import com.example.whattodo.network.RetrofitAPI
 import com.google.android.material.chip.Chip
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-const val TAG = "MakeCourseActivity"
+private const val TAG = "MakeCourseActivity"
 
 class MakeCourseActivity : AppCompatActivity() {
 
@@ -57,6 +63,7 @@ class MakeCourseActivity : AppCompatActivity() {
             }
         }
 
+        // 스피너 선택 부분에서 객체 초기화 해야할 듯 싶다
        /* val courseInput = CourseDto(
             binding.numPeople.text.toString().toInt(), null,
             binding.startTime.text.toString().toInt(),
@@ -67,10 +74,29 @@ class MakeCourseActivity : AppCompatActivity() {
             userGoalList,
         )*/
 
+        /* 서버 통신 부분 */
         binding.courseMakeBtn.setOnClickListener {
-            val intent=Intent(this, CourseListShowActivity::class.java)
-//            intent.putExtra("courseInput",courseInput)
-            startActivity(intent)
+            /* 여기서 서버랑 통신하고 받은 response data를 다음 페이지에 넘겨줘야함 */
+            val makeCourseCall=RetrofitAPI.storeService.requestStore().enqueue(object:Callback<StoreList>{
+                override fun onResponse(call: Call<StoreList>, response: Response<StoreList>) {
+                    if  (response.isSuccessful) {
+                        Log.e(TAG,"SUCCESS")
+                        val responseData=response.body()
+                        val intent = Intent(this@MakeCourseActivity, CourseListShowActivity::class.java)
+                        intent.putExtra("response", responseData)
+                        startActivity(intent)
+                    } else {
+                        Log.e(TAG,"CONNECTED BUT NOT SUCCESS")
+                        Log.e(TAG,"${response.body()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<StoreList>, t: Throwable) {
+                    Log.e(TAG,"Error Occur")
+                    t.printStackTrace()
+                }
+
+            })
         }
     }
 
@@ -176,6 +202,8 @@ class MakeCourseActivity : AppCompatActivity() {
         }
     }
 }
+
+
 
 
 

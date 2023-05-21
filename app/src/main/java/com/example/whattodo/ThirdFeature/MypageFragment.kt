@@ -37,18 +37,6 @@ class MypageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMypageBinding.inflate(layoutInflater)
-
-        /* fragment에서 뒤로가기 눌렀을때 home 으로 이동 */
-        val onBackPressedCallback=object: OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                val viewPager=requireActivity().findViewById<ViewPager2>(R.id.viewpager)
-                viewPager.setCurrentItem(0,true)
-
-            }
-        }
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,onBackPressedCallback
-        )
         return binding.root
     }
 
@@ -58,10 +46,24 @@ class MypageFragment : Fragment() {
         /*회원 이름 가져오기*/
         val sharedPreferences =
             requireActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
-        binding.userId.text = sharedPreferences.getString(ID, null).toString()
+        val currentUserName=sharedPreferences.getString(ID, null).toString()
+        binding.userId.text=currentUserName
+        val currentUserEmail=sharedPreferences.getString(EMAIL,null).toString()
+        val currentUserGender=sharedPreferences.getString(GENDER,null).toString()
+
+        if (sharedPreferences.getString(GENDER,null).toString().equals("남성")) {
+            binding.userImageView.setImageResource(R.drawable.male)
+        } else {
+            binding.userImageView.setImageResource(R.drawable.female)
+        }
+
+
 
         binding.userInfoChangeLayer.setOnClickListener {
             val intent = Intent(context, ChangeUserInfoActivity::class.java)
+            intent.putExtra("username",currentUserName)
+            intent.putExtra("userEmail",currentUserEmail)
+            intent.putExtra("userGender",currentUserGender)
             startActivity(intent)
         }
 
@@ -131,6 +133,7 @@ class MypageFragment : Fragment() {
             }
         }
 
+        /* 로그아웃 부분 */
         binding.logoutText.setOnClickListener {
             val intent = Intent(activity, MainActivity::class.java)
             intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
@@ -139,8 +142,6 @@ class MypageFragment : Fragment() {
             startActivity(intent)
         }
     }
-
-
 }
 
 
