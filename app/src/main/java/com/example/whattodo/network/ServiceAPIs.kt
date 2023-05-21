@@ -6,6 +6,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 /* 스프링 컨트롤러만봐라 바깥에 /member 박혀있으니 앞에 무조건 쓰기 */
 interface idCheckAPI {
@@ -34,7 +35,7 @@ interface loginAPI {
 
 interface ChangePassAPI {
     @POST("/member/changePW")
-    fun change(@Body user:User) : Call<User>
+    fun change(@Body user:User, @Query("password") password:String) : Call<User>
 }
 
 interface withDrawAPI {

@@ -14,6 +14,7 @@ import com.example.whattodo.SecondFeature.CourseFragment
 import com.example.whattodo.ThirdFeature.MypageFragment
 import com.example.whattodo.databinding.ActivityMainInfoBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.naver.maps.map.util.FusedLocationSource
 
 private const val TAG = "MainInfoActivity"
 
@@ -23,6 +24,8 @@ class MainInfoActivity : AppCompatActivity() {
     var fatigue = 0
     private var dialog: AlertDialog? = null
     private var initTime:Long=0L
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +79,10 @@ class MainInfoActivity : AppCompatActivity() {
         } else {
             binding.viewpager.setCurrentItem(0,true)
         }
+    }
+
+    private fun getLocation() {
+
     }
 
 }
