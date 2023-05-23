@@ -20,11 +20,11 @@ data class Store (
     @SerializedName("y")
     val y: Double,
     @SerializedName("cost")
-    val cost:String,
+    val cost:String?,
     @SerializedName("imgUrl")
-    val imgUrl:String,
+    val imgUrl:String?,
     @SerializedName("phoneNumber")
-    val phone: String,
+    val phone: String?,
 
 //    @SerializedName("categoryGroupName")
 //    val categoryGroupName: String,
@@ -42,10 +42,7 @@ data class Store (
 //    val finishTime: Double,
         ) : Parcelable
 
-@Parcelize
-data class StoreList(
-    val storeList:List<Store>
-) : Parcelable
+
 
 
 

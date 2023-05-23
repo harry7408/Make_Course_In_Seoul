@@ -104,6 +104,7 @@ class MainActivity : AppCompatActivity() {
                         startActivity(intent)
                     } else {
                         Log.e(TAG, "Failure")
+                        Log.e (TAG,"${response.body()}")
                     }
                 }
 

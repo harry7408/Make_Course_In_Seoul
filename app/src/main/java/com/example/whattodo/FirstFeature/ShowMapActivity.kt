@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityShowMapBinding
 import com.example.whattodo.datas.PlaceCategory
-import com.example.whattodo.datas.StoreList
 import com.example.whattodo.network.RetrofitAPI
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED

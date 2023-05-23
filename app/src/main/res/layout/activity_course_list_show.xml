@@ -20,7 +20,7 @@
 
     <include
         android:id="@+id/bottomSheetLayout"
-        layout="@layout/map_bottom_sheet"/>
+        layout="@layout/course_bottom_sheet"/>
 
 
 

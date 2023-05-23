@@ -53,7 +53,7 @@ interface withDrawAPI {
 /* 가게 테스트로 가게 데이터 받아오는 용도로 만든 api*/
 interface storeAPI {
     @POST("/makeCourse/test")
-    fun requestStore():Call<StoreList>
+    fun requestStore():Call<List<Store>>
 }
 
 
