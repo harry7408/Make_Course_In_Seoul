@@ -36,9 +36,10 @@ class FriendListAdapter:RecyclerView.Adapter<FriendListAdapter.FriendListViewHol
             }
             binding.textView.text=user.memberName
         }
+
     }
 
-    fun getFriend(dataSet: MutableList<User>) {
+    fun setData(dataSet: MutableList<User>) {
         this.friends= dataSet
         notifyDataSetChanged()
     }

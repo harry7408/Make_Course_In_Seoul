@@ -56,5 +56,10 @@ interface storeAPI {
     fun requestStore():Call<List<Store>>
 }
 
+interface addFriendAPI {
+    @POST("")
+    fun addFriend(@Body userId:String):Call<User>
+}
+
 
 

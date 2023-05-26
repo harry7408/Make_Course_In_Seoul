@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.whattodo.databinding.ItemCourseBinding
 import com.example.whattodo.databinding.ItemGetBinding
 import com.example.whattodo.datas.Store
+import net.daum.android.map.coord.MapCoord
 import net.daum.android.map.coord.MapCoordLatLng
 
-class MapGetAdapter(private val onClick: (MapCoordLatLng)->Unit):RecyclerView.Adapter<MapGetAdapter.MapGetViewHolder>() {
+class MapGetAdapter(private val onClick: (MapCoord)->Unit):RecyclerView.Adapter<MapGetAdapter.MapGetViewHolder>() {
     private var dataSet= emptyList<Store>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapGetViewHolder {
@@ -34,7 +35,7 @@ class MapGetAdapter(private val onClick: (MapCoordLatLng)->Unit):RecyclerView.Ad
                 binding.storePhoneTextView.text=store.phone
 
                 binding.root.setOnClickListener {
-                    onClick(MapCoordLatLng(store.x.toDouble(),store.y.toDouble()))
+                    onClick(MapCoord(store.x.toDouble(),store.y.toDouble()))
                 }
             }
     }

@@ -3,35 +3,50 @@ package com.example.whattodo.FirstFeature
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.method.Touch.scrollTo
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.whattodo.R
+import com.example.whattodo.SecondFeature.CourseListAdapter
 import com.example.whattodo.databinding.ActivityShowMapBinding
 import com.example.whattodo.datas.PlaceCategory
+import com.example.whattodo.datas.Store
 import com.example.whattodo.network.RetrofitAPI
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_COLLAPSED
 import com.google.android.material.chip.Chip
+import net.daum.android.map.coord.MapCoord
 import net.daum.android.map.coord.MapCoordLatLng
+import net.daum.mf.map.api.CameraUpdate
+import net.daum.mf.map.api.CameraUpdateFactory
+import net.daum.mf.map.api.MapPOIItem
+import net.daum.mf.map.api.MapPOIItem.MarkerType
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapPoint.PlainCoordinate
+import net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord
 import net.daum.mf.map.api.MapView
+import org.jetbrains.annotations.Contract
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-const private val TAG="ShowMapActivity"
+private const val TAG = "ShowMapActivity"
+
 class ShowMapActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityShowMapBinding
-
-
-    private val dList = mutableListOf<String>()
-
-    private val mapGetAdapter=MapGetAdapter {
+    private var mapAdapter = MapGetAdapter {
         collapseBottomSheet()
-
+        moveCamera(it, 7)
     }
+    var mapView = MapView(this)
+    private val dList = mutableListOf<String>()
+    private lateinit var serverOutput: List<Store>
+    private var marker = MapPOIItem()
+    private var mapFlag = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,59 +55,88 @@ class ShowMapActivity : AppCompatActivity() {
         setTheme(com.google.android.material.R.style.Theme_MaterialComponents_Light)
         val categoryC = intent.getStringExtra("selected").toString()
 
-        binding.mapView.onCreate(savedInstanceState)
-
+        val mapcontainer=findViewById<ViewGroup>(R.id.mapView)
+        mapcontainer.addView(mapView)
         initCategoryD(categoryC)
         categoryChips()
 
-
+        binding.bottomSheetLayout.storeListRecyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = mapAdapter
+        }
 
 
         /* 여기 안에 서버랑 통신하는 부분 넣어야 할 듯*/
         binding.categoryChipGroup.setOnCheckedStateChangeListener { _, _ ->
-            val chip=findViewById<Chip>(binding.categoryChipGroup.checkedChipId)
-            val categoryD=chip.text.toString()
-            Log.e(TAG,"$categoryC - $categoryD")
+            val chip = findViewById<Chip>(binding.categoryChipGroup.checkedChipId)
+            val categoryD = chip.text.toString()
+            Log.e(TAG, "$categoryC - $categoryD")
 
-            val serverRequestData=PlaceCategory(categoryC,categoryD)
+            val serverRequestData = PlaceCategory(categoryC, categoryD)
 
 
-//            RetrofitAPI.storeService.requestStore(serverRequestData).enqueue(object: Callback<StoreList>{
-//                override fun onResponse(call: Call<StoreList>, response: Response<StoreList>) {
-//                    val responseData=response.body()?.storeList.orEmpty()
-//
-//                    if (responseData.isEmpty()) {
-//                        Toast.makeText(this@ShowMapActivity,"검색 결과가 없습니다",Toast.LENGTH_SHORT).show()
-//                        return
-//                    } else {
-////                        markers=responseData.map {
-////                            PlainCoordinate(it.x.toDouble(),it.y.toDouble())
-////                        }
-//                    }
-////                    mapGetAdapter.setData(responseData)
-////                    moveCamera(markers.first())
-//
-//                }
-//
-//                override fun onFailure(call: Call<StoreList>, t: Throwable) {
-//                    t.printStackTrace()
-//                }
-//            })
+            RetrofitAPI.storeService.requestStore(/*serverRequestData*/)
+                .enqueue(object : Callback<List<Store>> {
+                    override fun onResponse(
+                        call: Call<List<Store>>,
+                        response: Response<List<Store>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val responseData = response.body() ?: emptyList()
+                            if (mapFlag.not()) {
+                                Toast.makeText(applicationContext, "오류가 발생했습니다", Toast.LENGTH_SHORT)
+                                    .show()
+                            } else if (responseData.isEmpty()) {
+                                Toast.makeText(
+                                    applicationContext,
+                                    "장소 정보가 없습니다",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            serverOutput = responseData
+                            mapAdapter.setData(serverOutput)
+                            serverOutput.map {
+                                marker.apply {
+                                    itemName = it.placeName
+                                    mapPoint = mapPointWithGeoCoord(it.x, it.y)
+                                    markerType = MapPOIItem.MarkerType.BluePin
+                                }
+                                mapView.addPOIItem(marker)
+                            }
+                        } else {
+                            Log.e(TAG, "NULL값 넘어옴")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<Store>>, t: Throwable) {
+                        Log.e(TAG, "통신실패")
+                        t.printStackTrace()
+                    }
+                })
         }
     }
 
     private fun collapseBottomSheet() {
-        val bottomSheet=BottomSheetBehavior.from(binding.bottomSheetLayout.root)
-        bottomSheet.state=STATE_COLLAPSED
+        val bottomSheet = BottomSheetBehavior.from(binding.bottomSheetLayout.root)
+        bottomSheet.state = STATE_COLLAPSED
     }
 
-    /*private fun moveCamera(position: MapCoordLatLng, zoomLevel:Double) {
 
-    }*/
+    private fun moveCamera(position: MapCoord, zoomLevel: Int) {
+        if (mapFlag.not()) return
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(position.x, position.y), true)
+        mapView.setZoomLevel(zoomLevel, true)
 
-    override fun onStart() {
-        super.onStart()
-        binding.mapView.onStart()
+        val mapPoint = MapPoint.mapPointWithGeoCoord(position.x, position.y)
+        val cameraUpdate = CameraUpdateFactory.newMapPoint(mapPoint)
+
+        mapView.moveCamera(cameraUpdate)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.mapView.onResume()
+        mapFlag = true
     }
 
     override fun onPause() {
@@ -102,30 +146,8 @@ class ShowMapActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.mapView.onDestroy()
+        binding.mapView.onSurfaceDestroyed()
     }
-
-    override fun onResume() {
-        super.onResume()
-        binding.mapView.onResume()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        dList.clear()
-        binding.mapView.onStop()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        binding.mapView.onSaveInstanceState(outState)
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        binding.mapView.onLowMemory()
-    }
-
 
     /* 필수장소 선택 chip 내용 초기화 하는 부분 */
     private fun categoryChips() {
@@ -145,8 +167,6 @@ class ShowMapActivity : AppCompatActivity() {
         }
         return chip
     }
-
-
 
     private fun initCategoryD(txt: String) {
         when (txt) {

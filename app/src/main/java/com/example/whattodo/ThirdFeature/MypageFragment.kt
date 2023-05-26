@@ -73,7 +73,7 @@ class MypageFragment : Fragment() {
         }
 
         binding.historyCardView.setOnClickListener {
-//            val intent=Intent(context,)
+        /* 서버랑 통신해서 저장된 히스토리를 다음으로 넘겨서 리사이클러뷰로 띄워야할 듯?*/
         }
 
         binding.deleteCardView.setOnClickListener {

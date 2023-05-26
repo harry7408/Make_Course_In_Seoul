@@ -14,7 +14,7 @@ import com.example.whattodo.SecondFeature.CourseFragment
 import com.example.whattodo.ThirdFeature.MypageFragment
 import com.example.whattodo.databinding.ActivityMainInfoBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import com.naver.maps.map.util.FusedLocationSource
+
 
 private const val TAG = "MainInfoActivity"
 
