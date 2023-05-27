@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.Touch.scrollTo
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +42,6 @@ class ShowMapActivity : AppCompatActivity() {
         collapseBottomSheet()
         moveCamera(it, 7)
     }
-    var mapView = MapView(this)
     private val dList = mutableListOf<String>()
     private lateinit var serverOutput: List<Store>
     private var marker = MapPOIItem()
@@ -54,9 +54,11 @@ class ShowMapActivity : AppCompatActivity() {
         setContentView(binding.root)
         setTheme(com.google.android.material.R.style.Theme_MaterialComponents_Light)
         val categoryC = intent.getStringExtra("selected").toString()
+        /* 필요 없는 부분인듯*/
+//        val mapView=MapView(this)
+//        val mapContainer=findViewById<ViewGroup>(R.id.mapView)
+//        mapContainer.addView(mapView)
 
-        val mapcontainer=findViewById<ViewGroup>(R.id.mapView)
-        mapcontainer.addView(mapView)
         initCategoryD(categoryC)
         categoryChips()
 
@@ -101,7 +103,7 @@ class ShowMapActivity : AppCompatActivity() {
                                     mapPoint = mapPointWithGeoCoord(it.x, it.y)
                                     markerType = MapPOIItem.MarkerType.BluePin
                                 }
-                                mapView.addPOIItem(marker)
+                                binding.mapView.addPOIItem(marker)
                             }
                         } else {
                             Log.e(TAG, "NULL값 넘어옴")
@@ -124,13 +126,13 @@ class ShowMapActivity : AppCompatActivity() {
 
     private fun moveCamera(position: MapCoord, zoomLevel: Int) {
         if (mapFlag.not()) return
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(position.x, position.y), true)
-        mapView.setZoomLevel(zoomLevel, true)
+        binding.mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(position.x, position.y), true)
+        binding.mapView.setZoomLevel(zoomLevel, true)
 
         val mapPoint = MapPoint.mapPointWithGeoCoord(position.x, position.y)
         val cameraUpdate = CameraUpdateFactory.newMapPoint(mapPoint)
 
-        mapView.moveCamera(cameraUpdate)
+        binding.mapView.moveCamera(cameraUpdate)
     }
 
     override fun onResume() {

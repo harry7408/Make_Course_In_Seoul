@@ -139,5 +139,4 @@ class FindIdFragment : Fragment() {
     private fun checkFlag() {
         binding.findButton.isEnabled = nameFlag && emailFlag && birthFlag && genderFlag
     }
-
 }

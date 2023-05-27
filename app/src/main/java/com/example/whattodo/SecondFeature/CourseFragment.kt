@@ -31,9 +31,6 @@ class CourseFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
     }
-
-
-
     override fun onStart() {
         super.onStart()
         val intent = Intent(activity, MakeCourseActivity::class.java)
