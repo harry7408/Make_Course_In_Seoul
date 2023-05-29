@@ -3,6 +3,7 @@ package com.example.whattodo.FirstFeature
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
@@ -60,7 +61,7 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
         binding.categoryRecyclerView.apply {
             adapter = categoryAdapter
             categoryAdapter.notifyDataSetChanged()
-            layoutManager = GridLayoutManager(context, 3)
+            layoutManager = GridLayoutManager(context, 5)
         }
     }
 
@@ -74,26 +75,24 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
     private fun initCategoryList() {
         categoryList.add(0, Category(R.drawable.sports, "스포츠"))
         categoryList.add(1, Category(R.drawable.nature, "자연"))
-        categoryList.add(2, Category(R.drawable.activity, "액티비티"))
+        categoryList.add(2, Category(R.drawable.activity, "어트랙션"))
         categoryList.add(3, Category(R.drawable.alone, "1인가능"))
         categoryList.add(4, Category(R.drawable.many, "여러명"))
-        categoryList.add(5, Category(R.drawable.cook, "요리&베이킹"))
-        categoryList.add(6, Category(R.drawable.flower, "식물"))
-        categoryList.add(7, Category(R.drawable.makeup, "메이크업"))
-        categoryList.add(8, Category(R.drawable.dado, "다도"))
-        categoryList.add(9, Category(R.drawable.art, "미술"))
-        categoryList.add(10, Category(R.drawable.handmade, "핸드메이드"))
-        categoryList.add(11, Category(R.drawable.show, "관람"))
-        categoryList.add(12, Category(R.drawable.besttrip, "관광명소"))
-        categoryList.add(13, Category(R.drawable.themaroad, "테마거리"))
-        categoryList.add(14, Category(R.drawable.scene, "풍경"))
-        categoryList.add(15, Category(R.drawable.relax, "휴식"))
-        categoryList.add(16, Category(R.drawable.shopping, "쇼핑"))
-        categoryList.add(17, Category(R.drawable.cafe, "테마카페"))
-        categoryList.add(18, Category(R.drawable.alchol, "음주"))
-        categoryList.add(19, Category(R.drawable.gallery, "전시시설"))
-        categoryList.add(20, Category(R.drawable.concert, "공연시설"))
+        categoryList.add(5, Category(R.drawable.level1, "Level1"))
+        categoryList.add(6, Category(R.drawable.level2, "Level2"))
+        categoryList.add(7, Category(R.drawable.level3, "Level3"))
+        categoryList.add(8, Category(R.drawable.show, "관람"))
+        categoryList.add(9, Category(R.drawable.besttrip, "관광"))
+        categoryList.add(10, Category(R.drawable.scene, "풍경"))
+        categoryList.add(11, Category(R.drawable.themaroad, "테마거리"))
+        categoryList.add(12, Category(R.drawable.relax, "휴식"))
+        categoryList.add(13, Category(R.drawable.shopping, "쇼핑"))
+        categoryList.add(14, Category(R.drawable.cafe, "테마카페"))
+        categoryList.add(15, Category(R.drawable.alchol, "음주"))
+        categoryList.add(16, Category(R.drawable.gallery, "전시시설"))
+        categoryList.add(17, Category(R.drawable.concert, "공연시설"))
     }
+
 }
 
 

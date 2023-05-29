@@ -44,6 +44,7 @@ class ChangeUserInfoActivity : AppCompatActivity() {
 
         binding.surveyChangeCardView.setOnClickListener {
             val intent=Intent(this,FirstSurveyActivity::class.java)
+            intent.putExtra("reSurvey",true)
             startActivity(intent)
         }
     }

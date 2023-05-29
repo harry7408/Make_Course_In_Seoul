@@ -24,6 +24,8 @@ data class Course(
     val mealFlag: Boolean,
     @SerializedName("wantedCategory")
     val essentialPlace: String?,
+    @SerializedName("categoryC")
+    val categoryC:String,
     @SerializedName("courseKeywords")
     val keywords: List<Int>,
     @SerializedName("goals")

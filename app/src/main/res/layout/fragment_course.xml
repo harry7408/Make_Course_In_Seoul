@@ -30,7 +30,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView1"
         style="@style/card_view_style"
-        app:cardBackgroundColor="#2196F3">
+        app:cardBackgroundColor="#79E0EE">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -75,7 +75,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
         style="@style/card_view_style"
-        app:cardBackgroundColor="@color/purple_200">
+        app:cardBackgroundColor="#98EECC">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -119,7 +119,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         style="@style/card_view_style"
-        app:cardBackgroundColor="@color/light_purple">
+        app:cardBackgroundColor="#D0F5BE">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -163,7 +163,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
         style="@style/card_view_style"
-        app:cardBackgroundColor="@color/gray">
+        app:cardBackgroundColor="#FBFFDC">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

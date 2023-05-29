@@ -40,17 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:id="@+id/storeCostTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/storeImageView"
-        app:layout_constraintStart_toEndOf="@+id/storeAddressTextView"
-        android:layout_marginStart="20sp"
-        tools:text="비용" />
 
     <TextView
-        android:id="@+id/storePhoneTextView"
+        android:id="@+id/storeCategoryNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

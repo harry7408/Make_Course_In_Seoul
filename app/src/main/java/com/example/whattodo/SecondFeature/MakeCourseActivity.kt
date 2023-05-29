@@ -12,6 +12,7 @@ import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityMakeCourseBinding
 import com.example.whattodo.databinding.DialogEndTimeSettingBinding
 import com.example.whattodo.databinding.DialogStartTimeSettingBinding
+import com.example.whattodo.datas.Course
 import com.example.whattodo.datas.Store
 
 
@@ -26,8 +27,6 @@ private const val TAG = "MakeCourseActivity"
 class MakeCourseActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMakeCourseBinding
-    private var keywords = mutableListOf<String>()
-    private var userGoal = mutableListOf<String>()
     private val userKeywordList = mutableListOf<Int>(0, 0, 0, 0, 0, 0)
     private val userGoalList = mutableListOf<Int>(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     private val suggestList = listOf<String>("놀기", "체험", "관계", "관람")
@@ -35,6 +34,8 @@ class MakeCourseActivity : AppCompatActivity() {
         listOf<String>("산책", "음주", "체험", "힐링", "관람", "지적", "경치", "일반", "운동", "솔로")
     private var startTimeValue: Int = 0
     private var endTimeValue: Int = 0
+    private lateinit var categoryC:String
+    private lateinit var courseInput : Course
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -57,9 +58,8 @@ class MakeCourseActivity : AppCompatActivity() {
         checkMenu(placeFlag)
         limitCheckCount()
 
-        /* 키워드 int 값으로 전달 위해 체크하면 1 아니면 0 */
-        initKeywords()
 
+        /* 목적 초기화 부분 만들어야함 */
 //        initGoals()
 
         binding.chipGroup1.setOnCheckedStateChangeListener { _, _ ->
@@ -71,17 +71,6 @@ class MakeCourseActivity : AppCompatActivity() {
             }
         }
 
-        // 스피너 선택 부분에서 객체 초기화 해야할 듯 싶다
-        /* val courseInput = CourseDto(
-             binding.numPeople.text.toString().toInt(), null,
-             binding.startTime.text.toString().toInt(),
-             binding.endTime.text.toString().toInt(),
-             mealFlag,
-             if (placeFlag) binding.categoryListSpinner.selectedItem.toString() else null,
-             userKeywordList,
-             userGoalList,
-         )*/
-
         binding.startTimeTextView.setOnClickListener {
             initStartTime()
         }
@@ -92,6 +81,17 @@ class MakeCourseActivity : AppCompatActivity() {
 
         /* 서버 통신 부분 */
         binding.courseMakeBtn.setOnClickListener {
+            initUserGoalList()
+            /*courseInput=Course(
+                    binding.numPeopleTextView.text.toString().toInt(),null,
+                    binding.startTimeTextView.text.toString().toInt(),
+                    binding.endTimeTextView.text.toString().toInt(),
+                    mealFlag,
+                if (placeFlag) binding.categoryListSpinner.selectedItem.toString() else null,
+                    initCategoryC(binding.categoryListSpinner.selectedItem.toString()),
+                    userGoalList
+                )*/
+
             /* 여기서 서버랑 통신하고 받은 response data를 다음 페이지에 넘겨줘야함 */
             val makeCourseCall =
                 RetrofitAPI.storeService.requestStore().enqueue(object : Callback<List<Store>> {
@@ -166,7 +166,7 @@ class MakeCourseActivity : AppCompatActivity() {
             with(dialogBinding.startTimePicker) {
                 displayedValues = resources.getStringArray(R.array.StartTimeSpinner)
                 minValue = 6
-                maxValue = 28
+                maxValue = 27
             }
 
             setView(dialogBinding.root)
@@ -250,74 +250,80 @@ class MakeCourseActivity : AppCompatActivity() {
                     }
                     "16" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(11, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(11, 23)
                         minValue = 17
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "17" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(12, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(12, 23)
                         minValue = 18
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "18" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(13, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(13, 23)
                         minValue = 19
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "19" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(14, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(14, 23)
                         minValue = 20
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "20" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(15, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(15, 23)
                         minValue = 21
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "21" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(16, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(16, 23)
                         minValue = 22
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "22" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(17, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(17, 23)
                         minValue = 23
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "23" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(18, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(18, 23)
                         minValue = 24
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "00" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(19, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(19, 23)
                         minValue = 25
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "01" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(20, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(20, 23)
                         minValue = 26
-                        maxValue = 27
+                        maxValue = 28
                     }
                     "02" -> {
                         displayedValues =
-                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(21, 22)
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(21, 23)
                         minValue = 27
-                        maxValue = 27
+                        maxValue = 28
+                    }
+                    "03"-> {
+                        displayedValues =
+                            resources.getStringArray(R.array.StartTimeSpinner).copyOfRange(22, 23)
+                        minValue = 28
+                        maxValue = 28
                     }
                 }
             }
             setView(dialogBinding.root)
-            setTitle("시작시간 설정")
+            setTitle("종료시간 설정")
             setPositiveButton("Ok") { _, _ ->
                 endTimeValue = dialogBinding.endTimePicker.value
                 if (endTimeValue >= 24)
@@ -328,60 +334,7 @@ class MakeCourseActivity : AppCompatActivity() {
         }.show()
     }
 
-
-/* 시간설정 스피너로 쓸때 사용 */
-/*private fun initStartTimeSpinner(resourceId: Int) {
-    binding.startTimeSpinner.adapter=ArrayAdapter.createFromResource(
-        this,resourceId,
-        android.R.layout.simple_list_item_1
-    )
-}*/
-
-
-    /* 사용자 키워드 값 조정 부분*/
-    private fun initKeywords() {
-        binding.radioGroup1.setOnCheckedChangeListener { _, checkId ->
-            when (checkId) {
-                R.id.exoticHigh -> {
-                    userKeywordList[0] = 1
-                    userKeywordList[1] = 0
-                }
-                R.id.exoticLow -> {
-                    userKeywordList[1] = 1
-                    userKeywordList[0] = 0
-                }
-            }
-            Log.d(TAG, "${userKeywordList[0]}, ${userKeywordList[1]}")
-        }
-        binding.radioGroup2.setOnCheckedChangeListener { _, checkId ->
-            when (checkId) {
-                R.id.hpHigh -> {
-                    userKeywordList[2] = 1
-                    userKeywordList[3] = 0
-                }
-                R.id.hpLow -> {
-                    userKeywordList[3] = 1
-                    userKeywordList[2] = 0
-                }
-            }
-            Log.d(TAG, "${userKeywordList[2]}, ${userKeywordList[3]}")
-
-        }
-        binding.radioGroup3.setOnCheckedChangeListener { _, checkId ->
-            when (checkId) {
-                R.id.activeHigh -> {
-                    userKeywordList[4] = 1
-                    userKeywordList[5] = 0
-                }
-                R.id.activeLow -> {
-                    userKeywordList[5] = 1
-                    userKeywordList[4] = 0
-                }
-            }
-            Log.d(TAG, "${userKeywordList[4]}, ${userKeywordList[5]}")
-        }
-    }
-
+    /* 목적 갯수 3개로 제한*/
     private fun limitCheckCount() {
         val maxCheck = 3
         var checkedCount = 0
@@ -402,6 +355,48 @@ class MakeCourseActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun initUserGoalList() {
+        if (binding.checkbox1.isChecked) userGoalList[0]=1 else userGoalList[0]=0
+        if (binding.checkbox2.isChecked) userGoalList[1]=1 else userGoalList[1]=0
+        if (binding.checkbox3.isChecked) userGoalList[2]=1 else userGoalList[2]=0
+        if (binding.checkbox4.isChecked) userGoalList[3]=1 else userGoalList[3]=0
+        if (binding.checkbox5.isChecked) userGoalList[4]=1 else userGoalList[4]=0
+        if (binding.checkbox6.isChecked) userGoalList[5]=1 else userGoalList[5]=0
+        if (binding.checkbox7.isChecked) userGoalList[6]=1 else userGoalList[6]=0
+        if (binding.checkbox8.isChecked) userGoalList[7]=1 else userGoalList[7]=0
+        if (binding.checkbox9.isChecked) userGoalList[8]=1 else userGoalList[8]=0
+        if (binding.checkbox10.isChecked) userGoalList[9]=1 else userGoalList[9]=0
+    }
+
+    private fun initCategoryC(categoryD: String?):String {
+        return when(categoryD) {
+            "수상스포츠","클라이밍","수영장","스킨스쿠버","스케이트장",
+            "탁구","볼링","사격&궁도","스크린야구","스크린골프"->"스포츠"
+            "산","계곡"->"자연"
+            "테마파크","워터테마파크","눈썰매장"->"어트랙션"
+            "오락실","실내낚시","만화카페"->"1인가능"
+            "VR","방탈출카페","보드게임카페" -> "다수"
+            "터프팅","캔들&향수&비누","식물","켈리그라피","포장",
+                "미니어처","뜨개질" -> "Level1"
+            "미술","금속&유리","라탄","가죽" -> "Level2"
+            "요리","목공","도자기" -> "Level3"
+            "동물원","식물원"->"관람"
+            "궁","전망대","관광&명소","고개","광장","촬영지","케이블카"->"관광"
+            "폭포","하천","공원","숲","호수"->"풍경"
+            "테마거리","카페거리"->"테마거리"
+            "룸카페&멀티방","파티룸","스파"->"휴식"
+            "백화점"->"쇼핑"
+            "갤러리카페","고양이카페","디저트카페","뮤직카페","북카페",
+                "타로&사주&상담카페","플라워카페","한옥카페","슬라임카페",
+                "피로회복카페","드로잉카페" -> "테마카페"
+            "실내포장마차","와인바","일본식주점","칵테일바",
+                "호프&요리주점"->"음주"
+            "아쿠아리움","미술관","전시관"->"전시시설"
+            "공연장&연극극장","영화관"->"공연시설"
+            else -> ({ null }).toString()
         }
     }
 }

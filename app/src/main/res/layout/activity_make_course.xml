@@ -27,7 +27,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
     <TextView
-        android:id="@+id/numPeople"
+        android:id="@+id/numPeopleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00"
@@ -42,8 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="명"
-        app:layout_constraintBaseline_toBottomOf="@id/numPeople"
-        app:layout_constraintStart_toEndOf="@+id/numPeople" />
+        app:layout_constraintBaseline_toBottomOf="@id/numPeopleTextView"
+        app:layout_constraintStart_toEndOf="@+id/numPeopleTextView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -102,98 +102,6 @@
         app:layout_constraintBaseline_toBottomOf="@id/endTimeTextView"
         app:layout_constraintStart_toEndOf="@+id/endTimeTextView" />
 
-    <TextView
-        android:id="@+id/keyWordText"
-        style="@style/Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="키워드"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/TimeText" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:text="* 최소 1개"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/keyWordText" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup1"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="@id/keyWordText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toTopOf="@id/keyWordText">
-
-        <RadioButton
-            android:id="@+id/exoticHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이색" />
-
-        <RadioButton
-            android:id="@+id/exoticLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="일상" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup3"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup2">
-
-        <RadioButton
-            android:id="@+id/activeHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="동적" />
-
-        <RadioButton
-            android:id="@+id/activeLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:text="정적" />
-    </RadioGroup>
-
-    <RadioGroup
-        android:id="@+id/radioGroup2"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_marginTop="4dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@id/guideline"
-        app:layout_constraintTop_toBottomOf="@id/radioGroup1">
-
-        <RadioButton
-            android:id="@+id/hpHigh"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="고체력" />
-
-        <RadioButton
-            android:id="@+id/hpLow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:text="저체력" />
-    </RadioGroup>
 
     <TextView
         android:id="@+id/goalWordText"
@@ -201,17 +109,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:text="목적"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/keyWordText" />
+        app:layout_constraintTop_toBottomOf="@id/TimeText" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
-        android:text="* 최대 3개"
+        android:text="* 최소 1개 최대 3개"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/goalWordText" />
 
@@ -223,8 +131,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="16dp"
         android:gravity="center"
-        android:columnCount="4"
-        android:rowCount="3"
+        android:columnCount="3"
+        android:rowCount="4"
         app:layout_constraintTop_toTopOf="@id/goalWordText">
 
         <CheckBox
@@ -236,47 +144,47 @@
             android:id="@+id/checkbox2"
             android:layout_column="1"
             android:layout_row="0"
-            android:text="음주"/>
+            android:text="친목도모"/>
         <CheckBox
             android:id="@+id/checkbox3"
             android:layout_column="2"
             android:layout_row="0"
-            android:text="메이킹"/>
+            android:text="분위기좋음"/>
         <CheckBox
             android:id="@+id/checkbox4"
-            android:layout_column="3"
-            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_row="1"
             android:text="힐링"/>
         <CheckBox
             android:id="@+id/checkbox5"
-            android:layout_column="0"
+            android:layout_column="1"
             android:layout_row="1"
-            android:text="관람"/>
+            android:text="음주"/>
         <CheckBox
             android:id="@+id/checkbox6"
-            android:layout_column="1"
-            android:layout_row="1"
-            android:text="사고력"/>
-        <CheckBox
-            android:id="@+id/checkbox7"
             android:layout_column="2"
             android:layout_row="1"
-            android:text="경치"/>
+            android:text="이색"/>
         <CheckBox
-            android:id="@+id/checkbox8"
-            android:layout_column="3"
-            android:layout_row="1"
-            android:text="일반"/>
-        <CheckBox
-            android:id="@+id/checkbox9"
+            android:id="@+id/checkbox7"
             android:layout_column="0"
             android:layout_row="2"
-            android:text="스포츠"/>
+            android:text="활발한"/>
         <CheckBox
-            android:id="@+id/checkbox10"
+            android:id="@+id/checkbox8"
             android:layout_column="1"
             android:layout_row="2"
-            android:text="솔로"/>
+            android:text="일상"/>
+        <CheckBox
+            android:id="@+id/checkbox9"
+            android:layout_column="2"
+            android:layout_row="2"
+            android:text="여름"/>
+        <CheckBox
+            android:id="@+id/checkbox10"
+            android:layout_column="0"
+            android:layout_row="3"
+            android:text="문화생활"/>
     </GridLayout>
 
     <TextView

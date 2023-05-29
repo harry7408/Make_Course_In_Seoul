@@ -11,8 +11,6 @@ data class Store (
     val id:Int,
     @SerializedName("name")
     val placeName: String,
-    @SerializedName("categoryCode")
-    val categoryCode: String,
     @SerializedName("addressName")
     val addressName: String,
     @SerializedName("x")
@@ -26,21 +24,19 @@ data class Store (
     @SerializedName("phoneNumber")
     val phone: String?,
 
-//    @SerializedName("categoryGroupName")
-//    val categoryGroupName: String,
 //    @SerializedName("categoryName")
 //    val categoryName: String,
-//    @SerializedName("roadAddressName")
-//    val roadAddressName: String,
-//    @SerializedName("placeUrl")
-//    val placeUrl: String,
-//    @SerializedName("rate")
-//    val rate: Double,
-//    @SerializedName("startTime")
-//    val startTime: Double,
-//    @SerializedName("finishTime")
-//    val finishTime: Double,
-        ) : Parcelable
+//    @SerializedName("avgRating")
+//    val avgRating: Double,
+//    @SerializedName("ratingNum")
+//    val ratingNum: Int,
+//    @SerializedName("reviewNum")
+//    val reviewNum: Int,
+//    @SerializedName("introduction")
+//    val introduction: String,
+//    @SerializedName("tags")
+//    val tags: String,
+) : Parcelable
 
 
 

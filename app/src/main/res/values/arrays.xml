@@ -3,15 +3,14 @@
     <string-array name="playing">
         <item>수상스포츠</item>
         <item>클라이밍</item>
-        <item>수영장(워터파크 포함)</item>
+        <item>수영장</item>
         <item>스킨스쿠버</item>
         <item>스케이트장</item>
         <item>산</item>
         <item>계곡</item>
-        <item>서바이벌게임</item>
-        <item>테마파크(소형)</item>
+        <item>테마파크</item>
+        <item>워터테마파크</item>
         <item>눈썰매장</item>
-        <item>소형 테마파크</item>
         <item>탁구</item>
         <item>볼링</item>
         <item>사격,궁도</item>
@@ -20,25 +19,40 @@
         <item>오락실</item>
         <item>실내낚시</item>
         <item>만화카페</item>
-        <item>VR게임</item>
+        <item>VR</item>
         <item>방탈출카페</item>
         <item>보드게임카페</item>
     </string-array>
 
     <string-array name="experience">
-        <item>플라워*가드닝</item>
-        <item>테라리움</item>
+        <item>터프팅</item>
+        <item>캔들,향수,비누</item>
+        <item>식물</item>
+        <item>켈리그라피</item>
+        <item>포장</item>
+        <item>미니어쳐</item>
+        <item>뜨개질</item>
+        <item>미술</item>
+        <item>금속,유리</item>
+        <item>라탄</item>
+        <item>가죽</item>
+        <item>요리</item>
+        <item>목공</item>
+        <item>도자기</item>
     </string-array>
 
     <string-array name="relationship">
-        <item>야외 동물원</item>
-        <item>실내 동물원</item>
+        <item>동물원</item>
         <item>식물원</item>
         <item>궁</item>
         <item>전망대</item>
         <item>관광,명소</item>
-        <item>테마거리</item>
-        <item>카페거리</item>
+        <item>고개</item>
+        <item>광장</item>
+        <item>촬영지</item>
+        <item>케이블카</item>
+        <item>폭포</item>
+        <item>하천</item>
         <item>공원</item>
         <item>숲</item>
         <item>호수</item>
@@ -46,14 +60,17 @@
         <item>파티룸</item>
         <item>스파</item>
         <item>백화점</item>
-        <item>플라워카페</item>
         <item>갤러리카페</item>
-        <item>슬라임카페</item>
         <item>고양이카페</item>
-        <item>상담카페</item>
-        <item>카페</item>
-        <item>이색카페</item>
+        <item>디저트카페</item>
+        <item>뮤직카페</item>
         <item>북카페</item>
+        <item>타로,사주,상담카페</item>
+        <item>플라워카페</item>
+        <item>한옥카페</item>
+        <item>슬라임카페</item>
+        <item>피로회복카페</item>
+        <item>드로잉카페</item>
         <item>실내포장마차</item>
         <item>와인바</item>
         <item>일본식주점</item>

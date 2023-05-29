@@ -8,8 +8,9 @@ import com.example.whattodo.databinding.ItemGetBinding
 import com.example.whattodo.datas.Store
 import net.daum.android.map.coord.MapCoord
 import net.daum.android.map.coord.MapCoordLatLng
+import net.daum.mf.map.api.MapPoint
 
-class MapGetAdapter(private val onClick: (MapCoord)->Unit):RecyclerView.Adapter<MapGetAdapter.MapGetViewHolder>() {
+class MapGetAdapter(private val onClick: (MapPoint.GeoCoordinate)->Unit):RecyclerView.Adapter<MapGetAdapter.MapGetViewHolder>() {
     private var dataSet= emptyList<Store>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapGetViewHolder {
@@ -32,10 +33,10 @@ class MapGetAdapter(private val onClick: (MapCoord)->Unit):RecyclerView.Adapter<
             fun bind(store: Store) {
                 binding.storeNameTextView.text=store.placeName
                 binding.storeAddressTextView.text=store.addressName
-                binding.storePhoneTextView.text=store.phone
+//                binding.storePhoneTextView.text=store.phone
 
                 binding.root.setOnClickListener {
-                    onClick(MapCoord(store.x.toDouble(),store.y.toDouble()))
+                    onClick(MapPoint.GeoCoordinate(store.y,store.x))
                 }
             }
     }

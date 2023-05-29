@@ -67,6 +67,7 @@ class FirstSurveyActivity : AppCompatActivity() {
                 putExtra("fatigue",fatigue)
                 putExtra("exotic",exotic)
                 putExtra("active",active)
+//                flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
             intent.putExtra("memberInfo1", memberData)
             startActivity(intent)

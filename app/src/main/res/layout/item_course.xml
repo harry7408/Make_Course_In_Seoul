@@ -7,26 +7,38 @@
 
     <ImageView
         android:id="@+id/storeImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
+        android:scaleType="fitXY"
         android:src="@drawable/ic_baseline_no_food_24"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/storeNameTextView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/black"
         android:textSize="25sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
-        tools:text="가게 이름"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/storeImageView"
+        tools:text="가게 이름"
+        android:layout_marginStart="24dp"/>
+
+    <TextView
+        android:id="@+id/storeCategoryNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/storeNameTextView"
+        app:layout_constraintTop_toTopOf="@id/storeNameTextView"
+        app:layout_constraintBottom_toBottomOf="@id/storeNameTextView"
+        android:textSize="16sp"
+        android:layout_marginStart="8dp"
+        tools:text="공연 연극 극장"/>
 
     <TextView
         android:id="@+id/storeAddressTextView"
@@ -34,38 +46,80 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
+        android:textSize="15sp"
         app:layout_constraintStart_toStartOf="@+id/storeNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/storeNameTextView"
         tools:text="서울시 서울시" />
+
+    <ImageView
+        android:id="@+id/avgRatingImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintTop_toBottomOf="@+id/storeAddressTextView"
+        app:layout_constraintStart_toStartOf="@id/storeAddressTextView"
+        android:src="@drawable/star"/>
+
+    <TextView
+        android:id="@+id/avgRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="별점 + (평점숫자)"
+        app:layout_constraintBottom_toBottomOf="@id/avgRatingImageView"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@id/avgRatingImageView"
+        app:layout_constraintTop_toTopOf="@id/avgRatingImageView" />
+
+    <View
+        android:id="@+id/reviewBorderView"
+        android:layout_width="2dp"
+        android:layout_height="14dp"
+        android:background="@color/gray"
+        app:layout_constraintStart_toEndOf="@id/avgRatingTextView"
+        app:layout_constraintTop_toTopOf="@id/avgRatingImageView"
+        app:layout_constraintBottom_toBottomOf="@id/avgRatingImageView"
+        android:layout_marginStart="4dp"/>
+
+    <TextView
+        android:id="@+id/reviewNumTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/reviewBorderView"
+        app:layout_constraintTop_toTopOf="@id/avgRatingImageView"
+        app:layout_constraintBottom_toBottomOf="@id/avgRatingImageView"
+        android:layout_marginStart="4dp"
+        tools:text="리뷰 : 갯수"/>
 
     <TextView
         android:id="@+id/storePhoneTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/storeAddressTextView"
-        app:layout_constraintStart_toEndOf="@+id/storeAddressTextView"
-        app:layout_constraintTop_toTopOf="@+id/storeAddressTextView"
-        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@+id/avgRatingImageView"
+        app:layout_constraintTop_toBottomOf="@+id/avgRatingImageView"
         tools:text="0000000" />
 
+    <ImageView
+        android:id="@+id/tagImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="6dp"
+        android:src="@drawable/tag"
+        app:layout_constraintStart_toStartOf="@+id/storePhoneTextView"
+        app:layout_constraintTop_toBottomOf="@+id/storePhoneTextView" />
+
     <TextView
-        android:id="@+id/storeCostTextView"
+        android:id="@+id/storeTagsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="36dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storeImageView"
-        tools:text="비용부분" />
-
-    <View
-        android:id="@+id/borderView"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/gray"
-        app:layout_constraintTop_toBottomOf="@+id/storePhoneTextView"
-        android:layout_marginTop="4dp"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintStart_toEndOf="@+id/tagImageView"
+        app:layout_constraintTop_toTopOf="@id/tagImageView"
+        app:layout_constraintBottom_toBottomOf="@id/tagImageView"
+        android:layout_marginStart="8dp"
+        tools:text="ddddddd" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
