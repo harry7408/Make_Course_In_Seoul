@@ -2,21 +2,14 @@ package com.example.whattodo.ThirdFeature
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.databinding.DataBindingUtil.setContentView
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityFriendListBinding
 import com.example.whattodo.datas.User
-import com.example.whattodo.network.RetrofitAPI
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 private const val TAG = "FriendListActivity"
@@ -25,7 +18,13 @@ class FriendListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFriendListBinding
     private var friends = mutableListOf<User>()
-    private lateinit var friendAdapter: FriendListAdapter
+    /* 어뎁터 선언 부분 */
+    /*private val friendAdapter = FriendListAdapter(checkBoxClick = {
+        addCourseInput(it)
+    }, imageViewClick = {
+        deleteFriend(it)
+    })*/
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -100,6 +99,16 @@ class FriendListActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.friend_menu, menu)
         return true
     }
+
+
+    private fun addCourseInput(user: User) {
+
+    }
+
+    private fun deleteFriend(user: User) {
+
+    }
+
 }
 
 /* 친구 삭제는 onItemClick 오버라이드 받아서 진행해야할듯*/

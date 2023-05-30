@@ -39,7 +39,7 @@ class PlaceFragmentAdapter(
 
         }
     }
-
+    /* 오버라이드 해야할 인터페이스 함수 */
     interface ItemClickListener {
         fun onClick(category: Category)
     }

@@ -43,6 +43,8 @@ interface withDrawAPI {
     fun delete(@Body user:User):Call<String>
 }
 
+/*여기 위까지는 제대로 동작하는 것 확인 완료 */
+
 // 코스 제작할 때 보낼 데이터 api
 /*interface courseAPI {
     @POST("/makeCourse/test")
@@ -59,6 +61,11 @@ interface storeAPI {
 interface addFriendAPI {
     @POST("")
     fun addFriend(@Body userId:String):Call<User>
+}
+
+interface deleteFriendAPI {
+    @POST("")
+    fun deleteFriend(@Body userId:String):Call<String>
 }
 
 

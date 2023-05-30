@@ -44,7 +44,7 @@ class ShowMapActivity : AppCompatActivity() {
     }
     private val dList = mutableListOf<String>()
     private lateinit var serverOutput: List<Store>
-    private var marker = MapPOIItem()
+    private var markers = ArrayList<MapPOIItem>()
     private var mapFlag = false
     private lateinit var categoryD:String
 
@@ -54,11 +54,8 @@ class ShowMapActivity : AppCompatActivity() {
         binding = ActivityShowMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setTheme(com.google.android.material.R.style.Theme_MaterialComponents_Light)
+        /* 이전 프래그먼트에서 누른 카테고리 이름 */
         val categoryC = intent.getStringExtra("selected").toString()
-        /* 필요 없는 부분인듯*/
-//        val mapView=MapView(this)
-//        val mapContainer=findViewById<ViewGroup>(R.id.mapView)
-//        mapContainer.addView(mapView)
 
         initCategoryD(categoryC)
         categoryChips()
@@ -67,8 +64,11 @@ class ShowMapActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(context)
             adapter = mapAdapter
         }
+
+        /* 지도의 처음 위치 설정 */
         binding.mapView.setMapCenterPoint(
             MapPoint.mapPointWithGeoCoord(
+                /* 서울시청 좌표 */
                 37.566826,126.9786567
             ), true
         )
@@ -103,22 +103,24 @@ class ShowMapActivity : AppCompatActivity() {
                                 ).show()
                             }
                             serverOutput = responseData
+                            /* 데이터 연결 부분 */
                             mapAdapter.setData(serverOutput)
-                            serverOutput.map {
-//                                val markerImage=initMarker(it)
+                            val marker=MapPOIItem()
+                            serverOutput.forEachIndexed { index,store->
+//                                val markerImage=initMarker(store)
                                 marker.apply {
-                                    itemName = it.placeName
-                                    mapPoint = mapPointWithGeoCoord(it.x, it.y)
+                                    itemName = store.placeName
+                                    mapPoint = mapPointWithGeoCoord(store.x, store.y)
                                     markerType = MapPOIItem.MarkerType.CustomImage
 //                                    customImageResourceId=markerImage
+                                    markers.add(marker)
                                 }
-                                binding.mapView.addPOIItem(marker)
+                                binding.mapView.addPOIItems(markers.toTypedArray())
                             }
                         } else {
                             Log.e(TAG, "NULL값 넘어옴")
                         }
                     }
-
                     override fun onFailure(call: Call<List<Store>>, t: Throwable) {
                         Log.e(TAG, "통신실패")
                         t.printStackTrace()
@@ -135,7 +137,6 @@ class ShowMapActivity : AppCompatActivity() {
 
     private fun moveCamera(position: MapPoint.GeoCoordinate, zoomLevel: Int) {
         if (mapFlag.not()) return
-
         val cameraUpdate = CameraUpdateFactory.newMapPoint(
             mapPointWithGeoCoord(
                 position.latitude,

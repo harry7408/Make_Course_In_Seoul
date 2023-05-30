@@ -26,8 +26,6 @@ data class Course(
     val essentialPlace: String?,
     @SerializedName("categoryC")
     val categoryC:String,
-    @SerializedName("courseKeywords")
-    val keywords: List<Int>,
     @SerializedName("goals")
     val specification: List<Int>,
 ) : Parcelable

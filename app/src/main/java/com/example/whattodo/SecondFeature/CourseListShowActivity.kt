@@ -175,5 +175,4 @@ class CourseListShowActivity : AppCompatActivity() {
             else ->{ R.drawable.else_marker}
         }
     }*/
-
 }

@@ -21,11 +21,6 @@ private const val TAG = "MainInfoActivity"
 class MainInfoActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainInfoBinding
-    var fatigue = 0
-    private var dialog: AlertDialog? = null
-    private var initTime:Long=0L
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

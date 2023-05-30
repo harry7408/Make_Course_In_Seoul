@@ -32,8 +32,6 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
 
     //    private var selectedCategory:Category?=null
     private val categoryList = mutableListOf<Category>()
-    private lateinit var onBackPressedCallback: OnBackPressedCallback
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +43,6 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPlaceBinding.inflate(layoutInflater)
-        /* 뒤로가기 눌렀을 때 앱 종료할 것인지 물어보는 다이얼로그 띄우는 부분 */
         return binding.root
     }
 
@@ -66,7 +63,6 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
     }
 
     override fun onClick(category: Category) {
-        Toast.makeText(context, "${category.title}가 클릭되었습니다", Toast.LENGTH_SHORT).show()
         val intent = Intent(activity, ShowMapActivity::class.java)
         intent.putExtra("selected", category.title)
         startActivity(intent)

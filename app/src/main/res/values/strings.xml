@@ -40,7 +40,7 @@
     <string name="survey">설문조사</string>
     <string name="very_good">매우 그렇다</string>
     <string name="not_good">전혀 그렇지않다</string>
-    <string name="first_question">나는 도전적인 것을 좋아한다</string>
+    <string name="first_question">나는 쉽게 피로감을 느낀다</string>
     <string name="second_question">나는 이색적인 것을 좋아한다</string>
     <string name="third_question">나는 활동적인 것을 좋아한다</string>
     <string name="fourth_question">다음 중 가장 좋아하는 것은?</string>
