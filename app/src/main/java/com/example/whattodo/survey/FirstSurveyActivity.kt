@@ -72,9 +72,9 @@ class FirstSurveyActivity : AppCompatActivity() {
         binding.layer.setOnClickListener {
             val intent = Intent(this, SecondSurveyActivity::class.java)
             intent.apply {
-                putExtra("fatigue", fatigue)
-                putExtra("exotic", exotic)
-                putExtra("active", active)
+                putExtra("fatigue1", fatigue)
+                putExtra("exotic1", exotic)
+                putExtra("active1", active)
 //                flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             }
             intent.putExtra("memberInfo1", memberData)

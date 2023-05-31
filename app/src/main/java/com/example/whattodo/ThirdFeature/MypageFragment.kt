@@ -96,6 +96,7 @@ class MypageFragment : Fragment() {
             /* 회원 탈퇴 기능*/
             AlertDialog.Builder(requireActivity()).run {
                 setMessage("정말로 탈퇴 하시겠습니까?")
+                setNegativeButton("Cancel",null)
                 setPositiveButton(
                     R.string.ok,
                     DialogInterface.OnClickListener { _, _ ->

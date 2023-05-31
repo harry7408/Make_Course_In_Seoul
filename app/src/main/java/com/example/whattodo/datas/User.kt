@@ -8,6 +8,8 @@ import com.google.gson.annotations.SerializedName
 
 /* 사용자 정보 (회원가입 시 서버와 통신에 사용) */
 data class User (
+      /*  @SerializedName("uuid")
+        val uuid:String?,*/ // 사용자 식별용도 위한 값
         @SerializedName("memberId")
         val memberId:String?,
         @SerializedName("password")

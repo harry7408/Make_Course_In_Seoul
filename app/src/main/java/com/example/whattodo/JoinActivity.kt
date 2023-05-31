@@ -231,7 +231,10 @@ class JoinActivity : AppCompatActivity() {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
+            val sharedPreferences=getSharedPreferences("USER_UUID", MODE_PRIVATE)
+            val uuid=sharedPreferences.getString("UID",null)
             val member = Member(
+//                uuid.toString(),
                 binding.idArea.text.toString(),
                 binding.passArea.text.toString(),
                 binding.emailArea.text.toString(),

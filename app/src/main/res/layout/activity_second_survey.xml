@@ -367,8 +367,8 @@
                 android:id="@+id/textView14"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ocena"
-                android:layout_marginStart="22dp"
+                android:text="바다"
+                android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/textView12"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -455,7 +455,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="34dp"
-                android:src="@drawable/gun"
+                android:src="@drawable/watersports"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/row3_fourthImage"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -548,8 +548,8 @@
                 android:id="@+id/textView21"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="서바이벌"
-                android:layout_marginStart="28dp"
+                android:text="수상스포츠"
+                android:layout_marginStart="20dp"
                 app:layout_constraintStart_toEndOf="@+id/textView20"
                 app:layout_constraintTop_toTopOf="parent" />
 

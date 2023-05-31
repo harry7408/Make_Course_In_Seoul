@@ -25,9 +25,13 @@ class SecondSurveyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySecondSurveyBinding
     private lateinit var currentMember: Member
+    var fatigue=0
+    var exotic=0
+    var active=0
     var extraFatigue = 0
     var extraExotic = 0
     var extraActive = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,13 +41,18 @@ class SecondSurveyActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = getString(R.string.survey)
 
-        val fatigue = intent.getIntExtra("fatigue", 0)
-        val exotic = intent.getIntExtra("exotic", 0)
-        val active = intent.getIntExtra("active", 0)
-
-        Log.d(TAG, "$fatigue, $exotic, $active")
         val memberData = intent.getParcelableExtra<Member>("memberInfo1")
 
+        if (savedInstanceState != null) {
+           fatigue = savedInstanceState.getInt("savedFatigue")
+            exotic = savedInstanceState.getInt("savedExotic")
+            active = savedInstanceState.getInt("savedActive")
+        } else {
+            fatigue= intent.getIntExtra("fatigue1",0)
+            exotic=intent.getIntExtra("exotic1", 0)
+            active= intent.getIntExtra("active1", 0)
+        }
+        Log.e(TAG,"$fatigue, $exotic, $active")
         binding.firstQuestion.setOnCheckedChangeListener { _, checkedId ->
             extraFatigue = when (checkedId) {
                 R.id.first1 -> 0
@@ -53,6 +62,7 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.first5 -> 80
                 else -> 50
             }
+
             Log.e(TAG, "$extraFatigue")
         }
         binding.secondQuestion.setOnCheckedChangeListener { _, checkedId ->
@@ -64,6 +74,7 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.second5 -> 80
                 else -> 50
             }
+
             Log.e(TAG, "$extraExotic")
         }
         binding.thirdQuestion.setOnCheckedChangeListener { _, checkedId ->
@@ -75,70 +86,26 @@ class SecondSurveyActivity : AppCompatActivity() {
                 R.id.third5 -> 80
                 else -> 50
             }
+
             Log.e(TAG, "$extraActive")
         }
 
         binding.layer.setOnClickListener {
-            currentMember = Member(
-                memberData?.memberId.toString(),
-                memberData?.password,
-                memberData?.email,
-                memberData?.memberName,
-                memberData?.birthday,
-                memberData?.gender,
-                (fatigue + extraFatigue),
-                (exotic + extraExotic),
-                (active + extraActive)
-            )
-
-
-            val currentUser = User(
-                memberData?.memberId.toString(),
-                memberData?.password,
-                memberData?.email,
-                memberData?.memberName,
-                memberData?.birthday,
-                memberData?.gender,
-                (fatigue + extraFatigue),
-                (exotic + extraExotic),
-                (active + extraActive)
-            )
-
-            /* 서버와 통신 필요*/
-            val joinCall = RetrofitAPI.joinService.Join(currentUser)
-            joinCall.enqueue(object : retrofit2.Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        Thread {
-                            UserDatabase.getInstance(this@SecondSurveyActivity)?.memberDao()
-                                ?.updateMember(currentMember)
-                        }.start()
-                        val builder = android.app.AlertDialog.Builder(this@SecondSurveyActivity)
-                        builder.setMessage("회원가입 성공")
-                        builder.setPositiveButton(
-                            R.string.ok,
-                            DialogInterface.OnClickListener { dialog, which ->
-                                val intent =
-                                    Intent(this@SecondSurveyActivity, MainActivity::class.java)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                startActivity(intent)
-                            })
-                        builder.create()
-                        builder.show()
-
-                    } else {
-                        Log.d(TAG, "not Successful")
-                    }
-                }
-
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.d(TAG, "FAILURE")
-                    t.printStackTrace()
-                    call.cancel()
-                }
-            })
+            val intent = Intent(this, ThirdSurveyActivity::class.java)
+            intent.apply {
+                putExtra("fatigue2", fatigue+extraFatigue)
+                putExtra("exotic2", exotic+extraExotic)
+                putExtra("active2", active+extraActive)
+            }
+            intent.putExtra("memberInfo2", memberData)
+            startActivity(intent)
         }
+    }
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt("savedFatigue", fatigue+extraFatigue)
+        outState.putInt("savedExotic", exotic+extraExotic)
+        outState.putInt("savedActive", active+extraActive)
     }
 }
 

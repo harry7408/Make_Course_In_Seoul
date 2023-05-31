@@ -1,6 +1,7 @@
 package com.example.whattodo.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Query
 import com.example.whattodo.entity.Friend
 import com.example.whattodo.entity.Member
@@ -11,6 +12,6 @@ interface FriendDao {
     @Query("SELECT * FROM friends")
     fun getMembers():List<Friend>
 
-    @DELETE
-    fun delete(friendId:String)
+    @Delete
+    fun delete(friendId:Friend)
 }
