@@ -103,8 +103,7 @@ class MainActivity : AppCompatActivity() {
                         intent = Intent(applicationContext, MainInfoActivity::class.java)
                         startActivity(intent)
                     } else {
-                        Log.e(TAG, "Failure")
-                        Log.e (TAG,"${response.body()}")
+                        Log.e(TAG, "Null return")
                     }
                 }
 

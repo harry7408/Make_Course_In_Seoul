@@ -1,37 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".FirstFeature.ShowMapActivity">
-<!--일단 네이버 쓰는데 좌표 잘 바뀔지 알아봐야함 -->
+
+
     <net.daum.mf.map.api.MapView
         android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"/>
 
-    <HorizontalScrollView
-        android:layout_gravity="top"
-        android:id="@+id/chipGroupScrollView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:scrollbars="none">
-
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/categoryChipGroup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:clickable="true"
-            app:singleLine="true"
-            app:singleSelection="true" />
-    </HorizontalScrollView>
-
-    <include
-        android:id="@+id/bottomSheetLayout"
-        layout="@layout/map_bottom_sheet"/>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

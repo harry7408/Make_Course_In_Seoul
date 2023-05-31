@@ -63,7 +63,7 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
     }
 
     override fun onClick(category: Category) {
-        val intent = Intent(activity, ShowMapActivity::class.java)
+        val intent = Intent(activity, StoreListShowActivity::class.java)
         intent.putExtra("selected", category.title)
         startActivity(intent)
     }

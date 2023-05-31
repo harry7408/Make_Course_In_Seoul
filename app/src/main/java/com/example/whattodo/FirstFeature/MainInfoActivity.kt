@@ -76,9 +76,7 @@ class MainInfoActivity : AppCompatActivity() {
         }
     }
 
-    private fun getLocation() {
 
-    }
 
 }
 
