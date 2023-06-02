@@ -31,6 +31,7 @@ import retrofit2.Response
 
 private const val TAG = "PlaceFragment"
 
+/* 첫번째 장소 보여주기 기능이 있는 페이지 */
 class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
     private lateinit var binding: FragmentPlaceBinding
     private lateinit var categoryAdapter: PlaceFragmentAdapter

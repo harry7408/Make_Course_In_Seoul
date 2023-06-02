@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-/* 사용자 User로 맞추기 */
+/* UserDto와 일치하게 맞추기 */
 data class User (
         @SerializedName("userCode")
         val userCode:String?, // 사용자 식별용도 위한 값

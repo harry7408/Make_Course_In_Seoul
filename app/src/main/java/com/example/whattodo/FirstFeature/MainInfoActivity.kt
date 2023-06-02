@@ -75,9 +75,6 @@ class MainInfoActivity : AppCompatActivity() {
             binding.viewpager.setCurrentItem(0,true)
         }
     }
-
-
-
 }
 
 

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="40dp"
-    android:backgroundTint="#1EDEF6"
+    android:backgroundTint="#FFD046"
     app:cardCornerRadius="16dp"
     android:background="@drawable/background_radius"
     xmlns:app="http://schemas.android.com/apk/res-auto">
