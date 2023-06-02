@@ -25,12 +25,12 @@ private const val TAG = "ThirdSurveyActivity"
 class ThirdSurveyActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityThirdSurveyBinding
-    var fatigue = 0
-    var exotic = 0
-    var active = 0
-    private var extraFatigue: Int = 0
-    private var extraExotic: Int = 0
-    private var extraActive: Int = 0
+    var fatigue = 0.0
+    var exotic = 0.0
+    var active = 0.0
+    private var extraFatigue: Double = 0.0
+    private var extraExotic: Double = 0.0
+    private var extraActive: Double = 0.0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,50 +40,34 @@ class ThirdSurveyActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = getString(R.string.survey)
-        val memberData = intent.getParcelableExtra<Member>("memberInfo2")
+        val memberData = intent.getParcelableExtra<User>("userInfo2")
         limitCheckBoxCount()
 
-        fatigue = intent.getIntExtra("fatigue2", 0)
-        exotic = intent.getIntExtra("exotic2", 0)
-        active = intent.getIntExtra("active2", 0)
+        fatigue = intent.getDoubleExtra("fatigue2", 0.0)
+        exotic = intent.getDoubleExtra("exotic2", 0.0)
+        active = intent.getDoubleExtra("active2", 0.0)
 
-        Log.e(TAG,"$fatigue, $exotic, $active")
+        Log.e(TAG, "$fatigue, $exotic, $active")
 
         binding.finishTextView.setOnClickListener {
             checkCheckBox()
-            val currentMember = Member(
-                memberData?.memberId.toString(),
-                memberData?.password,
-                memberData?.email,
-                memberData?.memberName,
-                memberData?.birthday,
-                memberData?.gender,
-                (fatigue + extraFatigue),
-                (exotic + extraExotic),
-                (active + extraActive)
-            )
-
-
             val currentUser = User(
+                memberData?.userCode.toString(),
                 memberData?.memberId.toString(),
                 memberData?.password,
                 memberData?.email,
                 memberData?.memberName,
                 memberData?.birthday,
                 memberData?.gender,
-                (fatigue + extraFatigue),
-                (exotic + extraExotic),
-                (active + extraActive)
+                (fatigue + extraFatigue).div(4),
+                (exotic + extraExotic).div(4),
+                (active + extraActive).div(4)
             )
 
             val joinCall = RetrofitAPI.joinService.Join(currentUser)
             joinCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
-                        Thread {
-                            UserDatabase.getInstance(this@ThirdSurveyActivity)?.memberDao()
-                                ?.updateMember(currentMember)
-                        }.start()
                         val builder = android.app.AlertDialog.Builder(this@ThirdSurveyActivity)
                         builder.setMessage("회원가입 성공")
                         builder.setPositiveButton(
@@ -102,6 +86,7 @@ class ThirdSurveyActivity : AppCompatActivity() {
                         Log.d(TAG, "null returned")
                     }
                 }
+
                 override fun onFailure(call: Call<User>, t: Throwable) {
                     Log.d(TAG, "FAILURE")
                     t.printStackTrace()
@@ -136,104 +121,104 @@ class ThirdSurveyActivity : AppCompatActivity() {
 
     private fun checkCheckBox() {
         if (binding.check1.isChecked) {
-            extraFatigue += 65
-            extraExotic += 65
-            extraActive += 60
+            extraFatigue += 65.0
+            extraExotic += 65.0
+            extraActive += 60.0
         }
         if (binding.check2.isChecked) {
-            extraFatigue += 65
-            extraExotic += 20
-            extraActive += 45
+            extraFatigue += 65.0
+            extraExotic += 20.0
+            extraActive += 45.0
         }
         if (binding.check3.isChecked) {
-            extraFatigue += 45
-            extraExotic += 35
-            extraActive += 20
+            extraFatigue += 45.0
+            extraExotic += 35.0
+            extraActive += 20.0
         }
         if (binding.check4.isChecked) {
-            extraFatigue += 15
-            extraExotic += 35
-            extraActive += 5
+            extraFatigue += 15.0
+            extraExotic += 35.0
+            extraActive += 5.0
         }
         if (binding.check5.isChecked) {
-            extraFatigue += 5
-            extraExotic += 45
-            extraActive += 5
+            extraFatigue += 5.0
+            extraExotic += 45.0
+            extraActive += 5.0
         }
         if (binding.check6.isChecked) {
-            extraFatigue += 40
-            extraExotic += 40
-            extraActive += 15
+            extraFatigue += 40.0
+            extraExotic += 40.0
+            extraActive += 15.0
         }
         if (binding.check7.isChecked) {
-            extraFatigue += 15
-            extraExotic += 20
-            extraActive += 15
+            extraFatigue += 15.0
+            extraExotic += 20.0
+            extraActive += 15.0
         }
         if (binding.check8.isChecked) {
-            extraFatigue += 55
-            extraExotic += 60
-            extraActive += 5
+            extraFatigue += 55.0
+            extraExotic += 60.0
+            extraActive += 5.0
         }
         if (binding.check9.isChecked) {
-            extraFatigue += 40
-            extraExotic += 35
-            extraActive += 20
+            extraFatigue += 40.0
+            extraExotic += 35.0
+            extraActive += 20.0
         }
         if (binding.check10.isChecked) {
-            extraFatigue += 45
-            extraExotic += 60
-            extraActive += 5
+            extraFatigue += 45.0
+            extraExotic += 60.0
+            extraActive += 5.0
         }
         if (binding.check11.isChecked) {
-            extraFatigue += 15
-            extraExotic += 0
-            extraActive += 20
+            extraFatigue += 15.0
+            extraExotic += 0.0
+            extraActive += 20.0
         }
         if (binding.check12.isChecked) {
-            extraFatigue += 40
-            extraExotic += 40
-            extraActive += 15
+            extraFatigue += 40.0
+            extraExotic += 40.0
+            extraActive += 15.0
         }
         if (binding.check13.isChecked) {
-            extraFatigue += 40
-            extraExotic += 20
-            extraActive += 25
+            extraFatigue += 40.0
+            extraExotic += 20.0
+            extraActive += 25.0
         }
         if (binding.check14.isChecked) {
-            extraFatigue += 45
-            extraExotic += 60
-            extraActive += 5
+            extraFatigue += 45.0
+            extraExotic += 60.0
+            extraActive += 5.0
         }
         if (binding.check15.isChecked) {
-            extraFatigue += 55
-            extraExotic += 60
-            extraActive += 5
+            extraFatigue += 55.0
+            extraExotic += 60.0
+            extraActive += 5.0
         }
         if (binding.check16.isChecked) {
-            extraFatigue += 40
-            extraExotic += 0
-            extraActive += 25
+            extraFatigue += 40.0
+            extraExotic += 0.0
+            extraActive += 25.0
         }
         if (binding.check17.isChecked) {
-            extraFatigue += 20
-            extraExotic += 40
-            extraActive += 20
+            extraFatigue += 20.0
+            extraExotic += 40.0
+            extraActive += 20.0
         }
         if (binding.check18.isChecked) {
-            extraFatigue += 55
-            extraExotic += 25
-            extraActive += 20
+            extraFatigue += 55.0
+            extraExotic += 25.0
+            extraActive += 20.0
         }
         if (binding.check19.isChecked) {
-            extraFatigue += 35
-            extraExotic += 40
-            extraActive += 5
+            extraFatigue += 35.0
+            extraExotic += 40.0
+            extraActive += 5.0
         }
         if (binding.check20.isChecked) {
-            extraFatigue += 45
-            extraExotic += 0
-            extraActive += 45
+            extraFatigue += 45.0
+            extraExotic += 0.0
+            extraActive += 45.0
         }
     }
 }

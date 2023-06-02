@@ -3,7 +3,6 @@ package com.example.whattodo
 /* sharedpreference의 key값들 */
 
 const val USER_INFO="userInfo"
-const val USER_UUID="userUUID"
 const val UID="uuid"
 const val ID="memberId"
 const val PASS="password"

@@ -46,57 +46,58 @@ class MypageFragment : Fragment() {
         /*회원 이름 가져오기*/
         val sharedPreferences =
             requireActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
-        val currentUserName=sharedPreferences.getString(ID, null).toString()
-        binding.userId.text=currentUserName
-        val currentUserEmail=sharedPreferences.getString(EMAIL,null).toString()
-        val currentUserGender=sharedPreferences.getString(GENDER,null).toString()
+        val currentUserName = sharedPreferences.getString(ID, null).toString()
+        binding.userId.text = currentUserName
+        val currentUserEmail = sharedPreferences.getString(EMAIL, null).toString()
+        val currentUserGender = sharedPreferences.getString(GENDER, null).toString()
 
-        if (sharedPreferences.getString(GENDER,null).toString().equals("남성")) {
+        if (sharedPreferences.getString(GENDER, null).toString() == "남성") {
             binding.userImageView.setImageResource(R.drawable.male)
-        } else {
+        } else if (sharedPreferences.getString(GENDER, null).toString() == "여성") {
             binding.userImageView.setImageResource(R.drawable.female)
+        } else {
+            binding.userImageView.setImageResource(R.drawable.human)
         }
 
 
 
         binding.userInfoChangeLayer.setOnClickListener {
             val intent = Intent(context, ChangeUserInfoActivity::class.java)
-            intent.putExtra("username",currentUserName)
-            intent.putExtra("userEmail",currentUserEmail)
-            intent.putExtra("userGender",currentUserGender)
+            intent.putExtra("username", currentUserName)
+            intent.putExtra("userEmail", currentUserEmail)
+            intent.putExtra("userGender", currentUserGender)
             startActivity(intent)
         }
 
         binding.friendListCardView.setOnClickListener {
+            /* 여기서 서버와 통신 후 넘어오는 데이터 받아서 넘겨야 한다 */
             val intent = Intent(context, FriendListActivity::class.java)
             startActivity(intent)
         }
 
         binding.historyCardView.setOnClickListener {
-        /* 서버랑 통신해서 저장된 히스토리를 다음으로 넘겨서 리사이클러뷰로 띄워야할 듯?*/
+            /* 서버랑 통신해서 저장된 히스토리를 다음으로 넘겨서 리사이클러뷰로 띄워야할 듯?*/
         }
 
         binding.deleteCardView.setOnClickListener {
             /* 서버와 회원탈퇴 기능 맞춰서 해야함 */
             val currentUser = User(
+                sharedPreferences.getString(UID, null),
                 sharedPreferences.getString(ID, null),
                 sharedPreferences.getString(PASS, null),
                 sharedPreferences.getString(EMAIL, null),
                 sharedPreferences.getString(NAME, null),
                 sharedPreferences.getString(BDAY, null),
                 sharedPreferences.getString(GENDER, null),
-                sharedPreferences.getInt(FATIGUE, 0),
-                sharedPreferences.getInt(EXOTIC, 0),
-                sharedPreferences.getInt(ACTIVITY, 0),
+                sharedPreferences.getFloat(FATIGUE, 0.0f).toDouble(),
+                sharedPreferences.getFloat(EXOTIC, 0.0f).toDouble(),
+                sharedPreferences.getFloat(ACTIVITY, 0.0f).toDouble(),
             )
-            Log.d(
-                TAG,
-                "${currentUser.memberId}, ${currentUser.password}," + "${currentUser.email}, ${currentUser.gender}"
-            )
+
             /* 회원 탈퇴 기능*/
             AlertDialog.Builder(requireActivity()).run {
                 setMessage("정말로 탈퇴 하시겠습니까?")
-                setNegativeButton("Cancel",null)
+                setNegativeButton("Cancel", null)
                 setPositiveButton(
                     R.string.ok,
                     DialogInterface.OnClickListener { _, _ ->
@@ -122,6 +123,7 @@ class MypageFragment : Fragment() {
                                         Log.d(TAG, "umm")
                                     }
                                 }
+
                                 override fun onFailure(call: Call<String>, t: Throwable) {
                                     Log.e(TAG, "ERROR OCCUR")
                                     t.printStackTrace()
@@ -137,7 +139,7 @@ class MypageFragment : Fragment() {
         /* 로그아웃 부분 */
         binding.logoutText.setOnClickListener {
             val intent = Intent(activity, MainActivity::class.java)
-            intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             val editor = sharedPreferences.edit()
             editor.clear().apply()
             startActivity(intent)

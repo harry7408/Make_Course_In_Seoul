@@ -109,7 +109,7 @@ class FindPassFragment : Fragment() {
                 userId, null, userEmail,
                 userName, userBirth, userGender,
                 null,null,null
-            )
+            ,null)
             val findPassCall = RetrofitAPI.findService.findPass(userData)
             findPassCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {

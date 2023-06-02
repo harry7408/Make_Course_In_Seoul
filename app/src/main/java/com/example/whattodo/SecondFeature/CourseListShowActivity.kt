@@ -34,11 +34,12 @@ private const val TAG = "CourseListShowActivity"
 class CourseListShowActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCourseListShowBinding
-    private lateinit var serverOutput: ArrayList<Store>
+    private lateinit var serverOutput:ArrayList<Store>
 
     private var mapFlag = false
 
     private var markers = ArrayList<MapPOIItem>()
+
 
     private var storeAdapter = CourseListAdapter {
         collapseBottomSheet()
@@ -55,7 +56,7 @@ class CourseListShowActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolBar)
         supportActionBar?.title = "코스 목록"
-        serverOutput = intent.getParcelableArrayListExtra("response")!!
+        serverOutput= intent.getParcelableArrayListExtra("response")!!
 
 
 

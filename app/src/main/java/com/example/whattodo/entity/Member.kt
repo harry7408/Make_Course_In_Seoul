@@ -10,7 +10,7 @@ import java.util.UUID
 @Parcelize
 @Entity(tableName = "members")
 data class Member(
-    /*var uuid:String,*/
+    var uuid:String?,
     @PrimaryKey
     var memberId:String,
 
@@ -24,9 +24,9 @@ data class Member(
 
     var gender:String?,
 
-    var fatigability:Int?,
+    var fatigability:Double?,
 
-    var specification:Int?,
+    var specification:Double?,
 
-    var active:Int?
+    var active:Double?
 ) : Parcelable

@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class Store (
     @SerializedName("id")
     val id:Int,
-    @SerializedName("name")
+    @SerializedName("placeName")
     val placeName: String,
     @SerializedName("addressName")
     val addressName: String,
@@ -23,19 +23,18 @@ data class Store (
     val imgUrl:String?,
     @SerializedName("phoneNumber")
     val phone: String?,
-
-//    @SerializedName("categoryName")
-//    val categoryName: String,
-//    @SerializedName("avgRating")
-//    val avgRating: Double,
-//    @SerializedName("ratingNum")
-//    val ratingNum: Int,
-//    @SerializedName("reviewNum")
-//    val reviewNum: Int,
-//    @SerializedName("introduction")
-//    val introduction: String,
-//    @SerializedName("tags")
-//    val tags: String,
+    @SerializedName("categoryName")
+    val categoryName: String?,
+    @SerializedName("avgRating")
+    val avgRating: Double?,
+    @SerializedName("ratingNum")
+    val ratingNum: Double?,
+    @SerializedName("reviewNum")
+    val reviewNum: Int?,
+    @SerializedName("introduction")
+    val introduction: String?,
+    @SerializedName("tags")
+    val tags: String?,
 ) : Parcelable
 
 

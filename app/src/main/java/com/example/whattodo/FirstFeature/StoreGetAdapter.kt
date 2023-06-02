@@ -10,7 +10,6 @@ import com.example.whattodo.datas.Store
 import net.daum.mf.map.api.MapPoint
 
 class StoreGetAdapter(private val onClick: (Store)->Unit):ListAdapter<Store,StoreGetAdapter.MapGetViewHolder>(diffUtil) {
-    private var dataSet= emptyList<Store>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MapGetViewHolder {
         return MapGetViewHolder(
@@ -22,18 +21,16 @@ class StoreGetAdapter(private val onClick: (Store)->Unit):ListAdapter<Store,Stor
 
     override fun onBindViewHolder(holder: MapGetViewHolder, position: Int) {
         val store=currentList[position]
-        holder.bind(dataSet[position])
+        holder.bind(store)
     }
 
-    override fun getItemCount(): Int {
-        return dataSet.size
-    }
+
 
     inner class MapGetViewHolder(private val binding:ItemGetBinding) :RecyclerView.ViewHolder(binding.root) {
             fun bind(store: Store) {
                 binding.storeNameTextView.text=store.placeName
                 binding.storeAddressTextView.text=store.addressName
-                binding.storePhoneTextView.text=store.phone
+                binding.ReviewTextView.text="${store.avgRating.toString()}"
                 binding.root.setOnClickListener {
                     onClick(store)
                 }

@@ -58,6 +58,11 @@ interface storeAPI {
     fun requestStore():Call<List<Store>>
 }
 
+interface categoryAPI {
+    @POST("")
+    fun requestCategoryList(@Body category:String) : Call<List<Store>>
+}
+
 interface addFriendAPI {
     @POST("")
     fun addFriend(@Body userId:String):Call<User>

@@ -6,7 +6,7 @@ import retrofit2.create
 
 object RetrofitAPI {
 //    10.0.2.2 로컬에서 테스트할 때
-    private const val BASE_URL="http://10.0.2.2:8080"
+    private const val BASE_URL="http://15.164.213.42:8080"
 
     private val retrofit : Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
@@ -22,6 +22,6 @@ object RetrofitAPI {
     /*val courseService : courseAPI=retrofit.create(courseAPI::class.java)*/
     val storeService:storeAPI=retrofit.create(storeAPI::class.java)
     val addFriendService:addFriendAPI= retrofit.create(addFriendAPI::class.java)
-
+    val requestCategoryService:categoryAPI=retrofit.create(categoryAPI::class.java)
 }
 

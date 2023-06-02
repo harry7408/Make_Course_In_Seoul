@@ -44,15 +44,25 @@
         app:layout_constraintWidth="wrap_content_constrained"
         tools:text="가게주소" />
 
+    <ImageView
+        android:id="@+id/starImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/star"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ReviewTextView"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:id="@+id/storePhoneTextView"
+        android:id="@+id/ReviewTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="010-0000-0000"
-        android:layout_marginEnd="32dp"/>
+        tools:text="별점"
+        android:layout_marginEnd="48dp" />
 
     <View
         app:layout_constraintTop_toBottomOf="@id/storeAddressTextView"

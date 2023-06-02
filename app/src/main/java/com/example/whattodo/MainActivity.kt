@@ -16,6 +16,7 @@ import com.example.whattodo.survey.FirstSurveyActivity
 import com.shashank.sony.fancytoastlib.FancyToast
 import retrofit2.Call
 import retrofit2.Response
+import java.util.UUID
 
 
 /* 로그인 페이지 */
@@ -24,8 +25,6 @@ private const val TAG = "MainActivity"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var member: Member
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
         }
+
 
 
 //        클릭 이벤트 처리부분
@@ -61,46 +61,37 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.loginButton.setOnClickListener {
-            val id = binding.idArea.text.toString()
+           /* val id = binding.idArea.text.toString()
             val pass = binding.passArea.text.toString()
             val userdata = User(
+                null,
                 id, pass, null,
                 null, null, null,
-                -1, -1, -1
+                -1.0, -1.0, -1.0
             )
+            Log.e(TAG,"$userdata")
 
             val loginCall = RetrofitAPI.loginService.login(userdata)
             loginCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
-                        val data = response.body()
-                        /* 여기부분 고민해보기 db 써야할 수도 */
+                        val responseData = response.body()
+//                         여기부분 고민해보기 db 써야할 수도
                         with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()) {
-                            putString(ID, data?.memberId)
-                            putString(PASS, data?.password)
-                            putString(EMAIL, data?.email)
-                            putString(NAME, data?.memberName)
-                            putString(BDAY, data?.birthday)
-                            putString(GENDER, data?.gender)
-                            putInt(FATIGUE, data?.fatigability!!)
-                            putInt(EXOTIC,data?.specification!!)
-                            putInt(ACTIVITY,data?.active!!)
+                            putString(UID,responseData?.userCode)
+                            putString(ID, responseData?.memberId)
+                            putString(PASS, responseData?.password)
+                            putString(EMAIL, responseData?.email)
+                            putString(NAME, responseData?.memberName)
+                            putString(BDAY, responseData?.birthday)
+                            putString(GENDER, responseData?.gender)
+                            putFloat(FATIGUE, responseData?.fatigability!!.toFloat())
+                            putFloat(EXOTIC,responseData?.specification!!.toFloat())
+                            putFloat(ACTIVITY,responseData?.active!!.toFloat())
                         }.apply()
-                        member = Member(
-                            data?.memberId.toString(),
-                            data?.password,
-                            data?.email,
-                            data?.memberName,
-                            data?.birthday,
-                            data?.gender,
-                            data?.fatigability,
-                            data?.specification,
-                            data?.active
-                        )
-                        Thread {
-                            UserDatabase.getInstance(this@MainActivity)?.memberDao()?.insert(member)
-                        }.start()
-                        intent = Intent(applicationContext, MainInfoActivity::class.java)
+
+
+                     val intent = Intent(applicationContext, MainInfoActivity::class.java)
                         startActivity(intent)
                     } else {
                         Log.e(TAG, "Null return")
@@ -126,7 +117,9 @@ class MainActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-            })
+            })*/
+            val intent =Intent(applicationContext,MainInfoActivity::class.java)
+            startActivity(intent)
         }
     }
 

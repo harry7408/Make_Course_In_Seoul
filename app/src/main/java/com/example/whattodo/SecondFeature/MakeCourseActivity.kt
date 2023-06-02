@@ -106,7 +106,7 @@ class MakeCourseActivity : AppCompatActivity() {
                             response.body()?.let { it1 -> responseData.addAll(it1) }
                             val intent =
                                 Intent(this@MakeCourseActivity, CourseListShowActivity::class.java)
-                            intent.putExtra("response", responseData)
+                            intent.putExtra("response",responseData)
                             startActivity(intent)
                         } else {
                             Log.e(TAG, "CONNECTED BUT NOT SUCCESS")

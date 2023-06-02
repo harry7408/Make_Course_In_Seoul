@@ -40,15 +40,16 @@ class PasswordChangeActivity : AppCompatActivity() {
         binding.changePassButton.setOnClickListener {
             /* 서버에 비밀번호 변경하는 기능과 연결하기*/
             val currentUser = User(
+                sharedPreferences.getString(UID,null),
                 sharedPreferences.getString(ID, null),
                 sharedPreferences.getString(PASS, null),
                 sharedPreferences.getString(EMAIL, null),
                 sharedPreferences.getString(NAME, null),
                 sharedPreferences.getString(BDAY, null),
                 sharedPreferences.getString(GENDER, null),
-                sharedPreferences.getInt(FATIGUE, 0),
-                sharedPreferences.getInt(EXOTIC, 0),
-                sharedPreferences.getInt(ACTIVITY, 0),
+                sharedPreferences.getFloat(FATIGUE, 0.0f).toDouble(),
+                sharedPreferences.getFloat(EXOTIC, 0.0f).toDouble(),
+                sharedPreferences.getFloat(ACTIVITY, 0.0f).toDouble(),
             )
 
             if (!binding.oldPassEditText.text.equals(currentPass).not()) {
@@ -72,7 +73,7 @@ class PasswordChangeActivity : AppCompatActivity() {
                                     putString(PASS, response.body()?.password)
                                 }.apply()
                             } else {
-                                Log.e(TAG, "통신만 성공")
+                                Log.e(TAG, "null return")
                             }
                         }
 

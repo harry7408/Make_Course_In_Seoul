@@ -46,10 +46,10 @@ class CourseListAdapter(private val itemClickListener: (MapPoint.GeoCoordinate) 
             binding.storeAddressTextView.text = store.addressName
             binding.storeImageView.setImageURI(store.imgUrl?.toUri())
             binding.storePhoneTextView.text = store.phone
-//            binding.storeCategoryNameTextView.text=store
-//            binding.avgRatingTextView.text=store
-//            binding.reviewNumTextView.text=store
-//            binding.storeTagsTextView.text=store
+            binding.storeCategoryNameTextView.text=store.categoryName
+            binding.avgRatingTextView.text="별점 : ${store.avgRating}(${store.ratingNum})"
+            binding.reviewNumTextView.text=store.reviewNum.toString()
+            binding.storeTagsTextView.text=store.tags
 
             binding.root.setOnClickListener {
                 Log.e(TAG,"${store.y}, ${store.x}")

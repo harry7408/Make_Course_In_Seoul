@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.whattodo.R
 import com.example.whattodo.databinding.FragmentFindIdBinding
@@ -101,10 +102,11 @@ class FindIdFragment : Fragment() {
                 binding.female.isChecked -> binding.female.text.toString()
                 else -> null
             }
+
             val userData = User(
                 null, null, userEmail,
                 userName, userBirth, userGender, null, null, null
-            )
+            ,null)
             val findIdCall = RetrofitAPI.findService.findId(userData)
             findIdCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {

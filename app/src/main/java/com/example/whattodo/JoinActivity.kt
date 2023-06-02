@@ -105,7 +105,7 @@ class JoinActivity : AppCompatActivity() {
                     }
                     else -> {
                         binding.passCheckArea.setBackgroundResource(R.drawable.background_rectangle)
-                        binding.cpassMessage.setText("")
+                        binding.cpassMessage.text = ""
                         passCheckFlag = true
                     }
                 }
@@ -177,7 +177,7 @@ class JoinActivity : AppCompatActivity() {
                     response: Response<List<User>>
                 ) {
                     Log.d(TAG,"RESPONSE : ${response.body()}")
-                    if (response.isSuccessful() && check_id.isNotEmpty()) {
+                    if (response.isSuccessful && check_id.isNotEmpty()) {
                         val userList: List<User>? = response.body()
                         for (users in userList!!) {
                             if (users.memberId == check_id) {
@@ -226,15 +226,13 @@ class JoinActivity : AppCompatActivity() {
     /*회원가입 버튼 눌렸을때 반응*/
     private fun joinUser() {
         binding.joinBtn.setOnClickListener {
-//            입력된 데이터를 가지고 회원정보에 넣고 회원가입이 성공한다면 데이터가 서버에 저장 되도록
             val genderText = when {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
-            val sharedPreferences=getSharedPreferences("USER_UUID", MODE_PRIVATE)
-            val uuid=sharedPreferences.getString("UID",null)
-            val member = Member(
-//                uuid.toString(),
+
+            val user = User(
+                null,
                 binding.idArea.text.toString(),
                 binding.passArea.text.toString(),
                 binding.emailArea.text.toString(),
@@ -249,7 +247,7 @@ class JoinActivity : AppCompatActivity() {
                 DialogInterface.OnClickListener { dialog, which ->
                     val intent = Intent(this@JoinActivity, FirstSurveyActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                    intent.putExtra("memberInfo",member)
+                    intent.putExtra("joinUserInfo",user)
                     startActivity(intent)
                 })
             builder.create()
