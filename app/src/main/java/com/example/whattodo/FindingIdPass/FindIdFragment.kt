@@ -104,9 +104,9 @@ class FindIdFragment : Fragment() {
             }
 
             val userData = User(
-                null, null, userEmail,
-                userName, userBirth, userGender, null, null, null
-            ,null)
+                null, null, null ,userName,null,
+                userEmail, userBirth, userGender, null, null, null
+            )
             val findIdCall = RetrofitAPI.findService.findId(userData)
             findIdCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {

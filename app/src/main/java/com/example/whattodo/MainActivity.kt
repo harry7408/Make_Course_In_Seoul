@@ -60,22 +60,24 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         binding.loginButton.setOnClickListener {
-           /* val id = binding.idArea.text.toString()
+            val id = binding.idArea.text.toString()
             val pass = binding.passArea.text.toString()
             val userdata = User(
                 null,
-                id, pass, null,
+                id, pass, null, null,
                 null, null, null,
                 -1.0, -1.0, -1.0
             )
-            Log.e(TAG,"$userdata")
+//            Log.e(TAG,"$userdata")
 
             val loginCall = RetrofitAPI.loginService.login(userdata)
             loginCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {
                     if (response.isSuccessful) {
                         val responseData = response.body()
+                        Log.e(TAG,"${response.body()}")
 //                         여기부분 고민해보기 db 써야할 수도
                         with(getSharedPreferences(USER_INFO, Context.MODE_PRIVATE).edit()) {
                             putString(UID,responseData?.userCode)
@@ -86,8 +88,8 @@ class MainActivity : AppCompatActivity() {
                             putString(BDAY, responseData?.birthday)
                             putString(GENDER, responseData?.gender)
                             putFloat(FATIGUE, responseData?.fatigability!!.toFloat())
-                            putFloat(EXOTIC,responseData?.specification!!.toFloat())
-                            putFloat(ACTIVITY,responseData?.active!!.toFloat())
+                            putFloat(EXOTIC, responseData.specification!!.toFloat())
+                            putFloat(ACTIVITY, responseData.active!!.toFloat())
                         }.apply()
 
 
@@ -99,6 +101,8 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.e(TAG,"ERROR OCCUR")
+                    Log.e(TAG,"$call")
                     if (id.isEmpty() && pass.isEmpty()) {
                         FancyToast.makeText(
                             applicationContext,
@@ -117,9 +121,9 @@ class MainActivity : AppCompatActivity() {
                         ).show()
                     }
                 }
-            })*/
-            val intent =Intent(applicationContext,MainInfoActivity::class.java)
-            startActivity(intent)
+            })
+            /*val intent =Intent(applicationContext,MainInfoActivity::class.java)
+            startActivity(intent)*/
         }
     }
 

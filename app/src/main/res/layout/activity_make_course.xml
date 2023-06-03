@@ -238,5 +238,17 @@
         android:textSize="20sp"
         android:textColor="@color/black"/>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/friendFindActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow_color"
+        android:clickable="true"
+        android:layout_marginBottom="36dp"
+        android:contentDescription="함께할 친구 찾기"
+        app:layout_constraintBottom_toTopOf="@+id/courseMakeBtn"
+        app:layout_constraintEnd_toEndOf="@+id/courseMakeBtn"
+        app:srcCompat="@drawable/many" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

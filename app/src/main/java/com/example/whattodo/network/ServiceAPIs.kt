@@ -63,6 +63,11 @@ interface categoryAPI {
     fun requestCategoryList(@Body category:String) : Call<List<Store>>
 }
 
+interface getFriendAPI {
+    @POST("/member/friendlist")
+    fun getFriendList(@Body userCode:String):Call<List<Friend>>
+}
+
 
 /* 친구 추가 삭제는 나중에 고려 */
 /*interface addFriendAPI {

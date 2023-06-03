@@ -52,11 +52,12 @@ class ThirdSurveyActivity : AppCompatActivity() {
         binding.finishTextView.setOnClickListener {
             checkCheckBox()
             val currentUser = User(
-                memberData?.userCode.toString(),
-                memberData?.memberId.toString(),
+                null,
+                memberData?.memberId,
                 memberData?.password,
-                memberData?.email,
                 memberData?.memberName,
+                null,
+                memberData?.email,
                 memberData?.birthday,
                 memberData?.gender,
                 (fatigue + extraFatigue).div(4),

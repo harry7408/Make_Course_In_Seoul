@@ -6,16 +6,15 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ItemFriendBinding
+import com.example.whattodo.datas.Friend
 import com.example.whattodo.datas.User
-import com.example.whattodo.entity.Friend
 
 
 class FriendListAdapter(
-    private val checkBoxClick:(User)->Unit,
-    private val imageViewClick:(User)->Unit,
+    private val imageViewClick: (Friend) -> Unit,
 ) : RecyclerView.Adapter<FriendListAdapter.FriendListViewHolder>() {
 
-    private var friends = mutableListOf<User>()
+    private var friends = mutableListOf<Friend>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendListViewHolder {
         return FriendListViewHolder(
@@ -34,26 +33,22 @@ class FriendListAdapter(
 
     inner class FriendListViewHolder(val binding: ItemFriendBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) {
-            if (user.gender.equals("남성")) {
+        fun bind(friend: Friend) {
+            if (friend.userGender == "남성") {
                 binding.friendImageView.setImageResource(R.drawable.male)
             } else {
                 binding.friendImageView.setImageResource(R.drawable.female)
             }
-            binding.textView.text = user.memberName
-
-            binding.friendListCheckBox.setOnCheckedChangeListener { _, isChecked ->
-                if (isChecked) checkBoxClick(user)
-            }
+            binding.friendNameTextView.text = friend.userName
+            binding.friendCodeTextView.text = friend.userCode
 
             binding.friendDeleteImageView.setOnClickListener {
-                imageViewClick(user)
+                imageViewClick(friend)
             }
         }
-
     }
 
-    fun setData(dataSet: MutableList<User>) {
+    fun setData(dataSet: MutableList<Friend>) {
         this.friends = dataSet
         notifyDataSetChanged()
     }

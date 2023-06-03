@@ -19,11 +19,9 @@ class FriendListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFriendListBinding
     private var friends = mutableListOf<User>()
     /* 어뎁터 선언 부분 */
-    /*private val friendAdapter = FriendListAdapter(checkBoxClick = {
-        addCourseInput(it)
-    }, imageViewClick = {
-        deleteFriend(it)
-    })*/
+    /*private val friendAdapter = FriendListAdapter{
+      deleteFriend(it)
+    }*/
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,11 +96,6 @@ class FriendListActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.friend_menu, menu)
         return true
-    }
-
-
-    private fun addCourseInput(user: User) {
-
     }
 
     private fun deleteFriend(user: User) {

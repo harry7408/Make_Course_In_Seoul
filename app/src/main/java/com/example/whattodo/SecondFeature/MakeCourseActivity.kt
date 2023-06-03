@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.util.Log
 import android.widget.*
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.*
 import androidx.core.widget.addTextChangedListener
@@ -16,6 +17,7 @@ import com.example.whattodo.databinding.ActivityMakeCourseBinding
 import com.example.whattodo.databinding.DialogEndTimeSettingBinding
 import com.example.whattodo.databinding.DialogStartTimeSettingBinding
 import com.example.whattodo.datas.Course
+import com.example.whattodo.datas.Friend
 
 import com.example.whattodo.datas.Store
 import com.example.whattodo.datas.courseResponse
@@ -39,6 +41,16 @@ class MakeCourseActivity : AppCompatActivity() {
     private var endTimeValue: Int = 0
     private lateinit var courseInput: Course
 
+    private val getFriendResult=registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        result->
+        val friendList=result.data?.getStringArrayListExtra("friendList") ?: emptyArray<Friend>()
+
+        memberList.addAll(listOf(friendList.toString()))
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +71,8 @@ class MakeCourseActivity : AppCompatActivity() {
 
         checkMenu(placeFlag)
         limitCheckCount()
-
+        val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
+        val userCode = sharedPreferences.getString(UID, null)
 
         binding.chipGroup1.setOnCheckedStateChangeListener { _, _ ->
             when (findViewById<Chip>(binding.chipGroup1.checkedChipId).text.toString()) {
@@ -82,20 +95,55 @@ class MakeCourseActivity : AppCompatActivity() {
         binding.endTimeTextView.setOnClickListener {
             initEndTime()
         }
-        memberList.add("강태호#01")
-        memberList.add("김재한#01")
-        memberList.add("이영원#01")
+
+
+
+        /* 친구목록 불러오기 부분 */
+        binding.friendFindActionButton.setOnClickListener {
+            val friendRequestCall=RetrofitAPI.requestFriendService
+                .getFriendList(userCode.toString()).enqueue(object:Callback<List<Friend>>{
+                    override fun onResponse(
+                        call: Call<List<Friend>>,
+                        response: Response<List<Friend>>
+                    ) {
+                        if (response.isSuccessful) {
+                            val intent=Intent(applicationContext,RequestFriendActivity::class.java)
+                            intent.putExtra("friendList", response.body()?.toTypedArray())
+                            getFriendResult.launch(intent)
+
+
+                        } else {
+                            Log.e(TAG,"null return")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<List<Friend>>, t: Throwable) {
+                        Log.e(TAG,"통신 실패")
+                        t.printStackTrace()
+                    }
+
+                })
+
+
+
+        }
+
+        memberList.add(userCode.toString())
+
+
+
+        /* 로그 찍어보기 */
+        Log.e(TAG,"$memberList")
 
         /* 서버 통신 부분 */
         binding.courseMakeBtn.setOnClickListener {
 
-            val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
-            val userCode = sharedPreferences.getString(UID, null)
+
             val categoryC=if (!placeFlag) null else initCategoryC(binding.categoryListSpinner.selectedItem.toString())
             initUserGoalList()
             courseInput = Course(
                 binding.numPeopleTextView.text.toString().toInt(),
-                "강태호#01",//userCode
+                userCode,
                 memberList,
                 binding.startTimeTextView.text.toString().toInt(),
                 binding.endTimeTextView.text.toString().toInt(),

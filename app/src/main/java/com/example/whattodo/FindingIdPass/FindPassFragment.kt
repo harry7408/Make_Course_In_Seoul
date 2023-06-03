@@ -105,11 +105,11 @@ class FindPassFragment : Fragment() {
                 binding.male.isChecked -> binding.male.text.toString()
                 else -> binding.female.text.toString()
             }
-            val userData = User(
-                userId, null, userEmail,
-                userName, userBirth, userGender,
+            val userData = User(null,
+                userId, null,userName,null,
+                userEmail, userBirth, userGender,
                 null,null,null
-            ,null)
+            )
             val findPassCall = RetrofitAPI.findService.findPass(userData)
             findPassCall.enqueue(object : retrofit2.Callback<User> {
                 override fun onResponse(call: Call<User>, response: Response<User>) {

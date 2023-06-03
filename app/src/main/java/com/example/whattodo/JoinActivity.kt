@@ -235,8 +235,9 @@ class JoinActivity : AppCompatActivity() {
                 null,
                 binding.idArea.text.toString(),
                 binding.passArea.text.toString(),
-                binding.emailArea.text.toString(),
                 binding.nameArea.text.toString(),
+                null,
+                binding.emailArea.text.toString(),
                 binding.birthArea.text.toString(),
                 genderText, null, null, null
             )

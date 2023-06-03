@@ -17,10 +17,12 @@ data class User (
         val memberId:String?,
         @SerializedName("pw")
         val password:String?,
-        @SerializedName("email")
-        val email:String?,
         @SerializedName("name")
         val memberName:String?,
+        @SerializedName("addressName")
+        val address:String?,
+        @SerializedName("email")
+        val email:String?,
         @SerializedName("birthDate")
         val birthday:String?,
         @SerializedName("gender")
