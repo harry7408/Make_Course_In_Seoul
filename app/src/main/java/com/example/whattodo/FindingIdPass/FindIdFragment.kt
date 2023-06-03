@@ -114,7 +114,7 @@ class FindIdFragment : Fragment() {
                         val receiveData = response.body()
                         val builder = AlertDialog.Builder(context)
                         builder.setTitle("아이디")
-                        builder.setMessage("${receiveData?.memberId.toString()}입니다")
+                        builder.setMessage("${receiveData?.memberId.toString()} 입니다")
                         builder.setPositiveButton(
                             R.string.ok,
                             DialogInterface.OnClickListener { _, _ ->

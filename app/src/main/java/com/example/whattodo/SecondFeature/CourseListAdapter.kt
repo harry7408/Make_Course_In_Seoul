@@ -1,21 +1,29 @@
 package com.example.whattodo.SecondFeature
 
+import android.app.Activity
 import android.content.Context
+import android.media.Image
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.example.whattodo.R
 import com.example.whattodo.databinding.ItemCourseBinding
 import com.example.whattodo.datas.Store
 import net.daum.mf.map.api.MapPoint
 import org.osgeo.proj4j.CRSFactory
+import kotlin.coroutines.coroutineContext
 
-private const val TAG="CourseListAdapter"
+private const val TAG = "CourseListAdapter"
+
 class CourseListAdapter(private val itemClickListener: (MapPoint.GeoCoordinate) -> Unit) :
     RecyclerView.Adapter<CourseListAdapter.CourseListViewHolder>() {
 
-    private var stores= emptyList<Store>()
+    private var stores = emptyList<Store>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CourseListViewHolder {
         val inflater =
@@ -26,6 +34,14 @@ class CourseListAdapter(private val itemClickListener: (MapPoint.GeoCoordinate) 
 
     override fun onBindViewHolder(holder: CourseListViewHolder, position: Int) {
         val store = stores[position]
+
+        Log.e(TAG, "$store")
+        if (store.imgUrl.isNullOrEmpty()) {
+            holder.binding.storeImageView.setImageResource(R.drawable.no_images)
+        } else {
+            Glide.with(holder.itemView.context).load("http:${store.imgUrl}")
+                .into(holder.binding.storeImageView)
+        }
         holder.bind(store)
     }
 
@@ -43,17 +59,43 @@ class CourseListAdapter(private val itemClickListener: (MapPoint.GeoCoordinate) 
         RecyclerView.ViewHolder(binding.root) {
         fun bind(store: Store) {
             binding.storeNameTextView.text = store.placeName
+            binding.storeCategoryNameTextView.text = store.categoryName
             binding.storeAddressTextView.text = store.addressName
-            binding.storeImageView.setImageURI(store.imgUrl?.toUri())
-            binding.storePhoneTextView.text = store.phone
-            binding.storeCategoryNameTextView.text=store.categoryName
-            binding.avgRatingTextView.text="별점 : ${store.avgRating}(${store.ratingNum})"
-            binding.reviewNumTextView.text=store.reviewNum.toString()
-            binding.storeTagsTextView.text=store.tags
+            if (store.phone.isNullOrEmpty()) {
+                binding.storePhoneTextView.visibility = TextView.GONE
+                binding.phoneImageView.visibility = ImageView.INVISIBLE
+            } else {
+                binding.storePhoneTextView.text = store.phone
+            }
+
+            binding.avgRatingTextView.text = "${store.avgRating} (${store.ratingNum})"
+            binding.reviewNumTextView.text = "리뷰 (${store.reviewNum})"
+
+            if (store.tags.isNullOrEmpty()) {
+                binding.storeTagsTextView.visibility = TextView.GONE
+                binding.tagImageView.visibility = ImageView.INVISIBLE
+            } else {
+                binding.storeTagsTextView.text = store.tags
+            }
+
+            if (store.introduction.isNullOrEmpty()) {
+                binding.storeIntroTextView.visibility = TextView.GONE
+                binding.chiefImageView.visibility = ImageView.INVISIBLE
+            } else {
+                binding.storeIntroTextView.text = "사장님 한마디 : ${store.introduction}"
+            }
+
+            if (store.menu.isNullOrEmpty()) {
+                binding.storeMenuTextView.visibility = TextView.GONE
+            } else {
+                binding.storeMenuTextView.text = store.menu
+            }
+
+
 
             binding.root.setOnClickListener {
-                Log.e(TAG,"${store.y}, ${store.x}")
-                itemClickListener(MapPoint.GeoCoordinate(store.y,store.x))
+                Log.e(TAG, "${store.y}, ${store.x}")
+                itemClickListener(MapPoint.GeoCoordinate(store.y, store.x))
             }
         }
     }

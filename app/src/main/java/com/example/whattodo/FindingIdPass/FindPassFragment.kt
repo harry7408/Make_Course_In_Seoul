@@ -118,7 +118,7 @@ class FindPassFragment : Fragment() {
                         val receiveData = response.body()
                         val builder=AlertDialog.Builder(context)
                         builder.setTitle("비밀번호")
-                        builder.setMessage("${receiveData?.password.toString()}입니다")
+                        builder.setMessage("${receiveData?.password.toString()} 입니다")
                         builder.setPositiveButton(R.string.ok,
                             DialogInterface.OnClickListener { dialog, which ->
                             activity!!.finish()

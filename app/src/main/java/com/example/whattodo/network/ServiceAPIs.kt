@@ -46,13 +46,13 @@ interface withDrawAPI {
 /*여기 위까지는 제대로 동작하는 것 확인 완료 */
 
 // 코스 제작할 때 보낼 데이터 api
-/*interface courseAPI {
-    @POST("/makeCourse/test")
-    fun requestCourse() : Call<List<Course>>
-}*/
+interface courseAPI {
+    @POST("/makeCourse")
+    fun requestCourse(@Body course:Course) : Call<courseResponse>
+}
 
 
-/* 가게 테스트로 가게 데이터 받아오는 용도로 만든 api*/
+/* 테스트용 api */
 interface storeAPI {
     @POST("/makeCourse/test")
     fun requestStore():Call<List<Store>>
@@ -63,7 +63,9 @@ interface categoryAPI {
     fun requestCategoryList(@Body category:String) : Call<List<Store>>
 }
 
-interface addFriendAPI {
+
+/* 친구 추가 삭제는 나중에 고려 */
+/*interface addFriendAPI {
     @POST("")
     fun addFriend(@Body userId:String):Call<User>
 }
@@ -71,7 +73,7 @@ interface addFriendAPI {
 interface deleteFriendAPI {
     @POST("")
     fun deleteFriend(@Body userId:String):Call<String>
-}
+}*/
 
 
 

@@ -39,36 +39,83 @@
         tools:text="111111111"
         android:layout_marginTop="16dp"/>
 
+    <ImageView
+        android:id="@+id/starImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/star"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/storeDetailCategoryNameTextView" />
+
     <TextView
         android:id="@+id/storeDetailRatingTextView"
-        android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/storeDetailCategoryNameTextView"
+        android:layout_marginStart="8dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/starImageView"
+        app:layout_constraintStart_toEndOf="@id/starImageView"
+        app:layout_constraintTop_toTopOf="@id/starImageView"
         tools:text="aaaaaaaaa" />
 
     <TextView
         android:id="@+id/storeDetailIntroductionTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@+id/storeDetailRatingTextView"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chiefImageView"
+        app:layout_constraintStart_toEndOf="@+id/chiefImageView"
+        app:layout_constraintTop_toTopOf="@+id/chiefImageView"
         tools:text="dddddddddddddddd" />
+
+    <ImageView
+        android:id="@+id/chiefImageView"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/megaphone"
+        app:layout_constraintStart_toStartOf="@+id/starImageView"
+        app:layout_constraintTop_toBottomOf="@+id/starImageView" />
+
+    <ImageView
+        android:id="@+id/menuImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/menu"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/chiefImageView"
+        app:layout_constraintTop_toBottomOf="@+id/chiefImageView" />
 
     <TextView
         android:id="@+id/storeDetailMenuTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:maxLines="1"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/storeDetailIntroductionTextView"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/menuImageView"
+        app:layout_constraintStart_toEndOf="@+id/menuImageView"
+        app:layout_constraintTop_toTopOf="@+id/menuImageView"
         tools:text="dddddddddd" />
+
+    <ImageView
+        android:id="@+id/openImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/open"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@+id/menuImageView"
+        app:layout_constraintTop_toBottomOf="@+id/menuImageView" />
+
+    <TextView
+        android:id="@+id/storeDetailTimeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/openImageView"
+        app:layout_constraintStart_toEndOf="@+id/openImageView"
+        app:layout_constraintTop_toTopOf="@+id/openImageView"
+        tools:text="dddddd"
+        android:layout_marginStart="8dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/storeDetailMapButton"

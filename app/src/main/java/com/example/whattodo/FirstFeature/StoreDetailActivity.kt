@@ -4,8 +4,11 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityStoreDetailBinding
 import com.example.whattodo.datas.Coordinate
@@ -46,11 +49,32 @@ class StoreDetailActivity : AppCompatActivity() {
 
     private fun initStoreDetail(store :Store) {
         if (store?.imgUrl==null) {
-            binding.storeDetailImageView.setImageResource(R.drawable.noimage)
+            binding.storeDetailImageView.setImageResource(R.drawable.no_images)
         } else {
-            binding.storeDetailImageView.setImageURI(store?.imgUrl!!.toUri())
+            Glide.with(this).load("http:{${store.imgUrl}").into(binding.storeDetailImageView)
         }
         binding.storeDetailStoreNameTextView.text=store?.placeName
         /* 등등 초기화 */
+
+        binding.storeDetailCategoryNameTextView.text=store?.categoryName
+        binding.storeDetailRatingTextView.text="${store.avgRating} (${store.ratingNum}) | 리뷰 (${store.reviewNum})"
+
+        if (store?.introduction.isNullOrEmpty()) {
+            binding.storeDetailIntroductionTextView.text="사장님의 한마디가 없습니다"
+        } else {
+            binding.storeDetailIntroductionTextView.text=store?.introduction
+        }
+
+        if (store?.menu.isNullOrEmpty()) {
+            binding.storeDetailMenuTextView.text="준비 중입니다"
+        } else {
+            binding.storeDetailMenuTextView.text=store?.menu
+        }
+        if (store?.time.isNullOrEmpty()) {
+            binding.storeDetailTimeTextView.text="준비 중입니다"
+        } else {
+            binding.storeDetailTimeTextView.text=store?.time
+        }
+
     }
 }

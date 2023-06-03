@@ -26,11 +26,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
-    <TextView
+    <EditText
         android:id="@+id/numPeopleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00"
+        android:hint="N"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/PeopleText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,8 +42,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="명"
-        app:layout_constraintBaseline_toBottomOf="@id/numPeopleTextView"
-        app:layout_constraintStart_toEndOf="@+id/numPeopleTextView" />
+
+        app:layout_constraintBottom_toBottomOf="@+id/numPeopleTextView"
+        app:layout_constraintStart_toEndOf="@+id/numPeopleTextView"
+        app:layout_constraintTop_toTopOf="@+id/numPeopleTextView" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -66,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="XX"
+        android:text="00"
         app:layout_constraintBottom_toBottomOf="@id/TimeText"
         app:layout_constraintEnd_toEndOf="@+id/endTimeTextView"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -87,7 +89,7 @@
         android:id="@+id/endTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="XX"
+        android:text="00"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/TimeText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +151,7 @@
             android:id="@+id/checkbox3"
             android:layout_column="2"
             android:layout_row="0"
-            android:text="분위기좋음"/>
+            android:text="분위기"/>
         <CheckBox
             android:id="@+id/checkbox4"
             android:layout_column="0"

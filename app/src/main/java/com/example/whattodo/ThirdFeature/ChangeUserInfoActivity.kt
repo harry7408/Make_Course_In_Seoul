@@ -42,11 +42,11 @@ class ChangeUserInfoActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.surveyChangeCardView.setOnClickListener {
+        /*binding.surveyChangeCardView.setOnClickListener {
             val intent=Intent(this,FirstSurveyActivity::class.java)
             intent.putExtra("reSurvey",true)
             startActivity(intent)
-        }
+        }*/
     }
 
     /* 툴바에서 <- 눌렀을때 이벤트 처리 */

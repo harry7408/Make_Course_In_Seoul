@@ -8,11 +8,11 @@ import kotlinx.parcelize.Parcelize
 /* 하나의 가게 정보를 받을 데이터 => 서버의 PlaceDto와 일치하도록 하기 */
 data class Store (
     @SerializedName("id")
-    val id:Int,
+    val id:Int?,
     @SerializedName("categoryName")
     val categoryName: String?,
     @SerializedName("placeName")
-    val placeName: String,
+    val placeName: String?,
     @SerializedName("rating")
     val avgRating: Double?,
     @SerializedName("ratingNum")
@@ -20,7 +20,7 @@ data class Store (
     @SerializedName("reviewNum")
     val reviewNum: Int?,
     @SerializedName("addressName")
-    val addressName: String,
+    val addressName: String?,
     @SerializedName("x")
     val x: Double,
     @SerializedName("y")

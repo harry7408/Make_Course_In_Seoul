@@ -14,8 +14,10 @@ data class Courses(
 data class Course(
     @SerializedName("numPeople")
     val numPeople: Int,
+    @SerializedName("userCode")
+    val userCode:String?,
     @SerializedName("memberIdList")
-    val memberIdList: List<Long>?,
+    val memberIdList: List<String>?,
     @SerializedName("startTime")
     val startTime: Int,
     @SerializedName("finishTime")
@@ -24,8 +26,8 @@ data class Course(
     val mealFlag: Boolean,
     @SerializedName("wantedCategory")
     val essentialPlace: String?,
-    @SerializedName("categoryC")
-    val categoryC:String,
+    @SerializedName("wantedCategoryGroup")
+    val categoryC:String?,
     @SerializedName("goals")
     val specification: List<Int>,
 ) : Parcelable
