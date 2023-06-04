@@ -70,10 +70,12 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
 
     override fun onClick(category: Category) {
         val serverRequest = category.title
+        Log.e(TAG,"$serverRequest")
         val requestCall = RetrofitAPI.requestCategoryService.requestCategoryList(serverRequest)
             .enqueue(object : Callback<List<Store>> {
                 override fun onResponse(call: Call<List<Store>>, response: Response<List<Store>>) {
                     if (response.isSuccessful) {
+                        Log.e(TAG,"${response.body()}")
                         val responseData = ArrayList<Store>()
                         response.body()?.let { it1 -> responseData.addAll(it1) }
                         val intent = Intent(activity, StoreListShowActivity::class.java)
@@ -87,7 +89,6 @@ class PlaceFragment : Fragment(), PlaceFragmentAdapter.ItemClickListener {
                 override fun onFailure(call: Call<List<Store>>, t: Throwable) {
                     t.printStackTrace()
                 }
-
             })
 
     }

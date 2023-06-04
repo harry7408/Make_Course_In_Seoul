@@ -13,22 +13,22 @@
         android:scaleType="fitXY"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
-        android:src="@drawable/ic_launcher_background"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/storeNameTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         tools:text="가게이름"
-        android:textSize="20sp"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@id/storeImageView"
         app:layout_constraintTop_toTopOf="@id/storeImageView"
         android:layout_marginStart="8dp"
-        app:layout_constraintHorizontal_bias="0.2"/>
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_chainStyle="packed"/>
 
 
     <TextView

@@ -53,6 +53,7 @@ class PasswordChangeActivity : AppCompatActivity() {
                 sharedPreferences.getFloat(ACTIVITY, 0.0f).toDouble(),
             )
 
+
             if (!binding.oldPassEditText.text.equals(currentPass).not()) {
                 Toast.makeText(this, "기존 비밀번호가 일치하지 않습니다", Toast.LENGTH_SHORT).show()
             } else if (checkPass(binding.newPassEditText.text.toString()).matches().not()) {

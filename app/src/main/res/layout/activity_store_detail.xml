@@ -8,10 +8,9 @@
 
     <ImageView
         android:id="@+id/storeDetailImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_launcher_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,6 +23,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storeDetailImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         tools:text="111111111"
         android:textSize="20sp"
         android:textColor="@color/black"
@@ -37,6 +38,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/storeDetailStoreNameTextView"
         tools:text="111111111"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         android:layout_marginTop="16dp"/>
 
     <ImageView
@@ -58,23 +61,29 @@
         app:layout_constraintBottom_toBottomOf="@+id/starImageView"
         app:layout_constraintStart_toEndOf="@id/starImageView"
         app:layout_constraintTop_toTopOf="@id/starImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         tools:text="aaaaaaaaa" />
 
     <TextView
         android:id="@+id/storeDetailIntroductionTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintBottom_toBottomOf="@+id/chiefImageView"
         app:layout_constraintStart_toEndOf="@+id/chiefImageView"
         app:layout_constraintTop_toTopOf="@+id/chiefImageView"
+        android:maxLines="2"
+        android:ellipsize="end"
         tools:text="dddddddddddddddd" />
 
     <ImageView
         android:id="@+id/chiefImageView"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:src="@drawable/megaphone"
         app:layout_constraintStart_toStartOf="@+id/starImageView"
         app:layout_constraintTop_toBottomOf="@+id/starImageView" />
@@ -84,18 +93,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/menu"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@+id/chiefImageView"
         app:layout_constraintTop_toBottomOf="@+id/chiefImageView" />
 
     <TextView
         android:id="@+id/storeDetailMenuTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/menuImageView"
         app:layout_constraintStart_toEndOf="@+id/menuImageView"
         app:layout_constraintTop_toTopOf="@+id/menuImageView"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintHorizontal_chainStyle="packed"
         tools:text="dddddddddd" />
 
     <ImageView
@@ -103,14 +116,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/open"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@+id/menuImageView"
         app:layout_constraintTop_toBottomOf="@+id/menuImageView" />
 
     <TextView
         android:id="@+id/storeDetailTimeTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        android:maxLines="5"
+        android:ellipsize="end"
         app:layout_constraintBottom_toBottomOf="@+id/openImageView"
         app:layout_constraintStart_toEndOf="@+id/openImageView"
         app:layout_constraintTop_toTopOf="@+id/openImageView"
@@ -118,29 +135,43 @@
         android:layout_marginStart="8dp"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/storeDetailMapButton"
+        android:id="@+id/menuFloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:clickable="true"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="48dp"
+        android:src="@drawable/plus"
+        app:backgroundTint="@color/yellow_color"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="@color/yellow_color"
-        app:layout_constraintEnd_toStartOf="@+id/storeDetailCallButton"
-        tools:srcCompat="@drawable/ic_baseline_call_24" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/storeDetailCallButton"
+        android:id="@+id/storeDetailCallFloatingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:clickable="true"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="@color/yellow_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@drawable/map" />
+        android:clickable="true"
+        android:contentDescription="전화걸기"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/storeDetailMapFloatingButton"
+        app:layout_constraintEnd_toEndOf="@+id/storeDetailMapFloatingButton"
+        app:layout_constraintStart_toStartOf="@+id/menuFloatingActionButton"
+        android:src="@drawable/ic_baseline_call_24" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/storeDetailMapFloatingButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/yellow_color"
+        android:clickable="true"
+        android:visibility="gone"
+        android:contentDescription="지도보기"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/menuFloatingActionButton"
+        app:layout_constraintEnd_toEndOf="@+id/menuFloatingActionButton"
+        app:layout_constraintStart_toStartOf="@+id/menuFloatingActionButton"
+        android:src="@drawable/map" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

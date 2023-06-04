@@ -12,6 +12,7 @@ import com.example.whattodo.databinding.ItemFriendBinding
 import com.example.whattodo.datas.Friend
 
 class FriendCourseAdapter :ListAdapter<Friend,FriendCourseAdapter.FriendCourseViewHolder>(diffUtil) {
+    var checkedItemList= ArrayList<String>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FriendCourseViewHolder {
         return FriendCourseViewHolder(ItemCourseFriendBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -36,6 +37,11 @@ class FriendCourseAdapter :ListAdapter<Friend,FriendCourseAdapter.FriendCourseVi
             binding.friendCodeTextView.text = friend.userCode
 
             binding.checkBox.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    friend.userCode?.let { checkedItemList.add(it) }
+                } else {
+                    checkedItemList.remove(friend.userCode)
+                }
             }
         }
     }

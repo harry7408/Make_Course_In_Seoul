@@ -36,13 +36,10 @@ private const val TAG = "CourseListShowActivity"
 class CourseListShowActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCourseListShowBinding
-
-
     private var mapFlag = false
     private lateinit var serverOutput: ArrayList<Store>
 
     private var markers = ArrayList<MapPOIItem>()
-
 
     private var storeAdapter = CourseListAdapter {
         collapseBottomSheet()
@@ -78,8 +75,6 @@ class CourseListShowActivity : AppCompatActivity() {
             ), true
         )
         binding.mapView.setZoomLevel(2, true)
-
-
     }
 
     private fun collapseBottomSheet() {
@@ -102,7 +97,7 @@ class CourseListShowActivity : AppCompatActivity() {
     /* 마커 찍기와 선 긋는 부분 */
     private fun setMarker(stores: ArrayList<Store>) {
         val polyLine = MapPolyline()
-        polyLine.lineColor = (Color.argb(128, 255, 105, 180))
+        polyLine.lineColor = (Color.argb(128, 51, 102, 51))
         val marker = MapPOIItem()
         stores.forEachIndexed { index, store ->
             marker.apply {
@@ -143,7 +138,7 @@ class CourseListShowActivity : AppCompatActivity() {
         binding.mapView.onSurfaceDestroyed()
     }
 
-    inner class CustomBalloonAdapter(private val context: Context) : CalloutBalloonAdapter {
+   /* inner class CustomBalloonAdapter(private val context: Context) : CalloutBalloonAdapter {
         val inflater = LayoutInflater.from(context)
         val view = inflater.inflate(R.layout.custom_balloon, null)
 
@@ -155,7 +150,7 @@ class CourseListShowActivity : AppCompatActivity() {
         override fun getPressedCalloutBalloon(p0: MapPOIItem?): View? {
             return null
         }
-    }
+    }*/
 
 
     private fun initMarker(store: Store): Int {
@@ -236,6 +231,7 @@ class CourseListShowActivity : AppCompatActivity() {
             "전시관" -> R.drawable.d_74
             "공연장&연극극장" -> R.drawable.d_75
             "영화관" -> R.drawable.d_76
+            "음식점"->R.drawable.restaurant
             else -> {
                 R.drawable.else_marker
             }

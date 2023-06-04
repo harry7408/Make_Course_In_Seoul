@@ -23,7 +23,7 @@ class StoreGetAdapter(private val onClick: (Store)->Unit):ListAdapter<Store,Stor
 
     override fun onBindViewHolder(holder: MapGetViewHolder, position: Int) {
         val store=currentList[position]
-        if (store.imgUrl == null) {
+        if (store.imgUrl.isNullOrEmpty()) {
             holder.binding.storeImageView.setImageResource(R.drawable.no_images)
         } else {
             Glide.with(holder.itemView.context).load("http:${store.imgUrl}")
@@ -38,7 +38,7 @@ class StoreGetAdapter(private val onClick: (Store)->Unit):ListAdapter<Store,Stor
             fun bind(store: Store) {
                 binding.storeNameTextView.text=store.placeName
                 binding.storeAddressTextView.text=store.addressName
-                binding.ReviewTextView.text="${store.avgRating.toString()} (${store.reviewNum})"
+                binding.ReviewTextView.text="${store.avgRating.toString()}"
                 binding.root.setOnClickListener {
                     onClick(store)
                 }

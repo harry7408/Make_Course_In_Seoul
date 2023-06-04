@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitAPI {
 //    10.0.2.2 로컬에서 테스트할 때
-    private const val BASE_URL="http://54.180.96.247:8080"
+    private const val BASE_URL="http://43.201.23.126:8080"
 
    val client=OkHttpClient.Builder()
        .connectTimeout(1,TimeUnit.HOURS)
@@ -29,7 +29,6 @@ object RetrofitAPI {
     val changeService:ChangePassAPI= retrofit.create(ChangePassAPI::class.java)
     val deleteService: withDrawAPI=retrofit.create(withDrawAPI::class.java)
     val courseService : courseAPI=retrofit.create(courseAPI::class.java)
-    val storeService:storeAPI=retrofit.create(storeAPI::class.java)
 //    val addFriendService:addFriendAPI= retrofit.create(addFriendAPI::class.java)
     val requestCategoryService:categoryAPI=retrofit.create(categoryAPI::class.java)
     val requestFriendService:getFriendAPI=retrofit.create(getFriendAPI::class.java)

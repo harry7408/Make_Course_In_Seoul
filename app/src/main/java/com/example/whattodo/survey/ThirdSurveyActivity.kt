@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.CheckBox
+import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.view.children
 import com.example.whattodo.MainActivity
@@ -31,6 +32,7 @@ class ThirdSurveyActivity : AppCompatActivity() {
     private var extraFatigue: Double = 0.0
     private var extraExotic: Double = 0.0
     private var extraActive: Double = 0.0
+    var checkedCount = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,59 +52,61 @@ class ThirdSurveyActivity : AppCompatActivity() {
         Log.e(TAG, "$fatigue, $exotic, $active")
 
         binding.finishTextView.setOnClickListener {
-            checkCheckBox()
-            val currentUser = User(
-                null,
-                memberData?.memberId,
-                memberData?.password,
-                memberData?.memberName,
-                null,
-                memberData?.email,
-                memberData?.birthday,
-                memberData?.gender,
-                (fatigue + extraFatigue).div(4),
-                (exotic + extraExotic).div(4),
-                (active + extraActive).div(4)
-            )
+            if (checkedCount != 3) {
+                Toast.makeText(this, "3개를 체크해주세요", Toast.LENGTH_SHORT).show()
+            } else {
+                checkCheckBox()
+                val currentUser = User(
+                    null,
+                    memberData?.memberId,
+                    memberData?.password,
+                    memberData?.memberName,
+                    null,
+                    memberData?.email,
+                    memberData?.birthday,
+                    memberData?.gender,
+                    (fatigue + extraFatigue).div(4),
+                    (exotic + extraExotic).div(4),
+                    (active + extraActive).div(4)
+                )
 
-            val joinCall = RetrofitAPI.joinService.Join(currentUser)
-            joinCall.enqueue(object : retrofit2.Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
-                    if (response.isSuccessful) {
-                        val builder = android.app.AlertDialog.Builder(this@ThirdSurveyActivity)
-                        builder.setMessage("회원가입 성공")
-                        builder.setPositiveButton(
-                            R.string.ok,
-                            DialogInterface.OnClickListener { dialog, which ->
-                                val intent =
-                                    Intent(this@ThirdSurveyActivity, MainActivity::class.java)
-                                intent.flags =
-                                    Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
-                                startActivity(intent)
-                            })
-                        builder.create()
-                        builder.show()
+                val joinCall = RetrofitAPI.joinService.Join(currentUser)
+                joinCall.enqueue(object : retrofit2.Callback<User> {
+                    override fun onResponse(call: Call<User>, response: Response<User>) {
+                        if (response.isSuccessful) {
+                            val builder = android.app.AlertDialog.Builder(this@ThirdSurveyActivity)
+                            builder.setMessage("회원가입 성공")
+                            builder.setPositiveButton(
+                                R.string.ok,
+                                DialogInterface.OnClickListener { dialog, which ->
+                                    val intent =
+                                        Intent(this@ThirdSurveyActivity, MainActivity::class.java)
+                                    intent.flags =
+                                        Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+                                    startActivity(intent)
+                                })
+                            builder.create()
+                            builder.show()
 
-                    } else {
-                        Log.d(TAG, "null returned")
+                        } else {
+                            Log.d(TAG, "null returned")
+                        }
                     }
-                }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
-                    Log.d(TAG, "FAILURE")
-                    t.printStackTrace()
-                    call.cancel()
-                }
-            })
+                    override fun onFailure(call: Call<User>, t: Throwable) {
+                        Log.d(TAG, "FAILURE")
+                        t.printStackTrace()
+                        call.cancel()
+                    }
+                })
+            }
+
         }
-
-
     }
 
     /* 체크 갯수 제한 */
     private fun limitCheckBoxCount() {
-        val maxCheck = 2
-        var checkedCount = 0
+        val maxCheck = 3
         binding.listGridLayout.children.forEachIndexed { index, view ->
             if (view is CheckBox) {
                 view.setOnCheckedChangeListener { _, isChecked ->
@@ -220,6 +224,11 @@ class ThirdSurveyActivity : AppCompatActivity() {
             extraFatigue += 45.0
             extraExotic += 0.0
             extraActive += 45.0
+        }
+        if (binding.check21.isChecked) {
+            extraFatigue += 40
+            extraExotic += 20
+            extraActive += 25
         }
     }
 }

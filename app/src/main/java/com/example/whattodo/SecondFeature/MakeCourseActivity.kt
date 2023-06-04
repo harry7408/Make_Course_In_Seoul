@@ -40,16 +40,16 @@ class MakeCourseActivity : AppCompatActivity() {
     private var startTimeValue: Int = 0
     private var endTimeValue: Int = 0
     private lateinit var courseInput: Course
+    private lateinit var userCode: String
 
-    private val getFriendResult=registerForActivityResult(
+    private val getFriendResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
-    ) {
-        result->
-        val friendList=result.data?.getStringArrayListExtra("friendList") ?: emptyArray<Friend>()
-
-        memberList.addAll(listOf(friendList.toString()))
+    ) { result ->
+        val friendList = result.data?.getStringArrayListExtra("finish") ?: emptyArray<String>()
+        if (result.resultCode == 1) {
+            memberList.addAll(listOf(friendList.toString()))
+        }
     }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +72,6 @@ class MakeCourseActivity : AppCompatActivity() {
         checkMenu(placeFlag)
         limitCheckCount()
         val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
-        val userCode = sharedPreferences.getString(UID, null)
 
         binding.chipGroup1.setOnCheckedStateChangeListener { _, _ ->
             when (findViewById<Chip>(binding.chipGroup1.checkedChipId).text.toString()) {
@@ -97,49 +96,48 @@ class MakeCourseActivity : AppCompatActivity() {
         }
 
 
-
         /* 친구목록 불러오기 부분 */
         binding.friendFindActionButton.setOnClickListener {
-            val friendRequestCall=RetrofitAPI.requestFriendService
-                .getFriendList(userCode.toString()).enqueue(object:Callback<List<Friend>>{
+            val userCode = sharedPreferences.getString(UID, null)
+            Log.e(TAG, "$userCode")
+            val friendRequestCall = RetrofitAPI.requestFriendService
+                .getFriendList(userCode!!).enqueue(object : Callback<List<Friend>> {
                     override fun onResponse(
                         call: Call<List<Friend>>,
                         response: Response<List<Friend>>
                     ) {
                         if (response.isSuccessful) {
-                            val intent=Intent(applicationContext,RequestFriendActivity::class.java)
-                            intent.putExtra("friendList", response.body()?.toTypedArray())
+                            val responseData = ArrayList<Friend>()
+                            response.body()?.let {
+                                responseData.addAll(it)
+                            }
+
+                            val intent =
+                                Intent(applicationContext, RequestFriendActivity::class.java)
+                            intent.putExtra("friendList", responseData)
                             getFriendResult.launch(intent)
-
-
                         } else {
-                            Log.e(TAG,"null return")
+                            Log.e(TAG, "null return")
                         }
                     }
 
                     override fun onFailure(call: Call<List<Friend>>, t: Throwable) {
-                        Log.e(TAG,"통신 실패")
+                        Log.e(TAG, "통신 실패")
                         t.printStackTrace()
                     }
-
                 })
-
-
-
         }
 
-        memberList.add(userCode.toString())
-
-
-
-        /* 로그 찍어보기 */
-        Log.e(TAG,"$memberList")
 
         /* 서버 통신 부분 */
         binding.courseMakeBtn.setOnClickListener {
-
-
-            val categoryC=if (!placeFlag) null else initCategoryC(binding.categoryListSpinner.selectedItem.toString())
+            val userCode = sharedPreferences.getString(UID, null)
+            Log.e(TAG, "$userCode")
+            memberList.add(userCode.toString())
+            /* 로그 찍어보기 */
+            Log.e(TAG, "$memberList")
+            val categoryC =
+                if (!placeFlag) null else initCategoryC(binding.categoryListSpinner.selectedItem.toString())
             initUserGoalList()
             courseInput = Course(
                 binding.numPeopleTextView.text.toString().toInt(),
@@ -175,7 +173,6 @@ class MakeCourseActivity : AppCompatActivity() {
                                             )
                                         }
                                     }
-
                                     val intent =
                                         Intent(
                                             this@MakeCourseActivity,
@@ -197,34 +194,6 @@ class MakeCourseActivity : AppCompatActivity() {
 
                         })
             }.start()
-            /* 여기서 서버랑 통신하고 받은 response data를 다음 페이지에 넘겨줘야함 */
-            /*val makeCourseCall =
-                RetrofitAPI.storeService.requestStore().enqueue(object : Callback<List<Store>> {
-                    override fun onResponse(
-                        call: Call<List<Store>>,
-                        response: Response<List<Store>>
-                    ) {
-                        if (response.isSuccessful) {
-                            Log.e(TAG, "SUCCESS")
-                            Log.d(TAG, "${response.body()}")
-                            val responseData = ArrayList<Store>()
-                            response.body()?.let { it1 -> responseData.addAll(it1) }
-                            val intent =
-                                Intent(this@MakeCourseActivity, CourseListShowActivity::class.java)
-                            intent.putExtra("response", responseData)
-                            startActivity(intent)
-                        } else {
-                            Log.e(TAG, "CONNECTED BUT NOT SUCCESS")
-                            Log.e(TAG, "${response.body()}")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<List<Store>>, t: Throwable) {
-                        Log.e(TAG, "Error Occur")
-                        Log.e(TAG, "${call.toString()}")
-                    }
-
-                })*/
         }
     }
 

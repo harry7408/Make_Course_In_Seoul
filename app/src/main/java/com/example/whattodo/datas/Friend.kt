@@ -7,9 +7,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Friend(
     @SerializedName("userCode")
-    val userCode:String,
+    val userCode:String?,
     @SerializedName("name")
-    val userName:String,
+    val userName:String?,
     @SerializedName("gender")
-    val userGender:String,
+    val userGender:String?,
 ) : Parcelable

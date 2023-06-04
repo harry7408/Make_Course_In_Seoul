@@ -45,7 +45,9 @@ class MainInfoActivity : AppCompatActivity() {
         myAdapter.addFragment(CourseFragment())
         myAdapter.addFragment(MypageFragment())
         binding.viewpager.adapter = myAdapter
-
+        val sharedPreferences=getSharedPreferences(USER_INFO, MODE_PRIVATE)
+        val userCode=sharedPreferences.getString(UID,null)
+        Log.e(TAG,"$userCode")
         binding.viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)

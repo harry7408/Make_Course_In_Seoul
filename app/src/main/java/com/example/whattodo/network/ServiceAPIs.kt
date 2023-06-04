@@ -43,7 +43,7 @@ interface withDrawAPI {
     fun delete(@Body user:User):Call<String>
 }
 
-/*여기 위까지는 제대로 동작하는 것 확인 완료 */
+/*여기 위까지는 제대로 동작하는 것 확인 완료, 비번 변경만 db 관련 이슈인듯 */
 
 // 코스 제작할 때 보낼 데이터 api
 interface courseAPI {
@@ -51,15 +51,8 @@ interface courseAPI {
     fun requestCourse(@Body course:Course) : Call<courseResponse>
 }
 
-
-/* 테스트용 api */
-interface storeAPI {
-    @POST("/makeCourse/test")
-    fun requestStore():Call<List<Store>>
-}
-
 interface categoryAPI {
-    @POST("")
+    @POST("/categoryPlace")
     fun requestCategoryList(@Body category:String) : Call<List<Store>>
 }
 
@@ -71,14 +64,16 @@ interface getFriendAPI {
 
 /* 친구 추가 삭제는 나중에 고려 */
 /*interface addFriendAPI {
-    @POST("")
+    @POST("/member/friend/add")
     fun addFriend(@Body userId:String):Call<User>
 }
 
 interface deleteFriendAPI {
-    @POST("")
+    @POST("/member/friend/delete")
     fun deleteFriend(@Body userId:String):Call<String>
 }*/
+
+
 
 
 
