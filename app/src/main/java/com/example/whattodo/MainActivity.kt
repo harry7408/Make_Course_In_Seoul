@@ -92,8 +92,8 @@ class MainActivity : AppCompatActivity() {
                             putFloat(ACTIVITY, responseData.active!!.toFloat())
                         }.apply()
 
-
-                     val intent = Intent(applicationContext, MainInfoActivity::class.java)
+                        val intent = Intent(applicationContext, MainInfoActivity::class.java)
+                        intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         startActivity(intent)
                     } else {
                         Log.e(TAG, "Null return")

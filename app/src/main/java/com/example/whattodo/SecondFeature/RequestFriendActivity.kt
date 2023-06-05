@@ -17,7 +17,7 @@ class RequestFriendActivity : AppCompatActivity() {
 
     private lateinit var binding:ActivityRequestFriendBinding
     private var friendAdapter=FriendCourseAdapter()
-    private lateinit var submitList:ArrayList<String>
+    private var friendList= ArrayList<String>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,8 +56,9 @@ class RequestFriendActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
     private fun actionCheckFinish() {
-        submitList=friendAdapter.checkedItemList
-        val intent= Intent().putExtra("finish",submitList)
+        friendList=friendAdapter.checkedItemList
+        Log.e(TAG,"$friendList")
+        val intent= Intent().putExtra("finish",friendList)
         setResult(1,intent)
         finish()
     }

@@ -23,6 +23,7 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
+
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,33 +99,33 @@
         android:id="@+id/phoneImageView"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/telephone"
-        app:layout_constraintStart_toStartOf="@+id/avgRatingImageView"
+        app:layout_constraintStart_toStartOf="@+id/storeAddressTextView"
         app:layout_constraintTop_toBottomOf="@+id/avgRatingImageView" />
 
     <TextView
         android:id="@+id/storePhoneTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
         android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/phoneImageView"
         app:layout_constraintStart_toEndOf="@+id/phoneImageView"
-        app:layout_constraintTop_toBottomOf="@+id/avgRatingImageView"
+        app:layout_constraintTop_toTopOf="@+id/phoneImageView"
         tools:text="0000000" />
 
     <ImageView
         android:id="@+id/tagImageView"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="6dp"
         android:src="@drawable/tag"
-        app:layout_constraintStart_toStartOf="@+id/phoneImageView"
-        app:layout_constraintTop_toBottomOf="@+id/storePhoneTextView" />
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/storeAddressTextView"
+        app:layout_constraintTop_toBottomOf="@+id/phoneImageView" />
 
     <TextView
         android:id="@+id/storeTagsTextView"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintHorizontal_chainStyle="packed"
@@ -132,7 +133,7 @@
         app:layout_constraintTop_toTopOf="@id/tagImageView"
         app:layout_constraintBottom_toBottomOf="@id/tagImageView"
         android:layout_marginStart="8dp"
-        android:maxLines="1"
+        android:maxLines="2"
         android:ellipsize="end"
         tools:text="ddddddd" />
 
@@ -140,37 +141,65 @@
         android:id="@+id/chiefImageView"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="12dp"
         android:src="@drawable/megaphone"
-        app:layout_constraintStart_toStartOf="@+id/tagImageView"
+        app:layout_constraintStart_toStartOf="@+id/storeAddressTextView"
         app:layout_constraintTop_toBottomOf="@+id/tagImageView" />
 
     <TextView
         android:id="@+id/storeIntroTextView"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintHorizontal_bias="0"
+        android:ellipsize="end"
+        android:maxLines="2"
+        app:layout_constraintBottom_toBottomOf="@+id/chiefImageView"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/chiefImageView"
         app:layout_constraintTop_toTopOf="@+id/chiefImageView"
-        android:maxLines="1"
-        android:ellipsize="end"
         tools:text="ddddddddd" />
+
+    <ImageView
+        android:id="@+id/menuImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/menu"
+        app:layout_constraintStart_toStartOf="@+id/storeAddressTextView"
+        app:layout_constraintTop_toBottomOf="@+id/chiefImageView" />
 
     <TextView
         android:id="@+id/storeMenuTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="1dp"
         android:ellipsize="end"
         android:singleLine="true"
-        app:layout_constraintStart_toStartOf="@id/tagImageView"
-        app:layout_constraintTop_toBottomOf="@id/storeIntroTextView"
-        tools:layout_editor_absoluteX="72dp"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintBottom_toBottomOf="@+id/menuImageView"
         app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/menuImageView"
+        app:layout_constraintTop_toTopOf="@+id/menuImageView"
         tools:text="aaaaaaaaaaaaaaaaaaaa" />
+
+    <ImageView
+        android:id="@+id/timeImageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/open"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="@+id/storeAddressTextView"
+        app:layout_constraintTop_toBottomOf="@id/menuImageView" />
+
+    <TextView
+        android:id="@+id/storeOpenTextView"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@id/timeImageView"
+        app:layout_constraintStart_toEndOf="@+id/timeImageView"
+        app:layout_constraintTop_toTopOf="@+id/timeImageView"
+        tools:text="ddddddddddddd" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

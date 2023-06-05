@@ -21,7 +21,7 @@
 
     <EditText
         android:id="@+id/idArea"
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
@@ -33,7 +33,7 @@
 
     <Button
         android:id="@+id/idCheck"
-        android:layout_width="80dp"
+        android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"

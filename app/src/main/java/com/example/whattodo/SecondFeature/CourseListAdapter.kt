@@ -63,7 +63,7 @@ class CourseListAdapter(private val itemClickListener: (MapPoint.GeoCoordinate) 
             binding.storeAddressTextView.text = store.addressName
             if (store.phone.isNullOrEmpty()) {
                 binding.storePhoneTextView.visibility = TextView.GONE
-                binding.phoneImageView.visibility = ImageView.INVISIBLE
+                binding.phoneImageView.visibility = ImageView.GONE
             } else {
                 binding.storePhoneTextView.text = store.phone
             }
@@ -73,22 +73,29 @@ class CourseListAdapter(private val itemClickListener: (MapPoint.GeoCoordinate) 
 
             if (store.tags.isNullOrEmpty()) {
                 binding.storeTagsTextView.visibility = TextView.GONE
-                binding.tagImageView.visibility = ImageView.INVISIBLE
+                binding.tagImageView.visibility = ImageView.GONE
             } else {
                 binding.storeTagsTextView.text = store.tags
             }
 
             if (store.introduction.isNullOrEmpty()) {
                 binding.storeIntroTextView.visibility = TextView.GONE
-                binding.chiefImageView.visibility = ImageView.INVISIBLE
+                binding.chiefImageView.visibility = ImageView.GONE
             } else {
                 binding.storeIntroTextView.text = "사장님 한마디 : ${store.introduction}"
             }
 
             if (store.menu.isNullOrEmpty()) {
                 binding.storeMenuTextView.visibility = TextView.GONE
+                binding.menuImageView.visibility=ImageView.GONE
             } else {
                 binding.storeMenuTextView.text = store.menu
+            }
+            if (store.time.isNullOrEmpty()) {
+                binding.storeOpenTextView.visibility=TextView.GONE
+                binding.timeImageView.visibility=ImageView.GONE
+            } else {
+                binding.storeOpenTextView.text=store.time
             }
 
 

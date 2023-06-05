@@ -65,9 +65,9 @@ class ThirdSurveyActivity : AppCompatActivity() {
                     memberData?.email,
                     memberData?.birthday,
                     memberData?.gender,
-                    (fatigue + extraFatigue).div(4),
-                    (exotic + extraExotic).div(4),
-                    (active + extraActive).div(4)
+                    (fatigue + extraFatigue).div(3),
+                    (exotic + extraExotic).div(3),
+                    (active + extraActive).div(3)
                 )
 
                 val joinCall = RetrofitAPI.joinService.Join(currentUser)

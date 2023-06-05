@@ -19,6 +19,7 @@ import com.example.whattodo.R
 import com.example.whattodo.databinding.ActivityStoreDetailBinding
 import com.example.whattodo.datas.Coordinate
 import com.example.whattodo.datas.Store
+import com.shashank.sony.fancytoastlib.FancyToast
 
 
 private const val TAG="StoreDetailActivity"
@@ -47,7 +48,8 @@ class StoreDetailActivity : AppCompatActivity() {
 
         binding.storeDetailCallFloatingButton.setOnClickListener {
             if (clickedStore?.phone.isNullOrEmpty()) {
-                Toast.makeText(this,"전화번호가 없습니다",Toast.LENGTH_SHORT).show()
+                FancyToast.makeText(this,"전화번호가 없습니다",FancyToast.LENGTH_SHORT,
+                FancyToast.DEFAULT,R.drawable.nocall,false).show()
             } else {
                 val intent=Intent(Intent.ACTION_VIEW, Uri.parse("tel:${clickedStore!!.phone}"))
                 startActivity(intent)

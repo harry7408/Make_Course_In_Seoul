@@ -45,12 +45,14 @@ class MakeCourseActivity : AppCompatActivity() {
     private val getFriendResult = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
-        val friendList = result.data?.getStringArrayListExtra("finish") ?: emptyArray<String>()
         if (result.resultCode == 1) {
-            memberList.addAll(listOf(friendList.toString()))
+            val friendList=result.data?.getStringArrayListExtra("finish")
+            Log.e(TAG,"$friendList")
+            friendList?.let { memberList.addAll(it.subList(0,friendList.size)) }
+
+            binding.numPeopleTextView.text=(memberList.size+1).toString()
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +74,7 @@ class MakeCourseActivity : AppCompatActivity() {
         checkMenu(placeFlag)
         limitCheckCount()
         val sharedPreferences = getSharedPreferences(USER_INFO, MODE_PRIVATE)
+        userCode= sharedPreferences.getString(UID,null)!!
 
         binding.chipGroup1.setOnCheckedStateChangeListener { _, _ ->
             when (findViewById<Chip>(binding.chipGroup1.checkedChipId).text.toString()) {
@@ -82,11 +85,11 @@ class MakeCourseActivity : AppCompatActivity() {
             }
         }
 
-        binding.numPeopleTextView.addTextChangedListener { text ->
+       /* binding.numPeopleTextView.addTextChangedListener { text ->
             if (text != null) {
                 binding.numPeopleTextView.isCursorVisible = false
             }
-        }
+        }*/
 
         binding.startTimeTextView.setOnClickListener {
             initStartTime()
@@ -98,10 +101,9 @@ class MakeCourseActivity : AppCompatActivity() {
 
         /* 친구목록 불러오기 부분 */
         binding.friendFindActionButton.setOnClickListener {
-            val userCode = sharedPreferences.getString(UID, null)
             Log.e(TAG, "$userCode")
             val friendRequestCall = RetrofitAPI.requestFriendService
-                .getFriendList(userCode!!).enqueue(object : Callback<List<Friend>> {
+                .getFriendList(userCode).enqueue(object : Callback<List<Friend>> {
                     override fun onResponse(
                         call: Call<List<Friend>>,
                         response: Response<List<Friend>>
@@ -131,9 +133,7 @@ class MakeCourseActivity : AppCompatActivity() {
 
         /* 서버 통신 부분 */
         binding.courseMakeBtn.setOnClickListener {
-            val userCode = sharedPreferences.getString(UID, null)
-            Log.e(TAG, "$userCode")
-            memberList.add(userCode.toString())
+            Log.e(TAG, userCode)
             /* 로그 찍어보기 */
             Log.e(TAG, "$memberList")
             val categoryC =
@@ -182,16 +182,14 @@ class MakeCourseActivity : AppCompatActivity() {
                                     startActivity(intent)
                                 } else {
                                     Log.e(TAG, "Null returned")
-                                    Log.e(TAG, "${response.body()}")
+                                    Toast.makeText(applicationContext,"코스를 다시 제작해주세요",Toast.LENGTH_SHORT).show()
                                 }
                             }
 
                             override fun onFailure(call: Call<courseResponse>, t: Throwable) {
                                 Log.e(TAG, "Error Occur")
                                 t.printStackTrace()
-
                             }
-
                         })
             }.start()
         }
@@ -472,6 +470,12 @@ class MakeCourseActivity : AppCompatActivity() {
             "공연장&연극극장", "영화관" -> "WM2"
             else -> ({ null }).toString()
         }
+    }
+
+    /* 친구 다시 부를때마다 list 비워줘야함 */
+    override fun onStop() {
+        super.onStop()
+        memberList.clear()
     }
 }
 

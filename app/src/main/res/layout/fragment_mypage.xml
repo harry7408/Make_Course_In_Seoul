@@ -36,7 +36,7 @@
                 android:layout_height="30dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="20dp"
-                android:text="회원 ID"
+                tools:text="TEST"
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -72,6 +72,16 @@
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="userImageView,changeInfo"
                 tools:ignore="MissingConstraints" />
+
+            <TextView
+                android:id="@+id/userCodeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="@+id/userId"
+                app:layout_constraintStart_toEndOf="@+id/userId"
+                app:layout_constraintTop_toTopOf="@+id/userId"
+                tools:text="TEST#01" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

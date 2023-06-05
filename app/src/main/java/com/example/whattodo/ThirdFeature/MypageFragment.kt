@@ -47,7 +47,9 @@ class MypageFragment : Fragment() {
         val sharedPreferences =
             requireActivity().getSharedPreferences(USER_INFO, Context.MODE_PRIVATE)
         val currentUserName = sharedPreferences.getString(ID, null).toString()
+        val currentUserCode=sharedPreferences.getString(UID,null).toString()
         binding.userId.text = currentUserName
+        binding.userCodeTextView.text=currentUserCode
         val currentUserEmail = sharedPreferences.getString(EMAIL, null).toString()
         val currentUserGender = sharedPreferences.getString(GENDER, null).toString()
 

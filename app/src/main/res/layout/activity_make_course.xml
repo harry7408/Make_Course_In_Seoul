@@ -26,7 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolBar" />
 
-    <EditText
+    <TextView
         android:id="@+id/numPeopleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -64,11 +64,21 @@
         app:layout_constraintTop_toBottomOf="@id/PeopleText" />
 
     <TextView
+        android:id="@+id/timeexplainTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="* XX 부분 Touch"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimeText" />
+
+    <TextView
         android:id="@+id/startTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
-        android:text="00"
+        android:text="XX"
         app:layout_constraintBottom_toBottomOf="@id/TimeText"
         app:layout_constraintEnd_toEndOf="@+id/endTimeTextView"
         app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -89,7 +99,7 @@
         android:id="@+id/endTimeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="00"
+        android:text="XX"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@id/TimeText"
         app:layout_constraintEnd_toEndOf="parent"
@@ -237,6 +247,18 @@
         android:text="코스 제작"
         android:textSize="20sp"
         android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/findFriendText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="함께할 친구"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/friendFindActionButton"
+        app:layout_constraintTop_toTopOf="@+id/friendFindActionButton"
+        app:layout_constraintEnd_toStartOf="@id/friendFindActionButton"
+        tools:layout_editor_absoluteX="325dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/friendFindActionButton"

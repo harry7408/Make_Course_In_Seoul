@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 object RetrofitAPI {
 //    10.0.2.2 로컬에서 테스트할 때
-    private const val BASE_URL="http://43.201.23.126:8080"
+    private const val BASE_URL="http://15.164.251.175:8080"
 
    val client=OkHttpClient.Builder()
        .connectTimeout(1,TimeUnit.HOURS)

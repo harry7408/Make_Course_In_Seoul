@@ -92,47 +92,44 @@
         android:id="@+id/menuImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/menu"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="@+id/chiefImageView"
-        app:layout_constraintTop_toBottomOf="@+id/chiefImageView" />
+        android:src="@drawable/menu"
+        app:layout_constraintEnd_toEndOf="@+id/storeDetailMenuTextView"
+        app:layout_constraintStart_toStartOf="@+id/storeDetailMenuTextView"
+        app:layout_constraintTop_toBottomOf="@+id/openImageView" />
 
     <TextView
         android:id="@+id/storeDetailMenuTextView"
-        android:layout_width="250dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/menuImageView"
-        app:layout_constraintStart_toEndOf="@+id/menuImageView"
-        app:layout_constraintTop_toTopOf="@+id/menuImageView"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:maxLines="2"
+        android:layout_marginTop="12dp"
         android:ellipsize="end"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        android:gravity="center"
+        android:maxLines="10"
+        app:layout_constraintStart_toStartOf="@+id/starImageView"
+        app:layout_constraintTop_toBottomOf="@+id/menuImageView"
         tools:text="dddddddddd" />
 
     <ImageView
         android:id="@+id/openImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/open"
         android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="@+id/menuImageView"
-        app:layout_constraintTop_toBottomOf="@+id/menuImageView" />
+        android:src="@drawable/open"
+        app:layout_constraintStart_toStartOf="@+id/starImageView"
+        app:layout_constraintTop_toBottomOf="@+id/chiefImageView" />
 
     <TextView
         android:id="@+id/storeDetailTimeTextView"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        android:maxLines="5"
         android:ellipsize="end"
+        android:maxLines="5"
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/openImageView"
         app:layout_constraintStart_toEndOf="@+id/openImageView"
         app:layout_constraintTop_toTopOf="@+id/openImageView"
-        tools:text="dddddd"
-        android:layout_marginStart="8dp"/>
+        tools:text="dddddd" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/menuFloatingActionButton"
