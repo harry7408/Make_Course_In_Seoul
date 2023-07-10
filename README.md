@@ -22,6 +22,9 @@
 **Kakao Map을 활용하여 코스 위치 표시, Retrofit2를 이용한 서버와의 통신**
 
 
+앱 실행 영상 : https://drive.google.com/file/d/1GZRHOjKyKeEmToupeq7nVTE7QcTDArv2/view?usp=sharing
+
+
 
  
 
