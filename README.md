@@ -1,6 +1,9 @@
 # 뭐놀? (뭐하고 놀지?)
 ## 사용자의 입력을 반영하여 서울시 안의 놀거리 코스 추천 어플리케이션
 
+## 프로젝트 목적
+- 코로나 이후 제한되었던 활동이 풀려 놀거리를 찾기 어려운 사람들을 위해 코스를 제작해주는 어플
+<br></br>
 ![image](https://github.com/2023-KW-graduate-project/Android_Part/assets/84065395/91ab015b-6caf-4b3b-b7f9-dbabe4ccab13)
 
 ### 주요 기능</br>
